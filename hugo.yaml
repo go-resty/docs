@@ -1,4 +1,4 @@
-baseURL: https://example.com/
+baseURL: https://resty.dev/
 title: Resty
 theme: hugo-book
 
@@ -36,9 +36,17 @@ markup:
   #     weight: 20
 
 params:
+  # Resty site variables
+  Resty:
+    GitHubRepo: https://github.com/go-resty/resty
+    GitHubSlug: go-resty/resty
+    V3:
+      Version: v3.0.0--alpha.2
+      Vanity: resty.dev/v3
+
   # (Optional, default light) Sets color theme: light, dark or auto.
   # Theme 'auto' switches between dark and light modes based on browser/os preferences
-  BookTheme: light
+  BookTheme: auto
 
   # (Optional, default true) Controls table of contents visibility on right side of pages.
   # Start and end levels can be controlled with markup.tableOfContents setting.

@@ -31,7 +31,7 @@ defer client.Close()
 
 resp, err := client.R().
     EnableDebug().
-    EnableGenerateCurlOnDebug(). // This option works in conjunction with debug mode
+    EnableGenerateCurlOnDebug().
     SetBody(map[string]string{
         "name": "Alex",
     }).

@@ -1,20 +1,77 @@
+.light-mode {
+	--gray-100: #f8f9fa;
+	--gray-200: #e9ecef;
+	--gray-500: #adb5bd;
+	--color-link: #0055bb;
+	--color-visited-link: #8440f1;
+	--body-background: white;
+	--body-font-color: black;
+	--icon-filter: none;
+	--hint-color-info: #6bf;
+	--hint-color-warning: #fd6;
+	--hint-color-danger: #f66
+}
+
+.dark-mode {
+    --gray-100: #494e54;
+    --gray-200: #5c6165;
+    --gray-500: #999d9f;
+    --color-link: #84b2ff;
+    --color-visited-link: #b88dff;
+    --body-background: #343a40;
+    --body-font-color: #e9ecef;
+    --icon-filter: brightness(0) invert(1);
+    --hint-color-info: #6bf;
+    --hint-color-warning: #fd6;
+    --hint-color-danger: #f66
+}
+
 .ml-20 {
     margin-left: 20px;
 }
 
-.book-brand {
-    display: none;
+.r-strong {
+    font-weight: bolder;
 }
 
-.book-search {
-    margin-top: 0;
+.r-logo {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    padding-bottom: .2rem;
 }
 
 .book-toc {
     font-size: .85rem;
 }
 
-.resty-badges {
-    margin-top: 3rem;
-    margin-bottom: 1rem;
+.r-footer {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-bottom: 2rem;
+    flex-direction: column;
+    border-top: solid 1px #6b6b6b;
+}
+
+a .r-icon {
+    height: 24px;
+    width: 24px;
+}
+
+.r-info-box {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding: .6rem 0;
+    border-bottom: solid 1px #6b6b6b;
+}
+
+.r-info-box a {
+    margin: 0 .2em;
+}
+
+.r-copyright {
+    padding-top: 1rem;
 }
