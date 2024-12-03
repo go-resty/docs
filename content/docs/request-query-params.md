@@ -13,19 +13,19 @@ Resty provides easy-to-add request query parameters into requests.
 {{% /hint %}}
 
 ## Methods
-* [Client.SetQueryParam]()
-* [Client.SetQueryParams]()
-* [Request.SetQueryParam]()
-* [Request.SetQueryParams]()
-* [Request.SetQueryParamsFromValues]()
-* [Request.SetQueryString]()
+* [Client.SetQueryParam]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetQueryParam)
+* [Client.SetQueryParams]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetQueryParams)
+* [Request.SetQueryParam]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetQueryParam)
+* [Request.SetQueryParams]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetQueryParams)
+* [Request.SetQueryParamsFromValues]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetQueryParamsFromValues)
+* [Request.SetQueryString]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetQueryString)
 
 ### Single Query Param
 ```go
-client := resty.New()
-defer client.Close()
+c := resty.New()
+defer c.Close()
 
-client.R().
+c.R().
     SetQueryParam("search", "kitchen papers").
     SetQueryParam("size", "large").
     Get("/search")
@@ -37,10 +37,10 @@ client.R().
 
 ### Multiple Query Params
 ```go
-client := resty.New()
-defer client.Close()
+c := resty.New()
+defer c.Close()
 
-client.R().
+c.R().
     SetQueryParams(map[string]string{
 		"search": "kitchen papers",
 		"size": "large",
@@ -53,10 +53,10 @@ client.R().
 
 ### Query Params from url.Values
 ```go
-client := resty.New()
-defer client.Close()
+c := resty.New()
+defer c.Close()
 
-client.R().
+c.R().
     SetQueryParamsFromValues(url.Values{
         "status": []string{"pending", "approved", "open"},
     }).
@@ -68,10 +68,10 @@ client.R().
 
 ### Query Params from String
 ```go
-client := resty.New()
-defer client.Close()
+c := resty.New()
+defer c.Close()
 
-client.R().
+c.R().
     SetQueryString("productId=232&template=fresh-sample&cat=resty&source=google&kw=buy a lot more").
     Get("/search")
 

@@ -18,18 +18,18 @@ Resty provides a way to generate the CURL command in debug mode.
 {{% /hint %}}
 
 ## Methods
-* [Client.EnableGenerateCurlOnDebug]()
-* [Client.DisableGenerateCurlOnDebug]()
-* [Client.SetGenerateCurlOnDebug]()
-* [Request.EnableGenerateCurlOnDebug]()
-* [Request.DisableGenerateCurlOnDebug]()
-* [Request.SetGenerateCurlOnDebug]()
+* [Client.EnableGenerateCurlOnDebug]({{% param Resty.V3.GoDocLinkPrefix %}}Client.EnableGenerateCurlOnDebug)
+* [Client.DisableGenerateCurlOnDebug]({{% param Resty.V3.GoDocLinkPrefix %}}Client.DisableGenerateCurlOnDebug)
+* [Client.SetGenerateCurlOnDebug]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetGenerateCurlOnDebug)
+* [Request.EnableGenerateCurlOnDebug]({{% param Resty.V3.GoDocLinkPrefix %}}Request.EnableGenerateCurlOnDebug)
+* [Request.DisableGenerateCurlOnDebug]({{% param Resty.V3.GoDocLinkPrefix %}}Request.DisableGenerateCurlOnDebug)
+* [Request.SetGenerateCurlOnDebug]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetGenerateCurlOnDebug)
 
 ```go
-client := resty.New()
-defer client.Close()
+c := resty.New()
+defer c.Close()
 
-resp, err := client.R().
+res, err := c.R().
     EnableDebug().
     EnableGenerateCurlOnDebug().
     SetBody(map[string]string{
@@ -37,10 +37,9 @@ resp, err := client.R().
     }).
     Post("https://httpbin.org/post")
 
-curlCmdExecuted := resp.Request.GenerateCurlCommand()
-fmt.Println(curlCmdExecuted)
+curlCmdStr := res.Request.GenerateCurlCommand()
+fmt.Println(err, curlCmdStr)
 
 // Result:
 //     curl -X POST -H 'Content-Type: application/json' -H 'User-Agent: go-resty/3.0.0 (https://resty.dev)' -d '{"name":"Alex"}' https://httpbin.org/post
-
 ```

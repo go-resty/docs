@@ -12,17 +12,17 @@ Resty provides easy-to-use dynamic request URL path params. It replaces the valu
 {{% /hint %}}
 
 ## Methods
-* [Client.SetPathParam]()
-* [Client.SetPathParams]()
-* [Request.SetPathParam]()
-* [Request.SetPathParams]()
+* [Client.SetPathParam]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetPathParam)
+* [Client.SetPathParams]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetPathParams)
+* [Request.SetPathParam]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetPathParam)
+* [Request.SetPathParams]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetPathParams)
 
 ### Single Path Param
 ```go
-client := resty.New()
-defer client.Close()
+c := resty.New()
+defer c.Close()
 
-client.R().
+c.R().
     SetPathParam("userId", "sample@sample.com").
     Get("/v1/users/{userId}/details")
 
@@ -33,10 +33,10 @@ client.R().
 
 ### Multiple Path Params
 ```go
-client := resty.New()
-defer client.Close()
+c := resty.New()
+defer c.Close()
 
-client.R().
+c.R().
     SetPathParams(map[string]string{
         "userId":       "sample@sample.com",
         "subAccountId": "100002",
@@ -53,17 +53,17 @@ client.R().
 Resty provides easy-to-use dynamic request URL **raw** path params. It replaces the value of the key while composing the request URL. The value used **as-is**, no escapes applied.
 
 ## Methods
-* [Client.SetRawPathParam]()
-* [Client.SetRawPathParams]()
-* [Request.SetRawPathParam]()
-* [Request.SetRawPathParams]()
+* [Client.SetRawPathParam]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetRawPathParam)
+* [Client.SetRawPathParams]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetRawPathParams)
+* [Request.SetRawPathParam]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetRawPathParam)
+* [Request.SetRawPathParams]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetRawPathParams)
 
 ### Single Raw Path Param
 ```go
-client := resty.New()
-defer client.Close()
+c := resty.New()
+defer c.Close()
 
-client.R().
+c.R().
     SetRawPathParam("path", "groups/developers").
     Get("/v1/users/{userId}/details")
 
@@ -73,10 +73,10 @@ client.R().
 
 ### Multiple Raw Path Params
 ```go
-client := resty.New()
-defer client.Close()
+c := resty.New()
+defer c.Close()
 
-client.R().
+c.R().
     SetRawPathParams(map[string]string{
         "userId":       "sample@sample.com",
         "subAccountId": "100002",

@@ -3,6 +3,9 @@ title: Resty
 theme: hugo-book
 
 languageCode: en-us
+# uglyURLs: true
+# permalinks:
+#   posts: ":filename"
 
 # module:
 #   imports:
@@ -38,11 +41,13 @@ markup:
 params:
   # Resty site variables
   Resty:
+    GoDoc: https://pkg.go.dev
     GitHubRepo: https://github.com/go-resty/resty
     GitHubSlug: go-resty/resty
     V3:
       Version: v3.0.0--alpha.2
       Vanity: resty.dev/v3
+      GoDocLinkPrefix: https://pkg.go.dev/resty.dev/v3#
 
   # (Optional, default light) Sets color theme: light, dark or auto.
   # Theme 'auto' switches between dark and light modes based on browser/os preferences
