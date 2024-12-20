@@ -17,8 +17,8 @@ type: docs
     <a href="{{% param Resty.GitHubRepo %}}/releases/latest" target="_blank">
         <img src="https://img.shields.io/badge/version-{{% param Resty.V3.Version %}}-blue.svg" alt="Resty Release Version">
     </a>
-    <a href="https://pkg.go.dev/{{% param Resty.V3.Vanity %}}" target="_blank">
-        <img src="https://pkg.go.dev/badge/{{% param Resty.V3.Vanity %}}" alt="Resty GoDoc">
+    <a href="{{% param Resty.GoDoc %}}/{{% param Resty.V3.Vanity %}}" target="_blank">
+        <img src="{{% param Resty.GoDoc %}}/badge/{{% param Resty.V3.Vanity %}}" alt="Resty GoDoc">
     </a>
     <a href="https://github.com/avelino/awesome-go" target="_blank">
         <img src="https://awesome.re/mentioned-badge.svg" alt="Mentioned in Awesome Go">
@@ -35,11 +35,11 @@ type: docs
 client := resty.New()
 defer client.Close()
 
-resp, err := client.R().
+res, err := client.R().
     EnableTrace().
     Get("https://httpbin.org/get")
-fmt.Println(err, resp)
-fmt.Println(resp.Request.TraceInfo())
+fmt.Println(err, res)
+fmt.Println(res.Request.TraceInfo())
 ```
 <--->
 ```go
@@ -56,9 +56,11 @@ client.Subscribe("*", func(v any) {
 
 {{% /columns %}}
 
-This website represents Resty v3 and above. For previous v2 documentation, refer to this [README.md](https://github.com/go-resty/resty/blob/v2/README.md "Resty v2 README")
+<p align="center">Resty v3 offers improved performance, memory efficiency, and features compared to Resty v2.</p>
 
-## Features
+This website represents Resty v3 and above. For previous v2 documentation, refer to this [README.md]({{% param Resty.GitHubRepo %}}/blob/v2/README.md "Resty v2 README")
+
+## Key Features
 
 {{% columns %}}
 * Simple and chainable methods
