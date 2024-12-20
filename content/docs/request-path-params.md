@@ -1,6 +1,5 @@
 ---
-title: "Request Path Params"
-weight: 1
+weight: 2
 ---
 
 # Request Path Params
