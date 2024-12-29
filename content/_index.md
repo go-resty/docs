@@ -15,7 +15,7 @@ type: docs
         <img src="https://goreportcard.com/badge/{{% param Resty.V3.Vanity %}}" alt="Go Report Card">
     </a>
     <a href="{{% param Resty.GitHubRepo %}}/releases/latest" target="_blank">
-        <img src="https://img.shields.io/badge/version-{{% param Resty.V3.Version %}}-blue.svg" alt="Resty Release Version">
+        <img src="https://img.shields.io/badge/version-v3.0.0--alpha.4-blue.svg" alt="Resty Release Version">
     </a>
     <a href="{{% param Resty.GoDoc %}}/{{% param Resty.V3.Vanity %}}" target="_blank">
         <img src="{{% param Resty.GoDoc %}}/badge/{{% param Resty.V3.Vanity %}}" alt="Resty GoDoc">
@@ -28,6 +28,12 @@ type: docs
     <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fgo-resty%2Fresty?ref=badge_shield&issueType=license" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fgo-resty%2Fresty.svg?type=shield&issueType=license"/></a>
     <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fgo-resty%2Fresty?ref=badge_shield&issueType=security" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fgo-resty%2Fresty.svg?type=shield&issueType=security"/></a>
 </p>
+
+<div id="resty-go-mod" class="resty-go-mod">
+<pre>
+require resty.dev/v3 {{% param Resty.V3.Version %}}
+</pre>
+</div>
 
 {{% columns %}}
 ```go
@@ -43,15 +49,15 @@ fmt.Println(res.Request.TraceInfo())
 ```
 <--->
 ```go
-// SSE Client
-client := resty.NewSSE().
+// Server-Sent Events Client
+es := NewEventSource().
     SetURL("https://sse.dev/test").
-    SetResultMapping("*", Message{})
+    OnMessage(func(a any) {
+        fmt.Println(a.(*resty.Event))
+    }, nil)
 
-client.Subscribe("*", func(v any) {
-    msg := v.(*Message)
-    fmt.Println(msg)
-})
+err := es.Get()
+fmt.Println(err)
 ```
 
 {{% /columns %}}
