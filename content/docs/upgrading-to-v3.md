@@ -23,7 +23,7 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 
 * All the Resty errors start with `resty: ...` prefix and sub feature errors contain feature name in them, e.g., `resty: digest: ...`
 
-### Behavior
+#### Behavior
 
 * Set Content length is not applicable for `io.Reader` flow.
 * By default, payload is not supported in HTTP verb DELETE. Use [Client.AllowMethodDeletePayload]({{% param Resty.V3.GoDocLinkPrefix %}}Client.AllowMethodDeletePayload) or [Request.AllowMethodDeletePayload]({{% param Resty.V3.GoDocLinkPrefix %}}Request.AllowMethodDeletePayload).

@@ -23,8 +23,11 @@ markup:
   tableOfContents:
     startLevel: 1
     endLevel: 4
+    # ordered: false
   highlight:
     style: base16-snazzy
+
+cleanDestinationDir: true
 
 # menu:
 #   before:
