@@ -22,6 +22,7 @@ markup:
       unsafe: true
   tableOfContents:
     startLevel: 1
+    endLevel: 4
   highlight:
     style: base16-snazzy
 
@@ -45,7 +46,7 @@ params:
     GitHubRepo: https://github.com/go-resty/resty
     GitHubSlug: go-resty/resty
     V3:
-      Version: v3.0.0--alpha.2
+      Version: v3.0.0-alpha.4
       Vanity: resty.dev/v3
       GoDocLinkPrefix: https://pkg.go.dev/resty.dev/v3#
 

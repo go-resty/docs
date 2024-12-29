@@ -1,5 +1,6 @@
 ---
 title: "CURL Command Generation"
+bookHidden: true
 ---
 
 # CURL Command Generation
