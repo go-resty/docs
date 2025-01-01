@@ -1,0 +1,16 @@
+<div class="copied-tooltip" id="copied-tooltip">Copied!</div>
+<script>
+(function() {
+    document.querySelectorAll("pre code").forEach(t => {
+        t.addEventListener("click", function() {
+            let toolTip = document.getElementById("copied-tooltip");
+            toolTip.style.visibility = "visible";
+            toolTip.style.opacity = 1;
+            setTimeout(function() {
+                toolTip.style.visibility = "hidden";
+                toolTip.style.opacity = 0;
+            }, 1000);
+        })
+    })
+})()
+</script>

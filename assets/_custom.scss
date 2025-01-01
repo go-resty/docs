@@ -97,3 +97,18 @@ a .r-icon {
     background-color: rgba(255, 221, 102, .1);
 }
 
+.copied-tooltip {
+    visibility: hidden;
+    width: 95px;
+    background-color: #93f19c;
+    color: #333;
+    text-align: center;
+    border-radius: 4px;
+    padding: 5px;
+    position: absolute;
+    z-index: 100;
+    left: 48%;
+    top:1%;
+    opacity: 0;
+    transition: opacity 0.3s;
+}

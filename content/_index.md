@@ -31,7 +31,7 @@ type: docs
 
 <div id="resty-go-mod" class="resty-go-mod">
 <pre>
-require resty.dev/v3 {{% param Resty.V3.Version %}}
+<code>require resty.dev/v3 {{% param Resty.V3.Version %}}</code>
 </pre>
 </div>
 
