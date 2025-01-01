@@ -23,10 +23,18 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 
 * All the Resty errors start with `resty: ...` prefix and sub feature errors contain feature name in them, e.g., `resty: digest: ...`
 
-### Behavior
+#### Behavior
 
 * Set Content length is not applicable for `io.Reader` flow.
 * By default, payload is not supported in HTTP verb DELETE. Use [Client.AllowMethodDeletePayload]({{% param Resty.V3.GoDocLinkPrefix %}}Client.AllowMethodDeletePayload) or [Request.AllowMethodDeletePayload]({{% param Resty.V3.GoDocLinkPrefix %}}Request.AllowMethodDeletePayload).
+* Retry Mechanism
+    * Respects header `Retry-After` if present
+    * Resets reader on retry request if the `io.ReadSeeker` interface is supported.
+    * Retries only on Idempotent HTTP Verb - GET, HEAD, PUT, DELETE, OPTIONS, and TRACE ([RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110.html#name-method-registration), [RFC 5789](https://datatracker.ietf.org/doc/html/rfc5789.html)),
+        * Use [Client.SetAllowNonIdempotentRetry]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetAllowNonIdempotentRetry) or [Request.SetAllowNonIdempotentRetry]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetAllowNonIdempotentRetry). If additional control is necessary, utilize the custom retry condition.
+    * Applies [default retry conditions]({{% relref "retry-mechanism#default-conditions" %}})
+        * It can be disabled via [Client.SetRetryDefaultConditions]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetRetryDefaultConditions) or [Request.SetRetryDefaultConditions]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetRetryDefaultConditions)
+*
 
 #### Client
 
@@ -40,6 +48,8 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * [Client.ResponseBodyLimit]({{% param Resty.V3.GoDocLinkPrefix %}}Client.ResponseBodyLimit) - datatype changed from `int` to `int64`
 * `Client.SetAllowGetMethodPayload` => [Client.SetAllowMethodGetPayload]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetAllowMethodGetPayload)
 * `Client.Clone()` - use [Client.Clone(ctx context.Context)]({{% param Resty.V3.GoDocLinkPrefix %}}Client.Clone) instead.
+* `Client.EnableGenerateCurlOnDebug` => [Client.EnableGenerateCurlCmd]({{% param Resty.V3.GoDocLinkPrefix %}}Client.EnableGenerateCurlCmd)
+* `Client.DisableGenerateCurlOnDebug` => [Client.DisableGenerateCurlCmd]({{% param Resty.V3.GoDocLinkPrefix %}}Client.DisableGenerateCurlCmd)
 
 #### Request
 
@@ -48,19 +58,27 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * `Request.NotParseResponse` => [Request.DoNotParseResponse]({{% param Resty.V3.GoDocLinkPrefix %}}Request.DoNotParseResponse)
 * `Request.ExpectContentType` => [Request.SetExpectResponseContentType]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetExpectResponseContentType)
 * `Request.ForceContentType` => [Request.SetForceResponseContentType]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetForceResponseContentType)
+* `Request.SetOutput` => [Request.SetOutputFileName]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetOutputFileName)
+* `Request.EnableGenerateCurlOnDebug` => [Request.EnableGenerateCurlCmd]({{% param Resty.V3.GoDocLinkPrefix %}}Request.EnableGenerateCurlCmd)
+* `Request.DisableGenerateCurlOnDebug` => [Request.DisableGenerateCurlCmd]({{% param Resty.V3.GoDocLinkPrefix %}}Request.DisableGenerateCurlCmd)
+* `Request.GenerateCurlCommand` => [Request.CurlCmd]({{% param Resty.V3.GoDocLinkPrefix %}}Request.CurlCmd)
 
 
 ### Removed
 
 #### Client
 
+* `Client.SetHostURL` - use [Client.SetBaseURL]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetBaseURL) instead.
 * `Client.{SetJSONMarshaler, SetJSONUnmarshaler, SetXMLMarshaler, SetXMLUnmarshaler}` - use [Client.AddContentTypeEncoder]({{% param Resty.V3.GoDocLinkPrefix %}}Client.AddContentTypeEncoder) and [Client.AddContentTypeDecoder]({{% param Resty.V3.GoDocLinkPrefix %}}Client.AddContentTypeDecoder) instead.
-* `Client.RawPathParams` - use `Client.PathParams()` instead
+* `Client.RawPathParams` - use `Client.PathParams()` instead.
 * `Client.UserInfo`
+* `Client.SetRetryResetReaders` - it happens automatically.
+* `Client.SetRetryAfter` - use [Client.SetRetryStrategy]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetRetryStrategy) or [Request.SetRetryStrategy]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetRetryStrategy) instead.
 
 #### Request
 
 * `Request.RawPathParams` - use [Request.PathParams]({{% param Resty.V3.GoDocLinkPrefix %}}Request.PathParams) instead
+*
 
 #### Response
 
@@ -78,6 +96,10 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 
 
 ## New Features and Enhancements
+
+* Override all transport settings and timeout values used by Resty using [NewWithTransportSettings]({{% param Resty.V3.GoDocLinkPrefix %}}NewWithTransportSettings)
+* [Circuit Breaker]({{% relref "circuit-breaker" %}})
+* Set retry settings on Request instance refer to [Retry Mechanism]({{% relref "retry-mechanism" %}})
 
 ### New ways to create Client
 
@@ -104,6 +126,12 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * [Client.IsDisableWarn]({{% param Resty.V3.GoDocLinkPrefix %}}Client.IsDisableWarn)
 * [Client.AllowMethodDeletePayload]({{% param Resty.V3.GoDocLinkPrefix %}}Client.AllowMethodDeletePayload)
 * [Client.SetAllowMethodDeletePayload]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetAllowMethodDeletePayload)
+* [Client.SetRetryStrategy]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetRetryStrategy)
+* [Client.SetRetryDefaultConditions]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetRetryDefaultConditions)
+* [Client.IsSaveResponse]({{% param Resty.V3.GoDocLinkPrefix %}}Client.IsSaveResponse)
+* [Client.SetSaveResponse]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetSaveResponse)
+* [Client.SetGenerateCurlCmd]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetGenerateCurlCmd)
+* [Client.SetDebugLogCurlCmd]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetDebugLogCurlCmd)
 
 ### Request
 
@@ -113,7 +141,7 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * [Request.DebugBodyLimit]({{% param Resty.V3.GoDocLinkPrefix %}}Request.DebugBodyLimit)
 * [Request.EnableDebug]({{% param Resty.V3.GoDocLinkPrefix %}}Request.EnableDebug)
 * [Request.DisableDebug]({{% param Resty.V3.GoDocLinkPrefix %}}Request.DisableDebug)
-* [Request.IsTrace]({{% param Resty.V3.GoDocLinkPrefix %}}Request.IsTrace)
+* [Request.IsTrace]({{% param Resty.V3.GoDocLinkPrefix %}}Request)
 * [Request.SetTrace]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetTrace)
 * [Request.DisableTrace]({{% param Resty.V3.GoDocLinkPrefix %}}Request.DisableTrace)
 * [Request.Patch]({{% param Resty.V3.GoDocLinkPrefix %}}Request.Patch)
@@ -122,11 +150,21 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * [Request.SetURL](R{{% param Resty.V3.GoDocLinkPrefix %}}equest.SetURL)
 * [Request.SetAllowMethodGetPayload]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetAllowMethodGetPayload)
 * [Request.SetAllowMethodDeletePayload]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetAllowMethodDeletePayload)
+* [Request.SetRetryCount]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetRetryCount)
+* [Request.SetRetryWaitTime]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetRetryWaitTime)
+* [Request.SetRetryMaxWaitTime]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetRetryMaxWaitTime)
+* [Request.SetRetryStrategy]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetRetryStrategy)
+* [Request.SetRetryDefaultConditions]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetRetryDefaultConditions)
+* [Request.IsSaveResponse]({{% param Resty.V3.GoDocLinkPrefix %}}Request)
+* [Request.SetSaveResponse]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetSaveResponse)
+* [Request.SetGenerateCurlCmd]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetGenerateCurlCmd)
+* [Request.SetDebugLogCurlCmd]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetDebugLogCurlCmd)
+
 
 ### Response
 
 * [Response.Body]({{% param Resty.V3.GoDocLinkPrefix %}}Response)
-* [Response.SetBodyBytes]({{% param Resty.V3.GoDocLinkPrefix %}}Response.SetBodyBytes)
 * [Response.Bytes]({{% param Resty.V3.GoDocLinkPrefix %}}Response.Bytes)
 * [Response.IsRead]({{% param Resty.V3.GoDocLinkPrefix %}}Response)
 * [Response.Err]({{% param Resty.V3.GoDocLinkPrefix %}}Response)
+* [Response.RedirectHistory]({{% param Resty.V3.GoDocLinkPrefix %}}Response.RedirectHistory)
