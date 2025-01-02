@@ -8,19 +8,12 @@ Resty provides easy-to-add request query parameters into requests.
 
     Example: search=kitchen%20papers&size=large
 
-{{% hint info %}}
-**NOTE:** Client-level settings can be overridden at the request level.
-{{% /hint %}}
+{{% hintreqoverride %}}
 
-## Methods
-* [Client.SetQueryParam]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetQueryParam)
-* [Client.SetQueryParams]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetQueryParams)
-* [Request.SetQueryParam]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetQueryParam)
-* [Request.SetQueryParams]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetQueryParams)
-* [Request.SetQueryParamsFromValues]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetQueryParamsFromValues)
-* [Request.SetQueryString]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetQueryString)
+## Examples
 
 ### Single Query Param
+
 ```go
 c := resty.New()
 defer c.Close()
@@ -36,6 +29,7 @@ c.R().
 ```
 
 ### Multiple Query Params
+
 ```go
 c := resty.New()
 defer c.Close()
@@ -52,6 +46,7 @@ c.R().
 ```
 
 ### Query Params from url.Values
+
 ```go
 c := resty.New()
 defer c.Close()
@@ -67,6 +62,7 @@ c.R().
 ```
 
 ### Query Params from String
+
 ```go
 c := resty.New()
 defer c.Close()
@@ -78,3 +74,17 @@ c.R().
 // Result:
 //     /search?cat=resty&kw=buy+a+lot+more&productId=232&source=google&template=fresh-sample
 ```
+
+## Methods
+
+### Client
+
+* [Client.SetQueryParam]({{% godoc v3 %}}Client.SetQueryParam)
+* [Client.SetQueryParams]({{% godoc v3 %}}Client.SetQueryParams)
+
+### Request
+
+* [Request.SetQueryParam]({{% godoc v3 %}}Request.SetQueryParam)
+* [Request.SetQueryParams]({{% godoc v3 %}}Request.SetQueryParams)
+* [Request.SetQueryParamsFromValues]({{% godoc v3 %}}Request.SetQueryParamsFromValues)
+* [Request.SetQueryString]({{% godoc v3 %}}Request.SetQueryString)

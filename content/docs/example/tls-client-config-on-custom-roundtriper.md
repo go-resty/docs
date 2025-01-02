@@ -4,7 +4,7 @@ title: TLS Client Config on Custom http.RoundTripper
 
 # TLS Client Config on Custom http.RoundTripper
 
-Resty v3 provides the [TLSClientConfiger]({{% param Resty.V3.GoDocLinkPrefix %}}TLSClientConfiger) interface to configure TLS client configuration for custom transports implemented using the [http.RoundTripper]({{% param Resty.GoDoc %}}/net/http#RoundTripper) interface.
+Resty v3 provides the [TLSClientConfiger]({{% godoc v3 %}}TLSClientConfiger) interface to configure TLS client configuration for custom transports implemented using the [http.RoundTripper]({{% godoc %}}/net/http#RoundTripper) interface.
 
 ## Implement `TLSClientConfiger` interface
 
@@ -35,7 +35,7 @@ Resty v3 provides the [TLSClientConfiger]({{% param Resty.V3.GoDocLinkPrefix %}}
 
 ## Assign it to the Resty client
 
-Subsequently, construct a transport instance and assign it to the Resty client via the method [Client.SetTransport]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetTransport).
+Subsequently, construct a transport instance and assign it to the Resty client via the method [Client.SetTransport]({{% godoc v3 %}}Client.SetTransport).
 
 ```go
 transport := &CustomTransport{
