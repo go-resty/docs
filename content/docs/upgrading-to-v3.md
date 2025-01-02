@@ -26,14 +26,14 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 #### Behavior
 
 * Set Content length is not applicable for `io.Reader` flow.
-* By default, payload is not supported in HTTP verb DELETE. Use [Client.AllowMethodDeletePayload]({{% param Resty.V3.GoDocLinkPrefix %}}Client.AllowMethodDeletePayload) or [Request.AllowMethodDeletePayload]({{% param Resty.V3.GoDocLinkPrefix %}}Request.AllowMethodDeletePayload).
+* By default, payload is not supported in HTTP verb DELETE. Use [Client.AllowMethodDeletePayload]({{% godoc v3 %}}Client.AllowMethodDeletePayload) or [Request.AllowMethodDeletePayload]({{% godoc v3 %}}Request).
 * Retry Mechanism
     * Respects header `Retry-After` if present
     * Resets reader on retry request if the `io.ReadSeeker` interface is supported.
     * Retries only on Idempotent HTTP Verb - GET, HEAD, PUT, DELETE, OPTIONS, and TRACE ([RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110.html#name-method-registration), [RFC 5789](https://datatracker.ietf.org/doc/html/rfc5789.html)),
-        * Use [Client.SetAllowNonIdempotentRetry]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetAllowNonIdempotentRetry) or [Request.SetAllowNonIdempotentRetry]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetAllowNonIdempotentRetry). If additional control is necessary, utilize the custom retry condition.
+        * Use [Client.SetAllowNonIdempotentRetry]({{% godoc v3 %}}Client.SetAllowNonIdempotentRetry) or [Request.SetAllowNonIdempotentRetry]({{% godoc v3 %}}Request.SetAllowNonIdempotentRetry). If additional control is necessary, utilize the custom retry condition.
     * Applies [default retry conditions]({{% relref "retry-mechanism#default-conditions" %}})
-        * It can be disabled via [Client.SetRetryDefaultConditions]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetRetryDefaultConditions) or [Request.SetRetryDefaultConditions]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetRetryDefaultConditions)
+        * It can be disabled via [Client.SetRetryDefaultConditions]({{% godoc v3 %}}Client.SetRetryDefaultConditions) or [Request.SetRetryDefaultConditions]({{% godoc v3 %}}Request.SetRetryDefaultConditions)
 *
 
 #### Client
@@ -42,43 +42,43 @@ I made necessary breaking changes to improve Resty and open up future growth pos
     * For Example:
         * `Client.BaseURL => Client.BaseURL()`
         * `Client.Debug => Client.IsDebug()`
-* Getter naming convention alignment - `Client.GetClient()` => [Client.Client()]({{% param Resty.V3.GoDocLinkPrefix %}}Client.Client)
-* `Client.Token` => [Client.AuthToken]({{% param Resty.V3.GoDocLinkPrefix %}}Client.AuthToken)
-* [Client.SetDebugBodyLimit]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetDebugBodyLimit) - datatype changed from `int64` to `int`
-* [Client.ResponseBodyLimit]({{% param Resty.V3.GoDocLinkPrefix %}}Client.ResponseBodyLimit) - datatype changed from `int` to `int64`
-* `Client.SetAllowGetMethodPayload` => [Client.SetAllowMethodGetPayload]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetAllowMethodGetPayload)
-* `Client.Clone()` - use [Client.Clone(ctx context.Context)]({{% param Resty.V3.GoDocLinkPrefix %}}Client.Clone) instead.
-* `Client.EnableGenerateCurlOnDebug` => [Client.EnableGenerateCurlCmd]({{% param Resty.V3.GoDocLinkPrefix %}}Client.EnableGenerateCurlCmd)
-* `Client.DisableGenerateCurlOnDebug` => [Client.DisableGenerateCurlCmd]({{% param Resty.V3.GoDocLinkPrefix %}}Client.DisableGenerateCurlCmd)
+* Getter naming convention alignment - `Client.GetClient()` => [Client.Client()]({{% godoc v3 %}}Client.Client)
+* `Client.Token` => [Client.AuthToken]({{% godoc v3 %}}Client.AuthToken)
+* [Client.SetDebugBodyLimit]({{% godoc v3 %}}Client.SetDebugBodyLimit) - datatype changed from `int64` to `int`
+* [Client.ResponseBodyLimit]({{% godoc v3 %}}Client.ResponseBodyLimit) - datatype changed from `int` to `int64`
+* `Client.SetAllowGetMethodPayload` => [Client.SetAllowMethodGetPayload]({{% godoc v3 %}}Client.SetAllowMethodGetPayload)
+* `Client.Clone()` - use [Client.Clone(ctx context.Context)]({{% godoc v3 %}}Client.Clone) instead.
+* `Client.EnableGenerateCurlOnDebug` => [Client.EnableGenerateCurlCmd]({{% godoc v3 %}}Client.EnableGenerateCurlCmd)
+* `Client.DisableGenerateCurlOnDebug` => [Client.DisableGenerateCurlCmd]({{% godoc v3 %}}Client.DisableGenerateCurlCmd)
 
 #### Request
 
-* `Request.QueryParam` => [Request.QueryParams]({{% param Resty.V3.GoDocLinkPrefix %}}Request.QueryParams)
-* `Request.Token` => [Request.AuthToken]({{% param Resty.V3.GoDocLinkPrefix %}}Request.AuthToken)
-* `Request.NotParseResponse` => [Request.DoNotParseResponse]({{% param Resty.V3.GoDocLinkPrefix %}}Request.DoNotParseResponse)
-* `Request.ExpectContentType` => [Request.SetExpectResponseContentType]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetExpectResponseContentType)
-* `Request.ForceContentType` => [Request.SetForceResponseContentType]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetForceResponseContentType)
-* `Request.SetOutput` => [Request.SetOutputFileName]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetOutputFileName)
-* `Request.EnableGenerateCurlOnDebug` => [Request.EnableGenerateCurlCmd]({{% param Resty.V3.GoDocLinkPrefix %}}Request.EnableGenerateCurlCmd)
-* `Request.DisableGenerateCurlOnDebug` => [Request.DisableGenerateCurlCmd]({{% param Resty.V3.GoDocLinkPrefix %}}Request.DisableGenerateCurlCmd)
-* `Request.GenerateCurlCommand` => [Request.CurlCmd]({{% param Resty.V3.GoDocLinkPrefix %}}Request.CurlCmd)
+* `Request.QueryParam` => [Request.QueryParams]({{% godoc v3 %}}Request)
+* `Request.Token` => [Request.AuthToken]({{% godoc v3 %}}Request)
+* `Request.NotParseResponse` => [Request.DoNotParseResponse]({{% godoc v3 %}}Request)
+* `Request.ExpectContentType` => [Request.SetExpectResponseContentType]({{% godoc v3 %}}Request.SetExpectResponseContentType)
+* `Request.ForceContentType` => [Request.SetForceResponseContentType]({{% godoc v3 %}}Request.SetForceResponseContentType)
+* `Request.SetOutput` => [Request.SetOutputFileName]({{% godoc v3 %}}Request.SetOutputFileName)
+* `Request.EnableGenerateCurlOnDebug` => [Request.EnableGenerateCurlCmd]({{% godoc v3 %}}Request.EnableGenerateCurlCmd)
+* `Request.DisableGenerateCurlOnDebug` => [Request.DisableGenerateCurlCmd]({{% godoc v3 %}}Request.DisableGenerateCurlCmd)
+* `Request.GenerateCurlCommand` => [Request.CurlCmd]({{% godoc v3 %}}Request.CurlCmd)
 
 
 ### Removed
 
 #### Client
 
-* `Client.SetHostURL` - use [Client.SetBaseURL]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetBaseURL) instead.
-* `Client.{SetJSONMarshaler, SetJSONUnmarshaler, SetXMLMarshaler, SetXMLUnmarshaler}` - use [Client.AddContentTypeEncoder]({{% param Resty.V3.GoDocLinkPrefix %}}Client.AddContentTypeEncoder) and [Client.AddContentTypeDecoder]({{% param Resty.V3.GoDocLinkPrefix %}}Client.AddContentTypeDecoder) instead.
+* `Client.SetHostURL` - use [Client.SetBaseURL]({{% godoc v3 %}}Client.SetBaseURL) instead.
+* `Client.{SetJSONMarshaler, SetJSONUnmarshaler, SetXMLMarshaler, SetXMLUnmarshaler}` - use [Client.AddContentTypeEncoder]({{% godoc v3 %}}Client.AddContentTypeEncoder) and [Client.AddContentTypeDecoder]({{% godoc v3 %}}Client.AddContentTypeDecoder) instead.
 * `Client.RawPathParams` - use `Client.PathParams()` instead.
 * `Client.UserInfo`
 * `Client.SetRetryResetReaders` - it happens automatically.
-* `Client.SetRetryAfter` - use [Client.SetRetryStrategy]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetRetryStrategy) or [Request.SetRetryStrategy]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetRetryStrategy) instead.
+* `Client.SetRetryAfter` - use [Client.SetRetryStrategy]({{% godoc v3 %}}Client.SetRetryStrategy) or [Request.SetRetryStrategy]({{% godoc v3 %}}Request.SetRetryStrategy) instead.
 
 #### Request
 
-* `Request.RawPathParams` - use [Request.PathParams]({{% param Resty.V3.GoDocLinkPrefix %}}Request.PathParams) instead
-*
+* `Request.RawPathParams` - use [Request.PathParams]({{% godoc v3 %}}Request) instead
+
 
 #### Response
 
@@ -97,74 +97,76 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 
 ## New Features and Enhancements
 
-* Override all transport settings and timeout values used by Resty using [NewWithTransportSettings]({{% param Resty.V3.GoDocLinkPrefix %}}NewWithTransportSettings)
+* Override all transport settings and timeout values used by Resty using [NewWithTransportSettings]({{% godoc v3 %}}NewWithTransportSettings)
 * [Circuit Breaker]({{% relref "circuit-breaker" %}})
 * Set retry settings on Request instance refer to [Retry Mechanism]({{% relref "retry-mechanism" %}})
 
 ### New ways to create Client
 
-* [NewWithTransportSettings]({{% param Resty.V3.GoDocLinkPrefix %}}NewWithTransportSettings)
-* [NewWithDialer]({{% param Resty.V3.GoDocLinkPrefix %}}NewWithDialer)
-* [NewWithDialerAndTransportSettings]({{% param Resty.V3.GoDocLinkPrefix %}}NewWithDialerAndTransportSettings)
+* [NewWithTransportSettings]({{% godoc v3 %}}NewWithTransportSettings)
+* [NewWithDialer]({{% godoc v3 %}}NewWithDialer)
+* [NewWithDialerAndTransportSettings]({{% godoc v3 %}}NewWithDialerAndTransportSettings)
 
 ### Client
 
-* [Client.AddContentTypeEncoder]({{% param Resty.V3.GoDocLinkPrefix %}}Client.AddContentTypeEncoder)
-* [Client.AddContentTypeDecoder]({{% param Resty.V3.GoDocLinkPrefix %}}Client.AddContentTypeDecoder)
-* [Client.SetResponseBodyUnlimitedReads]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetResponseBodyUnlimitedReads)
-* [Client.ContentDecompressor]({{% param Resty.V3.GoDocLinkPrefix %}}Client.ContentDecompressor)
-* [Client.ContentDecompressors]({{% param Resty.V3.GoDocLinkPrefix %}}Client.ContentDecompressors)
-* [Client.AddContentDecompressor]({{% param Resty.V3.GoDocLinkPrefix %}}Client.AddContentDecompressor) - Automatically handles `gzip` and `deflate`
-* [Client.ContentDecompressorKeys]({{% param Resty.V3.GoDocLinkPrefix %}}Client.ContentDecompressorKeys)
-* [Client.SetContentDecompressorKeys]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetContentDecompressorKeys)
-* [Client.Context]({{% param Resty.V3.GoDocLinkPrefix %}}Client.Context)
-* [Client.SetContext]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetContext)
-* [Client.Clone]({{% param Resty.V3.GoDocLinkPrefix %}}Client.Clone)
-* [Client.EnableDebug]({{% param Resty.V3.GoDocLinkPrefix %}}Client.EnableDebug)
-* [Client.DisableDebug]({{% param Resty.V3.GoDocLinkPrefix %}}Client.DisableDebug)
-* [Client.IsTrace]({{% param Resty.V3.GoDocLinkPrefix %}}Client.IsTrace)
-* [Client.IsDisableWarn]({{% param Resty.V3.GoDocLinkPrefix %}}Client.IsDisableWarn)
-* [Client.AllowMethodDeletePayload]({{% param Resty.V3.GoDocLinkPrefix %}}Client.AllowMethodDeletePayload)
-* [Client.SetAllowMethodDeletePayload]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetAllowMethodDeletePayload)
-* [Client.SetRetryStrategy]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetRetryStrategy)
-* [Client.SetRetryDefaultConditions]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetRetryDefaultConditions)
-* [Client.IsSaveResponse]({{% param Resty.V3.GoDocLinkPrefix %}}Client.IsSaveResponse)
-* [Client.SetSaveResponse]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetSaveResponse)
-* [Client.SetGenerateCurlCmd]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetGenerateCurlCmd)
-* [Client.SetDebugLogCurlCmd]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetDebugLogCurlCmd)
+* [Client.Close]({{% godoc v3 %}}Client.Close)
+* [Client.AddContentTypeEncoder]({{% godoc v3 %}}Client.AddContentTypeEncoder)
+* [Client.AddContentTypeDecoder]({{% godoc v3 %}}Client.AddContentTypeDecoder)
+* [Client.SetResponseBodyUnlimitedReads]({{% godoc v3 %}}Client.SetResponseBodyUnlimitedReads)
+* [Client.ContentDecompressor]({{% godoc v3 %}}Client.ContentDecompressor)
+* [Client.ContentDecompressors]({{% godoc v3 %}}Client.ContentDecompressors)
+* [Client.AddContentDecompressor]({{% godoc v3 %}}Client.AddContentDecompressor) - Automatically handles `gzip` and `deflate`
+* [Client.ContentDecompressorKeys]({{% godoc v3 %}}Client.ContentDecompressorKeys)
+* [Client.SetContentDecompressorKeys]({{% godoc v3 %}}Client.SetContentDecompressorKeys)
+* [Client.Context]({{% godoc v3 %}}Client.Context)
+* [Client.SetContext]({{% godoc v3 %}}Client.SetContext)
+* [Client.Clone]({{% godoc v3 %}}Client.Clone)
+* [Client.EnableDebug]({{% godoc v3 %}}Client.EnableDebug)
+* [Client.DisableDebug]({{% godoc v3 %}}Client.DisableDebug)
+* [Client.IsTrace]({{% godoc v3 %}}Client.IsTrace)
+* [Client.IsDisableWarn]({{% godoc v3 %}}Client.IsDisableWarn)
+* [Client.AllowMethodDeletePayload]({{% godoc v3 %}}Client.AllowMethodDeletePayload)
+* [Client.SetAllowMethodDeletePayload]({{% godoc v3 %}}Client.SetAllowMethodDeletePayload)
+* [Client.SetRetryStrategy]({{% godoc v3 %}}Client.SetRetryStrategy)
+* [Client.SetRetryDefaultConditions]({{% godoc v3 %}}Client.SetRetryDefaultConditions)
+* [Client.IsSaveResponse]({{% godoc v3 %}}Client.IsSaveResponse)
+* [Client.SetSaveResponse]({{% godoc v3 %}}Client.SetSaveResponse)
+* [Client.SetGenerateCurlCmd]({{% godoc v3 %}}Client.SetGenerateCurlCmd)
+* [Client.SetDebugLogCurlCmd]({{% godoc v3 %}}Client.SetDebugLogCurlCmd)
 
 ### Request
 
-* [Request.Clone]({{% param Resty.V3.GoDocLinkPrefix %}}Request.Clone)
-* [Request.WithContext]({{% param Resty.V3.GoDocLinkPrefix %}}Request.WithContext)
-* [Request.SetResponseBodyUnlimitedReads]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetResponseBodyUnlimitedReads)
-* [Request.DebugBodyLimit]({{% param Resty.V3.GoDocLinkPrefix %}}Request.DebugBodyLimit)
-* [Request.EnableDebug]({{% param Resty.V3.GoDocLinkPrefix %}}Request.EnableDebug)
-* [Request.DisableDebug]({{% param Resty.V3.GoDocLinkPrefix %}}Request.DisableDebug)
-* [Request.IsTrace]({{% param Resty.V3.GoDocLinkPrefix %}}Request)
-* [Request.SetTrace]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetTrace)
-* [Request.DisableTrace]({{% param Resty.V3.GoDocLinkPrefix %}}Request.DisableTrace)
-* [Request.Patch]({{% param Resty.V3.GoDocLinkPrefix %}}Request.Patch)
-* [Request.Trace]({{% param Resty.V3.GoDocLinkPrefix %}}Request.Trace)
-* [Request.SetMethod]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetMethod)
-* [Request.SetURL](R{{% param Resty.V3.GoDocLinkPrefix %}}equest.SetURL)
-* [Request.SetAllowMethodGetPayload]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetAllowMethodGetPayload)
-* [Request.SetAllowMethodDeletePayload]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetAllowMethodDeletePayload)
-* [Request.SetRetryCount]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetRetryCount)
-* [Request.SetRetryWaitTime]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetRetryWaitTime)
-* [Request.SetRetryMaxWaitTime]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetRetryMaxWaitTime)
-* [Request.SetRetryStrategy]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetRetryStrategy)
-* [Request.SetRetryDefaultConditions]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetRetryDefaultConditions)
-* [Request.IsSaveResponse]({{% param Resty.V3.GoDocLinkPrefix %}}Request)
-* [Request.SetSaveResponse]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetSaveResponse)
-* [Request.SetGenerateCurlCmd]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetGenerateCurlCmd)
-* [Request.SetDebugLogCurlCmd]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetDebugLogCurlCmd)
+* [Request.Clone]({{% godoc v3 %}}Request.Clone)
+* [Request.WithContext]({{% godoc v3 %}}Request.WithContext)
+* [Request.SetResponseBodyUnlimitedReads]({{% godoc v3 %}}Request.SetResponseBodyUnlimitedReads)
+* [Request.DebugBodyLimit]({{% godoc v3 %}}Request)
+* [Request.EnableDebug]({{% godoc v3 %}}Request.EnableDebug)
+* [Request.DisableDebug]({{% godoc v3 %}}Request.DisableDebug)
+* [Request.IsTrace]({{% godoc v3 %}}Request)
+* [Request.SetTrace]({{% godoc v3 %}}Request.SetTrace)
+* [Request.DisableTrace]({{% godoc v3 %}}Request.DisableTrace)
+* [Request.Patch]({{% godoc v3 %}}Request.Patch)
+* [Request.Trace]({{% godoc v3 %}}Request.Trace)
+* [Request.SetMethod]({{% godoc v3 %}}Request.SetMethod)
+* [Request.SetURL](R{{% godoc v3 %}}equest.SetURL)
+* [Request.SetAllowMethodGetPayload]({{% godoc v3 %}}Request.SetAllowMethodGetPayload)
+* [Request.SetAllowMethodDeletePayload]({{% godoc v3 %}}Request.SetAllowMethodDeletePayload)
+* [Request.RetryTraceID]({{% godoc v3 %}}Request)
+* [Request.SetRetryCount]({{% godoc v3 %}}Request.SetRetryCount)
+* [Request.SetRetryWaitTime]({{% godoc v3 %}}Request.SetRetryWaitTime)
+* [Request.SetRetryMaxWaitTime]({{% godoc v3 %}}Request.SetRetryMaxWaitTime)
+* [Request.SetRetryStrategy]({{% godoc v3 %}}Request.SetRetryStrategy)
+* [Request.SetRetryDefaultConditions]({{% godoc v3 %}}Request.SetRetryDefaultConditions)
+* [Request.IsSaveResponse]({{% godoc v3 %}}Request)
+* [Request.SetSaveResponse]({{% godoc v3 %}}Request.SetSaveResponse)
+* [Request.SetGenerateCurlCmd]({{% godoc v3 %}}Request.SetGenerateCurlCmd)
+* [Request.SetDebugLogCurlCmd]({{% godoc v3 %}}Request.SetDebugLogCurlCmd)
 
 
 ### Response
 
-* [Response.Body]({{% param Resty.V3.GoDocLinkPrefix %}}Response)
-* [Response.Bytes]({{% param Resty.V3.GoDocLinkPrefix %}}Response.Bytes)
-* [Response.IsRead]({{% param Resty.V3.GoDocLinkPrefix %}}Response)
-* [Response.Err]({{% param Resty.V3.GoDocLinkPrefix %}}Response)
-* [Response.RedirectHistory]({{% param Resty.V3.GoDocLinkPrefix %}}Response.RedirectHistory)
+* [Response.Body]({{% godoc v3 %}}Response)
+* [Response.Bytes]({{% godoc v3 %}}Response.Bytes)
+* [Response.IsRead]({{% godoc v3 %}}Response)
+* [Response.Err]({{% godoc v3 %}}Response)
+* [Response.RedirectHistory]({{% godoc v3 %}}Response.RedirectHistory)

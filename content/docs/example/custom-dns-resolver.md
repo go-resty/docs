@@ -1,7 +1,7 @@
 
 # Custom DNS Resolver
 
-Resty v3 introduces additional methods for creating client instances, including the [NewWithDialer]({{% param Resty.V3.GoDocLinkPrefix %}}NewWithDialer) function.
+Resty v3 introduces additional methods for creating client instances, including the [NewWithDialer]({{% godoc v3 %}}NewWithDialer) function.
 
 ```go
 package main

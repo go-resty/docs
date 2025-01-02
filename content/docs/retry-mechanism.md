@@ -9,6 +9,7 @@ Resty provides exponential backoff with a jitter strategy out of the box; a cust
 **Hint:** Combining the Retry strategy with [Circuit Breaker]({{% relref "circuit-breaker" %}}) typically provides a comprehensive approach to handling failures.
 {{% /hint %}}
 
+{{% hintreqoverride %}}
 
 ## Default Values
 
@@ -24,9 +25,10 @@ Resty provides exponential backoff with a jitter strategy out of the box; a cust
 * Respects header `Retry-After` if present
 * Resets reader on retry request if the `io.ReadSeeker` interface is supported.
 * Retries only on Idempotent HTTP Verb - GET, HEAD, PUT, DELETE, OPTIONS, and TRACE ([RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110.html#name-method-registration), [RFC 5789](https://datatracker.ietf.org/doc/html/rfc5789.html))
-    * Use [Client.SetAllowNonIdempotentRetry]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetAllowNonIdempotentRetry) or [Request.SetAllowNonIdempotentRetry]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetAllowNonIdempotentRetry). If additional control is necessary, utilize the custom retry condition.
+    * Use [Client.SetAllowNonIdempotentRetry]({{% godoc v3 %}}Client.SetAllowNonIdempotentRetry) or [Request.SetAllowNonIdempotentRetry]({{% godoc v3 %}}Request.SetAllowNonIdempotentRetry). If additional control is necessary, utilize the custom retry condition.
 * Applies [default retry conditions]({{% relref "#default-conditions" %}})
-    * It can be disabled via [Client.SetRetryDefaultConditions]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetRetryDefaultConditions) or [Request.SetRetryDefaultConditions]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetRetryDefaultConditions)
+    * It can be disabled via [Client.SetRetryDefaultConditions]({{% godoc v3 %}}Client.SetRetryDefaultConditions) or [Request.SetRetryDefaultConditions]({{% godoc v3 %}}Request.SetRetryDefaultConditions)
+* [Request.RetryTraceID]({{% godoc v3 %}}Request) - GUID generated for retry count > 0
 
 
 ## Default Conditions
@@ -98,21 +100,21 @@ client.
 
 ### Client
 
-* [Client.SetRetryCount]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetRetryCount)
-* [Client.SetRetryWaitTime]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetRetryWaitTime)
-* [Client.SetRetryMaxWaitTime]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetRetryMaxWaitTime)
-* [Client.SetRetryStrategy]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetRetryStrategy)
-* [Client.SetRetryDefaultConditions]({{% param Resty.V3.GoDocLinkPrefix %}}Client.SetRetryDefaultConditions)
-* [Client.AddRetryHook]({{% param Resty.V3.GoDocLinkPrefix %}}Client.AddRetryHook)
-* [Client.AddRetryCondition]({{% param Resty.V3.GoDocLinkPrefix %}}Client.AddRetryCondition)
+* [Client.SetRetryCount]({{% godoc v3 %}}Client.SetRetryCount)
+* [Client.SetRetryWaitTime]({{% godoc v3 %}}Client.SetRetryWaitTime)
+* [Client.SetRetryMaxWaitTime]({{% godoc v3 %}}Client.SetRetryMaxWaitTime)
+* [Client.SetRetryStrategy]({{% godoc v3 %}}Client.SetRetryStrategy)
+* [Client.SetRetryDefaultConditions]({{% godoc v3 %}}Client.SetRetryDefaultConditions)
+* [Client.AddRetryHook]({{% godoc v3 %}}Client.AddRetryHook)
+* [Client.AddRetryCondition]({{% godoc v3 %}}Client.AddRetryCondition)
 
 
 ### Request
 
-* [Request.SetRetryCount]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetRetryCount)
-* [Request.SetRetryWaitTime]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetRetryWaitTime)
-* [Request.SetRetryMaxWaitTime]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetRetryMaxWaitTime)
-* [Request.SetRetryStrategy]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetRetryStrategy)
-* [Request.SetRetryDefaultConditions]({{% param Resty.V3.GoDocLinkPrefix %}}Request.SetRetryDefaultConditions)
-* [Request.AddRetryHook]({{% param Resty.V3.GoDocLinkPrefix %}}Request.AddRetryHook)
-* [Request.AddRetryCondition]({{% param Resty.V3.GoDocLinkPrefix %}}Request.AddRetryCondition)
+* [Request.SetRetryCount]({{% godoc v3 %}}Request.SetRetryCount)
+* [Request.SetRetryWaitTime]({{% godoc v3 %}}Request.SetRetryWaitTime)
+* [Request.SetRetryMaxWaitTime]({{% godoc v3 %}}Request.SetRetryMaxWaitTime)
+* [Request.SetRetryStrategy]({{% godoc v3 %}}Request.SetRetryStrategy)
+* [Request.SetRetryDefaultConditions]({{% godoc v3 %}}Request.SetRetryDefaultConditions)
+* [Request.AddRetryHook]({{% godoc v3 %}}Request.AddRetryHook)
+* [Request.AddRetryCondition]({{% godoc v3 %}}Request.AddRetryCondition)

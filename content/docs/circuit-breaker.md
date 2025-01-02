@@ -22,7 +22,7 @@ A circuit breaker is used to improve system stability and resiliency. It is diff
 // create circuit breaker with required values, override as required
 cb := resty.NewCircuitBreaker().
 	SetTimeout(15 * time.Second).
-	SetFailThreshold(10).
+	SetFailureThreshold(10).
 	SetSuccessThreshold(5)
 
 // create Resty client
@@ -36,7 +36,8 @@ defer client.Close()
 
 ## Methods
 
-* [CircuitBreaker.SetTimeout]({{% param Resty.V3.GoDocLinkPrefix %}}CircuitBreaker.SetTimeout)
-* [CircuitBreaker.SetFailThreshold]({{% param Resty.V3.GoDocLinkPrefix %}}CircuitBreaker.SetFailThreshold)
-* [CircuitBreaker.SetSuccessThreshold]({{% param Resty.V3.GoDocLinkPrefix %}}CircuitBreaker.SetSuccessThreshold)
-* [CircuitBreaker.SetPolicies]({{% param Resty.V3.GoDocLinkPrefix %}}CircuitBreaker.SetPolicies)
+* [CircuitBreaker.SetTimeout]({{% godoc v3 %}}CircuitBreaker.SetTimeout)
+* [CircuitBreaker.SetFailureThreshold]({{% godoc v3 %}}CircuitBreaker.SetFailureThreshold)
+* [CircuitBreaker.SetSuccessThreshold]({{% godoc v3 %}}CircuitBreaker.SetSuccessThreshold)
+* [CircuitBreaker.SetPolicies]({{% godoc v3 %}}CircuitBreaker.SetPolicies)
+* [CircuitBreaker.AddPolicies]({{% godoc v3 %}}CircuitBreaker.AddPolicies)
