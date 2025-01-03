@@ -3,6 +3,8 @@ title: Resty
 theme: hugo-book
 
 languageCode: en-us
+cleanDestinationDir: true
+
 # uglyURLs: true
 # permalinks:
 #   posts: ":filename"
@@ -27,8 +29,6 @@ markup:
   highlight:
     style: base16-snazzy
 
-cleanDestinationDir: true
-
 # menu:
 #   before:
 #     - name: Home
@@ -49,7 +49,7 @@ params:
     GitHubRepo: https://github.com/go-resty/resty
     GitHubSlug: go-resty/resty
     V3:
-      Version: v3.0.0-alpha.4
+      Version: v3.0.0-alpha.6
       Vanity: resty.dev/v3
       GoDocLinkPrefix: https://pkg.go.dev/resty.dev/v3#
 
