@@ -15,7 +15,7 @@ type: docs
         <img src="https://goreportcard.com/badge/{{% param Resty.V3.Vanity %}}" alt="Go Report Card">
     </a>
     <a href="{{% param Resty.GitHubRepo %}}/releases/latest" target="_blank">
-        <img src="https://img.shields.io/badge/version-v3.0.0--alpha.4-blue.svg" alt="Resty Release Version">
+        <img src="https://img.shields.io/badge/version-v3.0.0--alpha.6-blue.svg" alt="Resty Release Version">
     </a>
     <a href="{{% param Resty.GoDoc %}}/{{% param Resty.V3.Vanity %}}" target="_blank">
         <img src="{{% param Resty.GoDoc %}}/badge/{{% param Resty.V3.Vanity %}}" alt="Resty GoDoc">
@@ -73,6 +73,7 @@ This website represents Resty v3 and above. For previous v2 documentation, refer
 * Multipart and Form data with ease
 * Request Path Params
 * Retry Mechanism
+* Circuit Breaker
 * Goroutine & concurrent safe
 * Automatic decompresser (gzip, deflate)
 * Basic auth, Digest auth, Bearer, etc.
@@ -89,6 +90,7 @@ This website represents Resty v3 and above. For previous v2 documentation, refer
 * Large file upload and progress callback
 * Download to file
 * Redirect Policies
+* Circuit Breaker Policy
 * Debug mode with human-readable log
 * Load Balancer and Service Discovery
 * Response body limit & Unlimited reads
@@ -103,13 +105,15 @@ This website represents Resty v3 and above. For previous v2 documentation, refer
 
 Resty provides various ways to enhance its functionality by implementing its interfaces to meet all custom requirements.
 
-* Request & Response middleware
+* Request middleware
+* Response middleware
 * Content-Type encoder & decoder
 * Content Decompresser
 * Load Balancer and Service Discovery
 * Retry Strategy, Condition, and Hooks
+* Circuit Breaker Policy
 * Request Functions
-* Transport RoundTripper
 * Redirect Policy
+* Transport RoundTripper
 * Logger
 
