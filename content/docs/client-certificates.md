@@ -23,9 +23,9 @@ myClientCertStr := `-----BEGIN CERTIFICATE-----
 ... cert content ...
 -----END CERTIFICATE-----`
 
-myClientCertKeyStr := `-----BEGIN CERTIFICATE-----
+myClientCertKeyStr := `-----BEGIN PRIVATE KEY-----
 ... cert key content ...
------END CERTIFICATE-----`
+-----END PRIVATE KEY-----`
 
 client.SetCertificateFromString(myClientCertStr, myClientCertKeyStr)
 ```
