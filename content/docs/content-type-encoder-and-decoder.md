@@ -9,8 +9,8 @@ weight: 6
 
 {{% hint info %}}
 **NOTE:**
-* User-defined encoder/decoder takes priority over default ones
-* Add method overwrites encoder/decoder if `Content-Type` key already exists
+* User-defined encoder/decoder takes priority over default ones.
+* Add method overwrites encoder/decoder if `Content-Type` key already exists.
 {{% /hint %}}
 
 ## Examples

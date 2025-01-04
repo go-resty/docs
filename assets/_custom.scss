@@ -47,17 +47,19 @@
 
 .r-footer {
     display: flex;
-    position: absolute;
+    // position: absolute;
     bottom: 0;
     width: 100%;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
     flex-direction: column;
-    border-top: solid 1px #6b6b6b;
+    border-top: solid 1px #cdcdcd;
+    background-color: var(--body-background);
+    margin-top: 2rem;
 }
 
 a .r-icon {
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 1.2rem;
+    width: 1.2rem;
 }
 
 .r-info-box {
@@ -65,15 +67,26 @@ a .r-icon {
     width: 100%;
     justify-content: center;
     padding: .6rem 0;
-    border-bottom: solid 1px #6b6b6b;
+    border-bottom: solid 1px #cdcdcd;
 }
 
 .r-info-box a {
     margin: 0 .2em;
+    cursor: pointer;
+}
+
+.r-info-box #sponsor {
+    vertical-align: middle;
+    font-size: 1.3rem;
+    // padding-top: 0.11rem;
 }
 
 .r-copyright {
     padding-top: 1rem;
+}
+.r-copyright-details {
+    font-size: 0.9em;
+    padding: 0.1rem 0.9rem;
 }
 
 .resty-go-mod pre {
@@ -111,4 +124,10 @@ a .r-icon {
     top:1%;
     opacity: 0;
     transition: opacity 0.3s;
+}
+
+@media screen and (min-width: 80rem) {
+    .book-menu .book-menu-content, .book-page, .book-toc .book-toc-content {
+        padding: 1rem 1rem;
+    }
 }

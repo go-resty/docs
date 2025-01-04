@@ -50,6 +50,6 @@ client.SetCertificates(cert1, cert2, cert3)
 
 ## Methods
 
-* [Client.SetCertificates](Client.SetCertificates)
-* [Client.SetCertificateFromFile](Client.SetCertificateFromFile)
-* [Client.SetCertificateFromString](Client.SetCertificateFromString)
+* [Client.SetCertificates]({{% godoc v3 %}}Client.SetCertificates)
+* [Client.SetCertificateFromFile]({{% godoc v3 %}}Client.SetCertificateFromFile)
+* [Client.SetCertificateFromString]({{% godoc v3 %}}Client.SetCertificateFromString)

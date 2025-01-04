@@ -8,7 +8,7 @@ Resty offers a convenient method to add `client root` certificates.
 
 {{% hint info %}}
 * Starting v3, Resty lets a watcher reload certificates dynamically at configured intervals if modified.
-* Default watcher reload interval is 24 hours
+* Default watcher reload interval is 24 hours.
 {{% /hint %}}
 
 ## Examples
