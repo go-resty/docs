@@ -105,8 +105,8 @@ client.
 * [Client.SetRetryMaxWaitTime]({{% godoc v3 %}}Client.SetRetryMaxWaitTime)
 * [Client.SetRetryStrategy]({{% godoc v3 %}}Client.SetRetryStrategy)
 * [Client.SetRetryDefaultConditions]({{% godoc v3 %}}Client.SetRetryDefaultConditions)
-* [Client.AddRetryHook]({{% godoc v3 %}}Client.AddRetryHook)
-* [Client.AddRetryCondition]({{% godoc v3 %}}Client.AddRetryCondition)
+* [Client.AddRetryHooks]({{% godoc v3 %}}Client.AddRetryHooks)
+* [Client.AddRetryConditions]({{% godoc v3 %}}Client.AddRetryConditions)
 
 
 ### Request
@@ -116,5 +116,7 @@ client.
 * [Request.SetRetryMaxWaitTime]({{% godoc v3 %}}Request.SetRetryMaxWaitTime)
 * [Request.SetRetryStrategy]({{% godoc v3 %}}Request.SetRetryStrategy)
 * [Request.SetRetryDefaultConditions]({{% godoc v3 %}}Request.SetRetryDefaultConditions)
-* [Request.AddRetryHook]({{% godoc v3 %}}Request.AddRetryHook)
-* [Request.AddRetryCondition]({{% godoc v3 %}}Request.AddRetryCondition)
+* [Request.AddRetryHooks]({{% godoc v3 %}}Request.AddRetryHooks)
+* [Request.SetRetryHooks]({{% godoc v3 %}}Request.SetRetryHooks)
+* [Request.AddRetryConditions]({{% godoc v3 %}}Request.AddRetryConditions)
+* [Request.SetRetryConditions]({{% godoc v3 %}}Request.SetRetryConditions)
