@@ -1,0 +1,3 @@
+{{- $gh_repo := ($.Page.Param "Resty.GitHubRepo") -}}
+{{- $version := (.Get 0) }}
+{{- printf "%s/releases/tag/%s" $gh_repo $version -}}

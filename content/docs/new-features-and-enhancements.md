@@ -5,16 +5,18 @@ bookHidden: true
 
 # New Features and Enhancements
 
-* Override all transport settings and timeout values used by Resty using [NewWithTransportSettings]({{% godoc v3 %}}NewWithTransportSettings)
+* Override all transport settings and timeout values used by Resty using [NewWithTransportSettings]({{% godoc v3 %}}NewWithTransportSettings).
 * [Content-Type {Encoder, Decoder}]({{% relref "content-type-encoder-and-decoder" %}})
 * [Content Decompresser]({{% relref "content-decompresser" %}})
 * [Circuit Breaker]({{% relref "circuit-breaker" %}})
-* Multipart [upload progress]({{% relref "multipart#upload-progress" %}})
-* Retry settings on [Request-level]({{% relref "retry-mechanism#request" %}})
-* Retry respects header `Retry-After` if present
-* [Root]({{% relref "root-certificates" %}}), [Client, and Client Root]({{% relref "client-root-certificates" %}}) certificates - dynamically reload by interval
-* SRV lookup got a facelift with weighted round-robin algorithm and weight value respected from SRV record
-* Ability to set empty header value for User-Agent and Accept-Encoding
+* [Multipart]({{% relref "multipart" %}}) streaming and [upload progress]({{% relref "multipart#upload-progress" %}}).
+* Retry
+    * Retry settings on [Request-level]({{% relref "retry-mechanism#request" %}}).
+    * Respects header `Retry-After` if present.
+    * Resets reader on retry request if the `io.ReadSeeker` interface is supported.
+* [Root]({{% relref "root-certificates" %}}), [Client Root]({{% relref "client-root-certificates" %}}) certificates - dynamically reload by interval.
+* SRV lookup got a facelift with weighted round-robin algorithm and weight value respected from SRV record.
+* Ability to set empty header value for User-Agent and Accept-Encoding.
 
 ## New ways to create Client
 

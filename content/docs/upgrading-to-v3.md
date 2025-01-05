@@ -57,6 +57,8 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * `Client.SetClientRootCertificate` => [Client.SetClientRootCertificates]({{% godoc v3 %}}Client.SetClientRootCertificates)
 * `Client.Debug` => [Client.IsDebug]({{% godoc v3 %}}Client.IsDebug)
 * `Client.DisableWarn` => [Client.IsDisableWarn]({{% godoc v3 %}}Client.IsDisableWarn)
+* `Client.AddRetryCondition` => [Client.AddRetryConditions]({{% godoc v3 %}}Client.AddRetryConditions)
+* `Client.AddRetryHook` => [Client.AddRetryHooks]({{% godoc v3 %}}Client.AddRetryHooks)
 
 #### Request
 
@@ -69,6 +71,7 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * `Request.EnableGenerateCurlOnDebug` => [Request.EnableGenerateCurlCmd]({{% godoc v3 %}}Request.EnableGenerateCurlCmd)
 * `Request.DisableGenerateCurlOnDebug` => [Request.DisableGenerateCurlCmd]({{% godoc v3 %}}Request.DisableGenerateCurlCmd)
 * `Request.GenerateCurlCommand` => [Request.CurlCmd]({{% godoc v3 %}}Request.CurlCmd)
+* `Request.AddRetryCondition` => [Request.AddRetryConditions]({{% godoc v3 %}}Request.AddRetryConditions)
 
 #### Multipart
 
