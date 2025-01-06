@@ -1,9 +1,9 @@
 
 # Allow Payload On
 
-By default, Resty allows request payload on POST, PUT, and PATCH per the latest [RFC-9110](https://datatracker.ietf.org/doc/html/rfc9110.html) as of Jun 2022.
+By default, Resty allows request payload on POST, PUT, and PATCH per the latest [RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110.html) as of Jun 2022.
 
-However, the methods GET and DELETE have been the subject of debate or interpretation in the past, at least with the latest [RFC-9110](https://datatracker.ietf.org/doc/html/rfc9110.html), which states that -
+However, the methods GET and DELETE have been the subject of debate or interpretation in the past, at least with the latest [RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110.html), which states that -
 
     request has no generally defined semantics...
 

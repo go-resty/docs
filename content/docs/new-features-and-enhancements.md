@@ -1,5 +1,4 @@
 ---
-# title: New Features and Enhancements
 bookHidden: true
 ---
 
