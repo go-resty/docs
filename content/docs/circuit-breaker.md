@@ -26,9 +26,9 @@ cb := resty.NewCircuitBreaker().
 	SetSuccessThreshold(5)
 
 // create Resty client
-client := resty.New().
+c := resty.New().
     SetCircuitBreaker(cb)
-defer client.Close()
+defer c.Close()
 
 // start using the client ...
 ```

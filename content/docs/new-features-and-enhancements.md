@@ -9,6 +9,7 @@ bookHidden: true
 * [Content Decompresser]({{% relref "content-decompresser" %}})
 * [Circuit Breaker]({{% relref "circuit-breaker" %}})
 * [Multipart]({{% relref "multipart" %}}) streaming and [upload progress]({{% relref "multipart#upload-progress" %}}).
+* [Load Balancer and Service Discovery]({{% relref "load-balancer-and-service-discovery" %}})
 * Retry
     * Retry settings on [Request-level]({{% relref "retry-mechanism#request" %}}).
     * Respects header `Retry-After` if present.
