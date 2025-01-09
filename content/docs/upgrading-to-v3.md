@@ -36,6 +36,8 @@ I made necessary breaking changes to improve Resty and open up future growth pos
         * It can be disabled via [Client.SetRetryDefaultConditions]({{% godoc v3 %}}Client.SetRetryDefaultConditions) or [Request.SetRetryDefaultConditions]({{% godoc v3 %}}Request.SetRetryDefaultConditions)
 * [Multipart]({{% relref "multipart" %}})
     * By default, Resty streams the content in the request body when a file or `io.Reader` is detected in the MultipartField input.
+* Redirect
+    * [NoRedirectPolicy]({{% godoc v3 %}}NoRedirectPolicy) returns an error `http.ErrUseLastResponse`
 
 #### Client
 
@@ -59,6 +61,11 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * `Client.DisableWarn` => [Client.IsDisableWarn]({{% godoc v3 %}}Client.IsDisableWarn)
 * `Client.AddRetryCondition` => [Client.AddRetryConditions]({{% godoc v3 %}}Client.AddRetryConditions)
 * `Client.AddRetryHook` => [Client.AddRetryHooks]({{% godoc v3 %}}Client.AddRetryHooks)
+* `Client.SetRetryAfter` => [Client.SetRetryStrategy]({{% godoc v3 %}}Client.SetRetryStrategy)
+* `Client.OnRequestLog` => [Client.OnRequestDebugLog]({{% godoc v3 %}}Client.OnRequestDebugLog)
+* `Client.OnResponseLog` => [Client.OnResponseDebugLog]({{% godoc v3 %}}Client.OnResponseDebugLog)
+* `Client.Transport` => [Client.HTTPTransport]({{% godoc v3 %}}Client.HTTPTransport) new method returns `http.Transport`
+    * [Client.Transport]({{% godoc v3 %}}Client.Transport) method does exist in v3, which returns `http.RoundTripper`
 
 #### Request
 
@@ -77,6 +84,15 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 
 * `MultipartField.Param` => [MultipartField.Name]({{% godoc v3 %}}MultipartField)
 
+#### Package Level
+
+* Retry
+    * `OnRetryFunc` => [RetryHookFunc]({{% godoc v3 %}}RetryHookFunc)
+    * `RetryStrategyFunc` => [RetryStrategyFunc]({{% godoc v3 %}}RetryStrategyFunc)
+* Debug Log
+    * `RequestLogCallback` and `ResponseLogCallback` => [DebugLogCallback]({{% godoc v3 %}}DebugLogCallback)
+
+
 ### Removed
 
 #### Client
@@ -87,7 +103,8 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * `Client.UserInfo`
 * `Client.SetRetryResetReaders` - it happens automatically.
 * `Client.SetRetryAfter` - use [Client.SetRetryStrategy]({{% godoc v3 %}}Client.SetRetryStrategy) or [Request.SetRetryStrategy]({{% godoc v3 %}}Request.SetRetryStrategy) instead.
-* `Client.RateLimiter` - Retry respects header `Retry-After` if present
+* `Client.RateLimiter` and `Client.SetRateLimiter` - Retry respects header `Retry-After` if present
+* `Client.AddRetryAfterErrorCondition` - use [Client.AddRetryConditions]({{% godoc v3 %}}Client.AddRetryConditions) instead.
 
 #### Request
 
@@ -100,6 +117,14 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 
 * `Response.SetBody`
 * `Response.Body()`
+
+#### RequestLog
+
+* `RequestLog` => use [DebugLog]({{% godoc v3 %}}DebugLog) instead.
+
+#### ResponseLog
+
+* `ResponseLog` => use [DebugLog]({{% godoc v3 %}}DebugLog) instead.
 
 #### Package Exported Methods
 

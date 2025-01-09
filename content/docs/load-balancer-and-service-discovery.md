@@ -5,8 +5,8 @@ Resty v3 provides new ways to discover the Base URL and client-side load balanci
 
 Out of the box, Resty provides two algorithms -
 
-* [Round-Robin (RR)]()
-* [Weighted Round-Robin (WRR)]
+* [Round-Robin (RR)]({{% godoc v3 %}}RoundRobin)
+* [Weighted Round-Robin (WRR)]({{% godoc v3 %}}WeightedRoundRobin)
 
 Also, SRV records discovery using the Weighted Round-Robin (WRR) algorithm, called []().
 

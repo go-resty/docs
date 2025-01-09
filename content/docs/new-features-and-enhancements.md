@@ -17,6 +17,7 @@ bookHidden: true
 * [Root]({{% relref "root-certificates" %}}), [Client Root]({{% relref "client-root-certificates" %}}) certificates - dynamically reload by interval.
 * SRV lookup got a facelift with weighted round-robin algorithm and weight value respected from SRV record.
 * Ability to set empty header value for User-Agent and Accept-Encoding.
+* Ability to set `TLSClientConfig` on custom RoundTripper via [TLSClientConfiger interface]({{% relref "tls-client-config-on-custom-roundtriper" %}})
 
 ## New ways to create Client
 
@@ -44,7 +45,11 @@ bookHidden: true
 * [Client.IsDisableWarn]({{% godoc v3 %}}Client.IsDisableWarn)
 * [Client.AllowMethodDeletePayload]({{% godoc v3 %}}Client.AllowMethodDeletePayload)
 * [Client.SetAllowMethodDeletePayload]({{% godoc v3 %}}Client.SetAllowMethodDeletePayload)
+* [Client.RetryStrategy]({{% godoc v3 %}}Client.RetryStrategy)
 * [Client.SetRetryStrategy]({{% godoc v3 %}}Client.SetRetryStrategy)
+* [Client.IsRetryDefaultConditions]({{% godoc v3 %}}Client.IsRetryDefaultConditions)
+* [Client.EnableRetryDefaultConditions]({{% godoc v3 %}}Client.EnableRetryDefaultConditions)
+* [Client.DisableRetryDefaultConditions]({{% godoc v3 %}}Client.DisableRetryDefaultConditions)
 * [Client.SetRetryDefaultConditions]({{% godoc v3 %}}Client.SetRetryDefaultConditions)
 * [Client.IsSaveResponse]({{% godoc v3 %}}Client.IsSaveResponse)
 * [Client.SetSaveResponse]({{% godoc v3 %}}Client.SetSaveResponse)
@@ -54,6 +59,8 @@ bookHidden: true
 * [Client.SetClientRootCertificatesWatcher]({{% godoc v3 %}}Client.SetClientRootCertificatesWatcher)
 * [Client.SetCertificateFromFile]({{% godoc v3 %}}Client.SetCertificateFromFile)
 * [Client.SetCertificateFromString]({{% godoc v3 %}}Client.SetCertificateFromString)
+* [Client.SetUnescapeQueryParams]({{% godoc v3 %}}Client.SetUnescapeQueryParams)
+
 
 ## Request
 
@@ -77,11 +84,14 @@ bookHidden: true
 * [Request.SetRetryWaitTime]({{% godoc v3 %}}Request.SetRetryWaitTime)
 * [Request.SetRetryMaxWaitTime]({{% godoc v3 %}}Request.SetRetryMaxWaitTime)
 * [Request.SetRetryStrategy]({{% godoc v3 %}}Request.SetRetryStrategy)
+* [Request.EnableRetryDefaultConditions]({{% godoc v3 %}}Request.EnableRetryDefaultConditions)
+* [Request.DisableRetryDefaultConditions]({{% godoc v3 %}}Request.DisableRetryDefaultConditions)
 * [Request.SetRetryDefaultConditions]({{% godoc v3 %}}Request.SetRetryDefaultConditions)
 * [Request.IsSaveResponse]({{% godoc v3 %}}Request)
 * [Request.SetSaveResponse]({{% godoc v3 %}}Request.SetSaveResponse)
 * [Request.SetGenerateCurlCmd]({{% godoc v3 %}}Request.SetGenerateCurlCmd)
 * [Request.SetDebugLogCurlCmd]({{% godoc v3 %}}Request.SetDebugLogCurlCmd)
+* [Request.SetUnescapeQueryParams]({{% godoc v3 %}}Request.SetUnescapeQueryParams)
 
 
 ## Response
@@ -91,3 +101,7 @@ bookHidden: true
 * [Response.IsRead]({{% godoc v3 %}}Response)
 * [Response.Err]({{% godoc v3 %}}Response)
 * [Response.RedirectHistory]({{% godoc v3 %}}Response.RedirectHistory)
+
+## TraceInfo
+
+* [TraceInfo.String]({{% godoc v3 %}}TraceInfo.String)
