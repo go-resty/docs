@@ -6,6 +6,7 @@
             let toolTip = document.getElementById("copied-tooltip");
             toolTip.style.visibility = "visible";
             toolTip.style.opacity = 1;
+            toolTip.style.top = (document.documentElement.scrollTop+10)+'px';
             setTimeout(function() {
                 toolTip.style.visibility = "hidden";
                 toolTip.style.opacity = 0;
