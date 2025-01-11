@@ -5,6 +5,7 @@ bookHidden: true
 # New Features and Enhancements
 
 * Override all transport settings and timeout values used by Resty using [NewWithTransportSettings]({{% godoc v3 %}}NewWithTransportSettings).
+* Fully composable [request]({{% relref "request-middleware" %}}) and [response]({{% relref "response-middleware" %}}) middleware
 * [Content-Type {Encoder, Decoder}]({{% relref "content-type-encoder-and-decoder" %}})
 * [Content Decompresser]({{% relref "content-decompresser" %}})
 * [Circuit Breaker]({{% relref "circuit-breaker" %}})
@@ -17,7 +18,14 @@ bookHidden: true
 * [Root]({{% relref "root-certificates" %}}), [Client Root]({{% relref "client-root-certificates" %}}) certificates - dynamically reload by interval.
 * SRV lookup got a facelift with weighted round-robin algorithm and weight value respected from SRV record.
 * Ability to set empty header value for User-Agent and Accept-Encoding.
-* Ability to set `TLSClientConfig` on custom RoundTripper via [TLSClientConfiger interface]({{% relref "tls-client-config-on-custom-roundtriper" %}})
+* Ability to set `TLSClientConfig` on custom RoundTripper via [TLSClientConfiger interface]({{% relref "tls-client-config-on-custom-roundtriper" %}}).
+* Adds Retry Trace ID and Attempt details to the debug log.
+* [Digest Auth]({{% relref "authentication#digest-auth" %}})
+    * Internal flow improvements and optimization.
+    * Adds `auth-int` QOP support.
+    * Adds new Hash functions `SHA-512` and `SHA-512-sess`.
+    * Updates hash functions for `SHA-512-256` and `SHA-512-256-sess`.
+
 
 ## New ways to create Client
 
@@ -28,6 +36,8 @@ bookHidden: true
 ## Client
 
 * [Client.Close]({{% godoc v3 %}}Client.Close)
+* [Client.SetRequestMiddlewares]({{% godoc v3 %}}Client.SetRequestMiddlewares)
+* [Client.SetResponseMiddlewares]({{% godoc v3 %}}Client.SetResponseMiddlewares)
 * [Client.AddContentTypeEncoder]({{% godoc v3 %}}Client.AddContentTypeEncoder)
 * [Client.AddContentTypeDecoder]({{% godoc v3 %}}Client.AddContentTypeDecoder)
 * [Client.SetResponseBodyUnlimitedReads]({{% godoc v3 %}}Client.SetResponseBodyUnlimitedReads)
@@ -51,6 +61,7 @@ bookHidden: true
 * [Client.EnableRetryDefaultConditions]({{% godoc v3 %}}Client.EnableRetryDefaultConditions)
 * [Client.DisableRetryDefaultConditions]({{% godoc v3 %}}Client.DisableRetryDefaultConditions)
 * [Client.SetRetryDefaultConditions]({{% godoc v3 %}}Client.SetRetryDefaultConditions)
+* [Client.SetAllowNonIdempotentRetry]({{% godoc v3 %}}Client.SetAllowNonIdempotentRetry)
 * [Client.IsSaveResponse]({{% godoc v3 %}}Client.IsSaveResponse)
 * [Client.SetSaveResponse]({{% godoc v3 %}}Client.SetSaveResponse)
 * [Client.SetGenerateCurlCmd]({{% godoc v3 %}}Client.SetGenerateCurlCmd)
@@ -87,12 +98,13 @@ bookHidden: true
 * [Request.EnableRetryDefaultConditions]({{% godoc v3 %}}Request.EnableRetryDefaultConditions)
 * [Request.DisableRetryDefaultConditions]({{% godoc v3 %}}Request.DisableRetryDefaultConditions)
 * [Request.SetRetryDefaultConditions]({{% godoc v3 %}}Request.SetRetryDefaultConditions)
+* [Request.SetAllowNonIdempotentRetry]({{% godoc v3 %}}Request.SetAllowNonIdempotentRetry)
 * [Request.IsSaveResponse]({{% godoc v3 %}}Request)
 * [Request.SetSaveResponse]({{% godoc v3 %}}Request.SetSaveResponse)
 * [Request.SetGenerateCurlCmd]({{% godoc v3 %}}Request.SetGenerateCurlCmd)
 * [Request.SetDebugLogCurlCmd]({{% godoc v3 %}}Request.SetDebugLogCurlCmd)
 * [Request.SetUnescapeQueryParams]({{% godoc v3 %}}Request.SetUnescapeQueryParams)
-
+* [Request.Funcs]({{% godoc v3 %}}Request.Funcs)
 
 ## Response
 

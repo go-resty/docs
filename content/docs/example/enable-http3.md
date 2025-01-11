@@ -1,6 +1,3 @@
----
-title: Enable HTTP3
----
 
 # Enable HTTP3
 

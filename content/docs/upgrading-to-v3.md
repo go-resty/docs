@@ -38,6 +38,10 @@ I made necessary breaking changes to improve Resty and open up future growth pos
     * By default, Resty streams the content in the request body when a file or `io.Reader` is detected in the MultipartField input.
 * Redirect
     * [NoRedirectPolicy]({{% godoc v3 %}}NoRedirectPolicy) returns an error `http.ErrUseLastResponse`
+* All response middleware executes regardless of the `error`. Instead, it cascades the error to downstream response middleware.
+    * It is recommended that the error be checked to determine whether to continue or skip the logic execution.
+* By default, Resty does not set the header `Accept` for requests.
+* Digest auth is supported only at the client level; create a dedicated client to utilize it.
 
 #### Client
 
@@ -66,6 +70,8 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * `Client.OnResponseLog` => [Client.OnResponseDebugLog]({{% godoc v3 %}}Client.OnResponseDebugLog)
 * `Client.Transport` => [Client.HTTPTransport]({{% godoc v3 %}}Client.HTTPTransport) new method returns `http.Transport`
     * [Client.Transport]({{% godoc v3 %}}Client.Transport) method does exist in v3, which returns `http.RoundTripper`
+* `Client.OnBeforeRequest` => [Client.AddRequestMiddleware]({{% godoc v3 %}}Client.AddRequestMiddleware)
+* `Client.OnAfterResponse` => [Client.AddResponseMiddleware]({{% godoc v3 %}}Client.AddResponseMiddleware)
 
 #### Request
 
@@ -105,12 +111,14 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * `Client.SetRetryAfter` - use [Client.SetRetryStrategy]({{% godoc v3 %}}Client.SetRetryStrategy) or [Request.SetRetryStrategy]({{% godoc v3 %}}Request.SetRetryStrategy) instead.
 * `Client.RateLimiter` and `Client.SetRateLimiter` - Retry respects header `Retry-After` if present
 * `Client.AddRetryAfterErrorCondition` - use [Client.AddRetryConditions]({{% godoc v3 %}}Client.AddRetryConditions) instead.
+* `Client.SetPreRequestHook` - use [Client.SetRequestMiddlewares]({{% godoc v3 %}}Client.SetRequestMiddlewares) instead. Refer to [docs]({{% relref "request-middleware" %}}).
 
 #### Request
 
 * `Request.RawPathParams` - use [Request.PathParams]({{% godoc v3 %}}Request) instead
 * `Request.UserInfo`
 * `Request.SRV` and `Request.SetSRV` - use [NewSRVWeightedRoundRobin]({{% godoc v3 %}}NewSRVWeightedRoundRobin) and [Client.SetLoadBalancer]({{% godoc v3 %}}Client.SetLoadBalancer) instead. It respects weight value from SRV record
+* `Request.SetDigestAuth` - use [Client.SetDigestAuth] instead.
 
 
 #### Response
@@ -118,21 +126,21 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * `Response.SetBody`
 * `Response.Body()`
 
-#### RequestLog
 
-* `RequestLog` => use [DebugLog]({{% godoc v3 %}}DebugLog) instead.
+#### Package Level
 
-#### ResponseLog
+##### Types
 
-* `ResponseLog` => use [DebugLog]({{% godoc v3 %}}DebugLog) instead.
+* `User` - become unexported as `credentials`.
+* `SRVRecord` - in favor of new [Load Balancer feature]({{% relref "load-balancer-and-service-discovery" %}}) that supports SRV record lookup.
+* `File` - in favor of enhanced [MultipartField]({{% godoc v3 %}}MultipartField) feature.
+* `RequestLog`, `ResponseLog` => use [DebugLog]({{% godoc v3 %}}DebugLog) instead.
 
-#### Package Exported Methods
+##### Methods
 
-The following package-level methods are removed.
-
-* IsStringEmpty
-* IsJSONType
-* IsXMLType
-* DetectContentType
-* Unmarshalc
-* Backoff
+* `IsStringEmpty`
+* `IsJSONType`
+* `IsXMLType`
+* `DetectContentType`
+* `Unmarshalc`
+* `Backoff`
