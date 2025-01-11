@@ -1,3 +1,4 @@
 ---
 title: Examples
+bookFlatSection: true
 ---
