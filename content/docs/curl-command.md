@@ -3,7 +3,7 @@
 
 Resty provides an option to generate the curl command for the request.
 
-By default, Resty does not log the curl command in the debug log since it has the potential to leak sensitive data unless explicitly enabled via [Client.SetDebugLogCurlCmd]({{% godoc v3 %}}Client.SetDebugLogCurlCmd).
+By default, Resty does not log the curl command in the debug log since it has the potential to leak sensitive data unless explicitly enabled via [Client.SetDebugLogCurlCmd]({{% godoc v3 %}}Client.SetDebugLogCurlCmd) or [Request.SetDebugLogCurlCmd]({{% godoc v3 %}}Request.SetDebugLogCurlCmd).
 
 {{% hintreqoverride %}}
 
@@ -20,18 +20,18 @@ By default, Resty does not log the curl command in the debug log since it has th
 c := resty.New()
 defer c.Close()
 
-res, err := c.R().
+res, _ := c.R().
     SetGenerateCurlCmd(true).
     SetBody(map[string]string{
-        "name": "Alex",
+        "name": "Resty",
     }).
     Post("https://httpbin.org/post")
 
-curlCmdStr := res.Request.CurlCommand()
-fmt.Println(err, curlCmdStr)
+curlCmdStr := res.Request.CurlCmd()
+fmt.Println(curlCmdStr)
 
 // Result:
-//     curl -X POST -H 'Content-Type: application/json' -H 'User-Agent: go-resty/3.0.0 (https://resty.dev)' -d '{"name":"Alex"}' https://httpbin.org/post
+// curl -X POST -H 'Accept-Encoding: gzip, deflate' -H 'Content-Type: application/json' -H 'User-Agent: go-resty/3.0.0 (https://resty.dev)' -d '{"name":"Resty"}' https://httpbin.org/post
 ```
 
 ## Methods
@@ -45,6 +45,7 @@ fmt.Println(err, curlCmdStr)
 
 ### Request
 
+* [Request.CurlCmd]({{% godoc v3 %}}Request.CurlCmd)
 * [Request.EnableGenerateCurlCmd]({{% godoc v3 %}}Request.EnableGenerateCurlCmd)
 * [Request.DisableGenerateCurlCmd]({{% godoc v3 %}}Request.DisableGenerateCurlCmd)
 * [Request.SetGenerateCurlCmd]({{% godoc v3 %}}Request.SetGenerateCurlCmd)

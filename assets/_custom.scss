@@ -124,6 +124,10 @@ a .r-icon {
     transition: opacity 0.3s;
 }
 
+.book-section-flat {
+    margin: 2.5rem 0;
+}
+
 @media screen and (min-width: 80rem) {
     .book-menu .book-menu-content, .book-page, .book-toc .book-toc-content {
         padding: 1rem 1rem;

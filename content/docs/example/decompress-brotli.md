@@ -3,9 +3,15 @@
 
 Resty v3 allows users to add decompression logic for HTTP responses using their favorite package.
 
+{{% hint info %}}
+Using `sync.Pool` can reuse the reader and reduce allocation if the package supports `Reset`.
+{{% /hint %}}
+
 ## Example 1
 
-Uses package: [github.com/andybalholm/brotli](https://github.com/andybalholm/brotli)
+Package: [github.com/andybalholm/brotli](https://github.com/andybalholm/brotli)
+
+[![Go Reference](https://pkg.go.dev/badge/github.com/andybalholm/brotli.svg)](https://pkg.go.dev/github.com/andybalholm/brotli)
 
 ```go
 c := resty.New()
@@ -36,7 +42,9 @@ func (b *brotliReader) Close() error {
 
 ## Example 2
 
-Uses package: [github.com/dsnet/compress](https://github.com/dsnet/compress)
+Package: [github.com/dsnet/compress](https://github.com/dsnet/compress)
+
+[![Go Reference](https://pkg.go.dev/badge/github.com/dsnet/compress.svg)](https://pkg.go.dev/github.com/dsnet/compress/brotli)
 
 ```go
 c := resty.New()

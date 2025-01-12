@@ -1,5 +1,8 @@
+---
+title: SOCKS5 Proxy
+---
 
-# Socks5 Proxy
+# SOCKS5 Proxy
 
 ```go
 package main

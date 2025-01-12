@@ -11,7 +11,7 @@ Resty provides a convenient method to compose multipart form-data or ordered for
 {{% /hint %}}
 
 ```go
-res, err := c.R().
+res, err := client.R().
     SetMultipartFormData(map[string]string{
         "first_name": "Jeevanandam",
         "last_name":  "M",
@@ -27,7 +27,7 @@ fmt.Println(err, res)
 ### Example 1
 
 ```go
-res, err := c.R().
+res, err := client.R().
     SetMultipartOrderedFormData("first_name", []string{"Jeevanandam"}).
     SetMultipartOrderedFormData("last_name", []string{"M"}).
     SetMultipartOrderedFormData("zip_code", []string{"00001"}).
@@ -51,7 +51,7 @@ fields := []*resty.MultipartField{
     }
 }
 
-res, err := c.R().
+res, err := client.R().
     SetMultipartFields(fields...). // it can be combined with SetMultipartOrderedFormData
     Post("https://myapp.com/profile")
 

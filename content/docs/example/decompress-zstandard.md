@@ -3,9 +3,15 @@
 
 Resty v3 allows users to add decompression logic for HTTP responses using their favorite package.
 
+{{% hint info %}}
+Using `sync.Pool` can reuse the reader and reduce allocation if the package supports `Reset`.
+{{% /hint %}}
+
 ## Example
 
-Uses package: [github.com/klauspost/compress/zstd](https://github.com/klauspost/compress)
+Package: [github.com/klauspost/compress/zstd](https://github.com/klauspost/compress)
+
+[![Go Reference](https://pkg.go.dev/badge/github.com/klauspost/compress/zstd.svg)](https://pkg.go.dev/github.com/klauspost/compress/zstd)
 
 ```go
 c := resty.New()
