@@ -42,6 +42,8 @@ I made necessary breaking changes to improve Resty and open up future growth pos
     * It is recommended that the error be checked to determine whether to continue or skip the logic execution.
 * By default, Resty does not set the header `Accept` for requests.
 * Digest auth is supported only at the client level; create a dedicated client to utilize it.
+* It does not use `http.Client.Timeout` instead, it uses context with [timeout]({{% relref "timeout" %}}).
+* Generate `curl` command flow is independent. It does not require debugging or tracing to be enabled.
 
 #### Client
 

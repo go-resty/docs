@@ -22,12 +22,14 @@ Resty provides exponential backoff with a jitter strategy out of the box; a cust
 
 ## Default Behavior
 
+* Applies [default retry conditions]({{% relref "#default-conditions" %}}) first before user-defined retry conditions.
+    * It can be disabled via [Client.SetRetryDefaultConditions]({{% godoc v3 %}}Client.SetRetryDefaultConditions) or [Request.SetRetryDefaultConditions]({{% godoc v3 %}}Request.SetRetryDefaultConditions)
+* Executes request retry conditions first, then the client retry conditions, until it gets the return value `true`. Then, it doesn't proceed to execute the remaining conditions.
+* Executes request retry hooks first, and then the client retry hooks.
 * Respects header `Retry-After` if present
-* Resets reader on retry request if the `io.ReadSeeker` interface is supported.
+* Resets reader automatically on retry request if the `io.ReadSeeker` interface is supported.
 * Retries only on Idempotent HTTP Verb - GET, HEAD, PUT, DELETE, OPTIONS, and TRACE ([RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110.html#name-method-registration), [RFC 5789](https://datatracker.ietf.org/doc/html/rfc5789.html))
     * Use [Client.SetAllowNonIdempotentRetry]({{% godoc v3 %}}Client.SetAllowNonIdempotentRetry) or [Request.SetAllowNonIdempotentRetry]({{% godoc v3 %}}Request.SetAllowNonIdempotentRetry). If additional control is necessary, utilize the custom retry condition.
-* Applies [default retry conditions]({{% relref "#default-conditions" %}})
-    * It can be disabled via [Client.SetRetryDefaultConditions]({{% godoc v3 %}}Client.SetRetryDefaultConditions) or [Request.SetRetryDefaultConditions]({{% godoc v3 %}}Request.SetRetryDefaultConditions)
 * [Request.RetryTraceID]({{% godoc v3 %}}Request) - GUID generated for retry count > 0
 
 
@@ -68,16 +70,53 @@ client.
     })
 ```
 
-### Retry Hook
+### Retry Hooks
 
 Utilize the retry hook(s) to perform logic between retries.
 
 ```go
 // Retry configuration can be set at the client or request level
 client.
-    AddRetryHook(func(res *resty.Response, err error) {
-        // perform logic here
-    })
+    AddRetryHooks(
+        func(res *resty.Response, err error) {
+            // client retry hook 1
+            // perform logic here
+        },
+        func(res *resty.Response, err error) {
+            // client retry hook 2
+            // perform logic here
+        },
+    )
+```
+
+#### Add at Request
+
+```go
+client.R().
+    AddRetryHooks(
+        func(res *resty.Response, err error) {
+            // request retry hook
+            // perform logic here
+        },
+    )
+```
+
+#### Overwrite at Request
+
+If a specific use case requires certain retry hooks only for a particular request and does not want the client to retry hooks, use [Request.SetRetryHooks]({{% godoc v3 %}}Request.SetRetryHooks).
+
+```go
+client.R().
+    SetRetryHooks(
+        func(res *resty.Response, err error) {
+            // request retry hook 1
+            // perform logic here
+        },
+        func(res *resty.Response, err error) {
+            // request retry hook 2
+            // perform logic here
+        },
+    )
 ```
 
 ### Retry Conditions
@@ -87,14 +126,66 @@ client.
 // NOTE: first default retry conditions get applied
 //       before user-defined retry conditions
 client.
-    AddRetryCondition(func(res *resty.Response, err error) bool {
-        // perform logic here
+    AddRetryConditions(
+        func(res *resty.Response, err error) bool {
+            // client retry condition 1
+            // perform logic here
 
-        // return true if retry is required otherwise, return false
-        return true
-    })
+            // return true if retry is required otherwise, return false
+            return false
+        },
+        func(res *resty.Response, err error) bool {
+            // client retry condition 1
+            // perform logic here
+
+            // return true if retry is required otherwise, return false
+            return true
+        },
+    )
 ```
 
+#### Add at Request
+
+```go
+// NOTE: first default retry conditions get applied
+//       before user-defined retry conditions
+client.R().
+    AddRetryConditions(
+        func(res *resty.Response, err error) bool {
+            // request retry condition
+            // perform logic here
+
+            // return true if retry is required otherwise, return false
+            return true
+        },
+    )
+```
+
+#### Overwrite at Request
+
+If a specific use case requires certain retry conditions only for a particular request and does not want the client to retry conditions, use [Request.SetRetryConditions]({{% godoc v3 %}}Request.SetRetryConditions).
+
+```go
+// NOTE: first default retry conditions get applied
+//       before user-defined retry conditions
+client.R().
+    SetRetryConditions(
+        func(res *resty.Response, err error) bool {
+            // request retry condition 1
+            // perform logic here
+
+            // return true if retry is required otherwise, return false
+            return false
+        },
+        func(res *resty.Response, err error) bool {
+            // request retry condition 2
+            // perform logic here
+
+            // return true if retry is required otherwise, return false
+            return true
+        },
+    )
+```
 
 ## Methods
 

@@ -1,5 +1,4 @@
 
-
 # Authentication
 
 Resty supports the following authentication/authorization mechanism for requests.
