@@ -7,7 +7,7 @@ title: OAuth2 Client Credentials
 [![Go Reference](https://pkg.go.dev/badge/golang.org/x/oauth2/clientcredentials.svg)](https://pkg.go.dev/golang.org/x/oauth2/clientcredentials)
 
 
-## Without Modifying TLSClientConfig
+## Without Modifying
 
 {{% hint info %}}
 As per the GoDoc of [clientcredentials#Config.Client](https://pkg.go.dev/golang.org/x/oauth2/clientcredentials#Config.Client)
@@ -30,14 +30,14 @@ defer c.Close()
 ```
 
 
-## Modifying TLSClientConfig
+## Modifying
 
-This scenario is applicable for adding Root CA, Client Root CA, Client SSL certs, transport timeouts, etc.
+This scenario applies to any client and transport-related configurations, such as adding Root CA, Client Root CA, Client SSL certificates, transport timeouts, and so on.
 
 {{% hint info %}}
 * As per the GoDoc of [clientcredentials#Config.Client](https://pkg.go.dev/golang.org/x/oauth2/clientcredentials#Config.Client)
     * The returned `Client` and its `Transport` should not be modified.
-* To modify TLSClientConfig and use the oauth2 client credentials package together, a slight tweak is required.
+* To use the oauth2 client credentials package and make modifications to it, a minor adjustment is necessary.
 {{% /hint %}}
 
 ```go
@@ -50,9 +50,9 @@ c := resty.New()
 defer c.Close()
 
 // configure required Root CA, Client Root CA, or Client SSL certs
-c.SetRootCertificates("/path/to/root/pemFile.pem")
-c.SetClientRootCertificates("/path/to/client-root/pemFile.pem")
-c.SetCertificateFromFile("/path/to/certs/client.pem", "/path/to/certs/client.key")
+// c.SetRootCertificates("/path/to/root/pemFile.pem")
+// c.SetClientRootCertificates("/path/to/client-root/pemFile.pem")
+// c.SetCertificateFromFile("/path/to/certs/client.pem", "/path/to/certs/client.key")
 
 // add custom auth request middleware
 c.AddRequestMiddleware(func(c *resty.Client, req *resty.Request) error {
