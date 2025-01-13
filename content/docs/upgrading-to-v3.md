@@ -36,7 +36,7 @@ I made necessary breaking changes to improve Resty and open up future growth pos
         * It can be disabled via [Client.SetRetryDefaultConditions]({{% godoc v3 %}}Client.SetRetryDefaultConditions) or [Request.SetRetryDefaultConditions]({{% godoc v3 %}}Request.SetRetryDefaultConditions)
 * [Multipart]({{% relref "multipart" %}})
     * By default, Resty streams the content in the request body when a file or `io.Reader` is detected in the MultipartField input.
-* Redirect
+* [Redirect]({{% relref "redirect-policy" %}})
     * [NoRedirectPolicy]({{% godoc v3 %}}NoRedirectPolicy) returns an error `http.ErrUseLastResponse`
 * All response middleware executes regardless of the `error`. Instead, it cascades the error to downstream response middleware.
     * It is recommended that the error be checked to determine whether to continue or skip the logic execution.
