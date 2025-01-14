@@ -9,7 +9,7 @@ However, the methods GET and DELETE have been the subject of debate or interpret
 
 So Resty, by default, disallows the request payload on GET and DELETE HTTP verbs.
 
-Some systems, in real-world use, request payloads on GET and DELETE. Resty provides explicit methods to enable payloads for these verbs.
+Some systems, in real-world use, request payloads on GET and DELETE. Resty provides explicit methods to enable payload for these verbs.
 
 ## Methods
 

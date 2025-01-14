@@ -25,7 +25,7 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 
 #### Behavior
 
-* Set content length option is no longer applicable for `io.Reader` flow.
+* The content length option no longer applies to the `io.Reader` flow.
 * By default, payload is not supported in HTTP verb DELETE. Use [Client.AllowMethodDeletePayload]({{% godoc v3 %}}Client.AllowMethodDeletePayload) or [Request.AllowMethodDeletePayload]({{% godoc v3 %}}Request).
 * [Retry Mechanism]({{% relref "retry-mechanism" %}})
     * Respects header `Retry-After` if present
