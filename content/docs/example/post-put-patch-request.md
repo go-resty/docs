@@ -29,7 +29,7 @@ res, err := client.R().
     SetBody(User{
         Username: "testuser",
         Password: "testpass",
-    }). // default is JSON content-type
+    }). // default request content type is JSON
     SetResult(&LoginResponse{}). // or SetResult(LoginResponse{}).
     SetError(&LoginError{}).     // or SetError(LoginError{}).
     Post("https://myapp.com/login")
@@ -48,7 +48,7 @@ res, err := client.R().
         Content: "This is my article content, oh ya!",
         Author: "Jeevanandam M",
         Tags: []string{"article", "sample", "resty"},
-    }). // default is JSON content-type
+    }). // default request content type is JSON
     SetAuthToken("bc594900518b4f7eac75bd37f019e08fbc594900518b4f7eac75bd37f019e08f").
     SetError(&Error{}). // or SetError(Error{}).
     Put("https://myapp.com/articles/123456")
@@ -63,7 +63,7 @@ fmt.Println(res.Error().(*Error))
 resp, err := client.R().
     SetBody(Article{
         Tags: []string{"new tag1", "new tag2"},
-    }). // default is JSON content-type
+    }). // default request content type is JSON
     SetAuthToken("bc594900518b4f7eac75bd37f019e08fbc594900518b4f7eac75bd37f019e08f").
     SetError(&Error{}). // or SetError(Error{}).
     Patch("https://myapp.com/articles/123456")

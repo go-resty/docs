@@ -7,9 +7,9 @@ weight: 4
 Resty supports various request body types.
 
 {{% hint info %}}
-HINT:
-* If you know the Content-Type, set it on the request to prevent the auto-detect computation.
-* Resty v3, streams the content in the request body for the `io.Reader` interface.
+* Resty v3 streams the content in the request body for the `io.Reader` interface.
+* Setting the Content-Type header in the request skips the auto-detect computation.
+* It does request body automatic marshaling for `struct` and `map` data types.
 {{% /hint %}}
 
 ## Struct
@@ -23,7 +23,7 @@ res, err := client.R().
     SetBody(User{
         Username: "testuser",
         Password: "testpass",
-    }). // default is JSON content-type
+    }). // default request content type is JSON
     SetResult(&LoginResponse{}). // or SetResult(LoginResponse{}).
     SetError(&LoginError{}).     // or SetError(LoginError{}).
     Post("https://myapp.com/login")
@@ -38,7 +38,7 @@ res, err := client.R().
     SetBody(map[string]string{
         "username": "testuser",
         "password": "testpass",
-    }). // default is JSON content-type
+    }). // default request content type is JSON
     SetResult(&LoginResponse{}). // or SetResult(LoginResponse{}).
     SetError(&LoginError{}).     // or SetError(LoginError{}).
     Post("https://myapp.com/login")

@@ -1,6 +1,6 @@
 ---
 title: Content-Type {Encoder, Decoder}
-weight: 6
+weight: 7
 ---
 
 # Content-Type {Encoder, Decoder}
