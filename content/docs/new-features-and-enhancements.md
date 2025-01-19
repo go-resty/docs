@@ -16,6 +16,7 @@ bookHidden: true
     * Respects header `Retry-After` if present.
     * Resets reader on retry request if the `io.ReadSeeker` interface is supported.
 * [Root]({{% relref "root-certificates" %}}), [Client Root]({{% relref "client-root-certificates" %}}) certificates - dynamically reload by interval.
+* [Server-Sent Events]({{% relref "server-sent-events" %}})
 * SRV lookup got a facelift with weighted round-robin algorithm and weight value respected from SRV record.
 * Ability to set empty header value for `User-Agent` and `Accept-Encoding`.
 * Ability to set `TLSClientConfig` on custom RoundTripper via [TLSClientConfiger interface]({{% relref "tls-client-config-on-custom-roundtriper" %}}).
