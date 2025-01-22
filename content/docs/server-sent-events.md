@@ -5,15 +5,130 @@ Resty v3 adds Server-Sent Events feature. It provides APIs similar to the specif
 
 ## Examples
 
+### Get Started
+
 ```go
-es := NewEventSource().
+es := resty.NewEventSource().
     SetURL("https://sse.dev/test").
-    OnMessage(func(a any) {
-        fmt.Println(a.(*resty.Event))
+    OnMessage(func(e any) {
+        fmt.Println(e.(*resty.Event))
     }, nil)
 
 err := es.Get()
 fmt.Println(err)
+```
+
+### Auto Unmarshalling
+
+```go
+// https://sse.dev/test returns
+// {"testing":true,"sse_dev":"is great","msg":"It works!","now":1737508994502}
+type Data struct {
+    Testing bool   `json:"testing"`
+    SSEDev  string `json:"sse_dev"`
+    Message string `json:"msg"`
+    Now     int64  `json:"now"`
+}
+
+es := resty.NewEventSource().
+    SetURL("https://sse.dev/test").
+    OnMessage(
+        func(e any) {
+            d := e.(*Data)
+            fmt.Println("Testing:", d.Testing)
+            fmt.Println("SSEDev:", d.SSEDev)
+            fmt.Println("Message:", d.Message)
+            fmt.Println("Now:", d.Now)
+            fmt.Println("")
+        },
+        Data{},
+    )
+
+err := es.Get()
+fmt.Println(err)
+
+// Output:
+//     Testing: true
+//     SSEDev: is great
+//     Message: It works!
+//     Now: 1737509497652
+
+//     Testing: true
+//     SSEDev: is great
+//     Message: It works!
+//     Now: 1737509499652
+
+//     ...
+```
+
+
+### Multiple Event Types
+
+```go
+type UserEvent struct {
+    UserName string    `json:"username"`
+    Message  string    `json:"msg"`
+    Time     time.Time `json:"time"`
+}
+
+es := resty.NewEventSource().
+    SetURL("https://sse.dev/test").
+    OnMessage(
+        func(e any) {
+            fmt.Println(e.(*resty.Event))
+        },
+        nil,
+    ).
+    AddEventListener(
+        "user_connect",
+        func(e any) {
+            fmt.Println(e.(*UserEvent))
+        },
+        UserEvent{},
+    ).
+    AddEventListener(
+        "user_message",
+        func(e any) {
+            fmt.Println(e.(*UserEvent))
+        },
+        UserEvent{},
+    )
+
+err := es.Get()
+fmt.Println(err)
+```
+
+### OnOpen, OnError Events
+
+```go
+es := resty.NewEventSource().
+    SetURL("https://sse.dev/test").
+    OnMessage(
+        func(e any) {
+            fmt.Println(e.(*resty.Event))
+        },
+        nil,
+    ).
+    OnError(
+        func(err error) {
+			fmt.Println("Error occurred:", err)
+		},
+    ).
+    OnOpen(
+        func(url string) {
+			fmt.Println("I'm connected:", url)
+		},
+    )
+
+err := es.Get()
+fmt.Println(err)
+
+// Output:
+//  I'm connected: https://sse.dev/test
+//  &{  {"testing":true,"sse_dev":"is great","msg":"It works!","now":1737510458794}}
+//  &{  {"testing":true,"sse_dev":"is great","msg":"It works!","now":1737510460794}}
+//  &{  {"testing":true,"sse_dev":"is great","msg":"It works!","now":1737510462794}}
+//  ...
 ```
 
 
