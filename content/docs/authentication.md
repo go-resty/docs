@@ -108,3 +108,4 @@ client.AddRequestMiddleware(func(c *resty.Client, req *resty.Request) error {
 * [Request.SetBasicAuth]({{% godoc v3 %}}Request.SetBasicAuth)
 * [Request.SetAuthToken]({{% godoc v3 %}}Request.SetAuthToken)
 * [Request.SetAuthScheme]({{% godoc v3 %}}Request.SetAuthScheme)
+* [Request.SetHeaderAuthorizationKey]({{% godoc v3 %}}Request.SetHeaderAuthorizationKey)
