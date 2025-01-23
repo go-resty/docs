@@ -25,10 +25,11 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 
 #### Behavior
 
-* Set content length option is no longer applicable for `io.Reader` flow.
+* The content length option no longer applies to the `io.Reader` flow.
 * By default, payload is not supported in HTTP verb DELETE. Use [Client.AllowMethodDeletePayload]({{% godoc v3 %}}Client.AllowMethodDeletePayload) or [Request.AllowMethodDeletePayload]({{% godoc v3 %}}Request).
 * [Retry Mechanism]({{% relref "retry-mechanism" %}})
-    * Respects header `Retry-After` if present
+    * Request values are inherited from the client upon creation; they do not refresh during a retry attempt. Therefore, value updates are performed on the request instance via [Response.Request]({{% godoc v3 %}}Response).
+    * Respects header `Retry-After` if present.
     * Resets reader on retry request if the `io.ReadSeeker` interface is supported.
     * Retries only on Idempotent HTTP Verb - GET, HEAD, PUT, DELETE, OPTIONS, and TRACE ([RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110.html#name-method-registration), [RFC 5789](https://datatracker.ietf.org/doc/html/rfc5789.html)),
         * Use [Client.SetAllowNonIdempotentRetry]({{% godoc v3 %}}Client.SetAllowNonIdempotentRetry) or [Request.SetAllowNonIdempotentRetry]({{% godoc v3 %}}Request.SetAllowNonIdempotentRetry). If additional control is necessary, utilize the custom retry condition.
@@ -36,7 +37,7 @@ I made necessary breaking changes to improve Resty and open up future growth pos
         * It can be disabled via [Client.SetRetryDefaultConditions]({{% godoc v3 %}}Client.SetRetryDefaultConditions) or [Request.SetRetryDefaultConditions]({{% godoc v3 %}}Request.SetRetryDefaultConditions)
 * [Multipart]({{% relref "multipart" %}})
     * By default, Resty streams the content in the request body when a file or `io.Reader` is detected in the MultipartField input.
-* Redirect
+* [Redirect]({{% relref "redirect-policy" %}})
     * [NoRedirectPolicy]({{% godoc v3 %}}NoRedirectPolicy) returns an error `http.ErrUseLastResponse`
 * All response middleware executes regardless of the `error`. Instead, it cascades the error to downstream response middleware.
     * It is recommended that the error be checked to determine whether to continue or skip the logic execution.

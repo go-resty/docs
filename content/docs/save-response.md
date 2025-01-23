@@ -1,3 +1,6 @@
+---
+weight: 4
+---
 
 # Save Response
 
@@ -9,6 +12,7 @@ Resty v3 adds -
     * [Request.SetOutputFileName]({{% godoc v3 %}}Request.SetOutputFileName)
     * Header `Content-Disposition`
     * Request URL using `path.Base`
+    * Request URL hostname if path is empty or "/"
 * Ability to use [Request.SetResult]({{% godoc v3 %}}Request.SetResult) and [Request.SetError]({{% godoc v3 %}}Request.SetError) together with save response by enabling [Request.SetResponseBodyUnlimitedReads]({{% godoc v3 %}}Request.SetResponseBodyUnlimitedReads), refer to [unlimited response reads]().
 {{% /hint %}}
 
