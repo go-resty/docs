@@ -93,6 +93,10 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 
 * `MultipartField.Param` => [MultipartField.Name]({{% godoc v3 %}}MultipartField)
 
+#### TraceInfo
+
+* `TraceInfo.RemoteAddr` => `net.Addr` to `string`
+
 #### Package Level
 
 * Retry

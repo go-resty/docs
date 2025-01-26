@@ -111,6 +111,7 @@ bookHidden: true
 * [Request.SetUnescapeQueryParams]({{% godoc v3 %}}Request.SetUnescapeQueryParams)
 * [Request.Funcs]({{% godoc v3 %}}Request.Funcs)
 * [Request.SetTimeout]({{% godoc v3 %}}Request.SetTimeout)
+* [Request.SetHeaderAuthorizationKey]({{% godoc v3 %}}Request.SetHeaderAuthorizationKey)
 
 ## Response
 
@@ -123,3 +124,4 @@ bookHidden: true
 ## TraceInfo
 
 * [TraceInfo.String]({{% godoc v3 %}}TraceInfo.String)
+* [TraceInfo.JSON]({{% godoc v3 %}}TraceInfo.JSON)
