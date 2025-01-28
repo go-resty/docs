@@ -28,6 +28,8 @@ bookHidden: true
     * Updates hash functions for `SHA-512-256` and `SHA-512-256-sess`.
 * Adds Request level [timeout]({{% relref "timeout" %}}) support.
 * Adds the ability to determine the filename automatically from the response for [saving the response]({{% relref "save-response" %}}).
+* [Debug Log]({{% relref "debug-log" %}})
+    * Introduced Debug Log formatter, out of the box human-readable and JSON formatter added.
 
 
 ## New ways to create Client
@@ -74,7 +76,8 @@ bookHidden: true
 * [Client.SetCertificateFromFile]({{% godoc v3 %}}Client.SetCertificateFromFile)
 * [Client.SetCertificateFromString]({{% godoc v3 %}}Client.SetCertificateFromString)
 * [Client.SetUnescapeQueryParams]({{% godoc v3 %}}Client.SetUnescapeQueryParams)
-
+* [Client.OnDebugLog]({{% godoc v3 %}}Client.OnDebugLog)
+* [Client.SetDebugLogFormatter]({{% godoc v3 %}}Client.SetDebugLogFormatter)
 
 ## Request
 
