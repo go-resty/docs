@@ -6,6 +6,10 @@ bookHidden: true
 
 Resty v3 release brings many new features, enhancements, and breaking changes. This page outlines upgrading Resty to v3.
 
+{{% hint info %}}
+Minimum required go version is `{{% param Resty.V3.GoMinVersion %}}`
+{{% /hint %}}
+
 ## Update go.mod
 
 Resty v3 provides a Go vanity URL.
@@ -86,6 +90,10 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * `Request.DisableGenerateCurlOnDebug` => [Request.DisableGenerateCurlCmd]({{% godoc v3 %}}Request.DisableGenerateCurlCmd)
 * `Request.GenerateCurlCommand` => [Request.CurlCmd]({{% godoc v3 %}}Request.CurlCmd)
 * `Request.AddRetryCondition` => [Request.AddRetryConditions]({{% godoc v3 %}}Request.AddRetryConditions)
+
+#### Response
+
+* `Response.Time` => [Response.Duration]({{% godoc v3 %}}Response.Duration)
 
 #### Multipart
 
