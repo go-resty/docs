@@ -31,6 +31,7 @@ type: docs
 <code>require resty.dev/v3 {{% param Resty.V3.Version %}}</code>
 </pre>
 </div>
+<div class="resty-go-min">Minimum required Go version is {{% param Resty.V3.GoMinVersion %}}</div>
 
 {{% columns %}}
 ```go
@@ -49,8 +50,8 @@ fmt.Println(res.Request.TraceInfo())
 // Server-Sent Events Client
 es := NewEventSource().
     SetURL("https://sse.dev/test").
-    OnMessage(func(a any) {
-        fmt.Println(a.(*resty.Event))
+    OnMessage(func(e any) {
+        fmt.Println(e.(*resty.Event))
     }, nil)
 
 err := es.Get()
@@ -88,7 +89,7 @@ This website represents Resty v3 and above. For previous v2 documentation, refer
 * Download to file
 * Redirect Policies
 * Circuit Breaker Policy
-* Debug mode with human-readable log
+* Debug mode with human-readable, JSON log
 * Load Balancer and Service Discovery
 * Response body limit & Unlimited reads
 * Bazel support
@@ -112,5 +113,6 @@ Resty provides various ways to enhance its functionality by implementing its int
 * Request Functions
 * Redirect Policy
 * Transport RoundTripper
+* Debug Log Formatter
 * Logger
 

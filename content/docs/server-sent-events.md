@@ -1,7 +1,7 @@
 
 # Server-Sent Events
 
-Resty v3 adds Server-Sent Events feature. It provides APIs similar to the specification and is easy to use.
+Resty v3 adds Server-Sent Events feature. It provides APIs similar to the [specification](https://html.spec.whatwg.org/multipage/server-sent-events.html) and is easy to use.
 
 ## Examples
 

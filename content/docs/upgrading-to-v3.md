@@ -6,6 +6,10 @@ bookHidden: true
 
 Resty v3 release brings many new features, enhancements, and breaking changes. This page outlines upgrading Resty to v3.
 
+{{% hint info %}}
+Minimum required go version is `{{% param Resty.V3.GoMinVersion %}}`
+{{% /hint %}}
+
 ## Update go.mod
 
 Resty v3 provides a Go vanity URL.
@@ -69,8 +73,6 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * `Client.AddRetryCondition` => [Client.AddRetryConditions]({{% godoc v3 %}}Client.AddRetryConditions)
 * `Client.AddRetryHook` => [Client.AddRetryHooks]({{% godoc v3 %}}Client.AddRetryHooks)
 * `Client.SetRetryAfter` => [Client.SetRetryStrategy]({{% godoc v3 %}}Client.SetRetryStrategy)
-* `Client.OnRequestLog` => [Client.OnRequestDebugLog]({{% godoc v3 %}}Client.OnRequestDebugLog)
-* `Client.OnResponseLog` => [Client.OnResponseDebugLog]({{% godoc v3 %}}Client.OnResponseDebugLog)
 * `Client.Transport` => [Client.HTTPTransport]({{% godoc v3 %}}Client.HTTPTransport) new method returns `http.Transport`
     * [Client.Transport]({{% godoc v3 %}}Client.Transport) method does exist in v3, which returns `http.RoundTripper`
 * `Client.OnBeforeRequest` => [Client.AddRequestMiddleware]({{% godoc v3 %}}Client.AddRequestMiddleware)
@@ -89,18 +91,23 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * `Request.GenerateCurlCommand` => [Request.CurlCmd]({{% godoc v3 %}}Request.CurlCmd)
 * `Request.AddRetryCondition` => [Request.AddRetryConditions]({{% godoc v3 %}}Request.AddRetryConditions)
 
+#### Response
+
+* `Response.Time` => [Response.Duration]({{% godoc v3 %}}Response.Duration)
+
 #### Multipart
 
 * `MultipartField.Param` => [MultipartField.Name]({{% godoc v3 %}}MultipartField)
+
+#### TraceInfo
+
+* `TraceInfo.RemoteAddr` => `net.Addr` to `string`
 
 #### Package Level
 
 * Retry
     * `OnRetryFunc` => [RetryHookFunc]({{% godoc v3 %}}RetryHookFunc)
     * `RetryStrategyFunc` => [RetryStrategyFunc]({{% godoc v3 %}}RetryStrategyFunc)
-* Debug Log
-    * `RequestLogCallback` and `ResponseLogCallback` => [DebugLogCallback]({{% godoc v3 %}}DebugLogCallback)
-
 
 ### Removed
 
@@ -112,9 +119,12 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * `Client.UserInfo`
 * `Client.SetRetryResetReaders` - it happens automatically.
 * `Client.SetRetryAfter` - use [Client.SetRetryStrategy]({{% godoc v3 %}}Client.SetRetryStrategy) or [Request.SetRetryStrategy]({{% godoc v3 %}}Request.SetRetryStrategy) instead.
-* `Client.RateLimiter` and `Client.SetRateLimiter` - Retry respects header `Retry-After` if present
+* `Client.RateLimiter` and `Client.SetRateLimiter` - Retry respects header `Retry-After` if present.
 * `Client.AddRetryAfterErrorCondition` - use [Client.AddRetryConditions]({{% godoc v3 %}}Client.AddRetryConditions) instead.
 * `Client.SetPreRequestHook` - use [Client.SetRequestMiddlewares]({{% godoc v3 %}}Client.SetRequestMiddlewares) instead. Refer to [docs]({{% relref "request-middleware" %}}).
+* `Client.OnRequestLog` => use [Client.OnDebugLog]({{% godoc v3 %}}Client.OnDebugLog) instead.
+* `Client.OnResponseLog` => use [Client.OnDebugLog]({{% godoc v3 %}}Client.OnDebugLog) instead.
+
 
 #### Request
 
@@ -138,6 +148,7 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * `SRVRecord` - in favor of new [Load Balancer feature]({{% relref "load-balancer-and-service-discovery" %}}) that supports SRV record lookup.
 * `File` - in favor of enhanced [MultipartField]({{% godoc v3 %}}MultipartField) feature.
 * `RequestLog`, `ResponseLog` => use [DebugLog]({{% godoc v3 %}}DebugLog) instead.
+* `RequestLogCallback` and `ResponseLogCallback` => use [DebugLogCallbackFunc]({{% godoc v3 %}}DebugLogCallbackFunc) instead
 
 ##### Methods
 

@@ -9,28 +9,28 @@ Resty v3 provides the [TLSClientConfiger]({{% godoc v3 %}}TLSClientConfiger) int
 ## Implement `TLSClientConfiger` interface
 
 ```go
- type CustomTransport struct {
-    http.RoundTripper
-    resty.TLSClientConfiger
- }
+type CustomTransport struct {
+   http.RoundTripper
+   resty.TLSClientConfiger
+}
 
- func (t *CustomTransport) RoundTrip(r *http.Request) (*http.Response, error) {
-    // custom round trip implementation here ...
+func (t *CustomTransport) RoundTrip(r *http.Request) (*http.Response, error) {
+   // custom round trip implementation here ...
 
- 	return resp, err
- }
+   return resp, err
+}
 
- func (t *CustomTransport) TLSClientConfig() *tls.Config {
-    // return TLS config instance
+func (t *CustomTransport) TLSClientConfig() *tls.Config {
+   // return TLS config instance
 
- 	return t.tlsConfig
- }
+   return t.tlsConfig
+}
 
- func (t *CustomTransport) SetTLSClientConfig(tlsConfig *tls.Config) error {
- 	// handle TLS client config here
+func (t *CustomTransport) SetTLSClientConfig(tlsConfig *tls.Config) error {
+   // handle TLS client config here
 
- 	return nil
- }
+   return nil
+}
 ```
 
 ## Assign it to the Resty client
