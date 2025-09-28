@@ -27,11 +27,11 @@ markup:
 menu:
   before:
     - name: "Upgrading to v3"
-      url: "/docs/upgrading-to-v3/"
+      pageRef: "/docs/upgrading-to-v3/"
       weight: 10
     - name: "New Features and Enhancements"
       parent: "Upgrading to v3"
-      url: "/docs/new-features-and-enhancements/"
+      pageRef: "/docs/new-features-and-enhancements/"
       weight: 20
 
 params:
