@@ -1,6 +1,5 @@
 baseURL: https://resty.dev/
 title: Resty
-theme: hugo-book
 
 languageCode: en-us
 cleanDestinationDir: true
@@ -9,13 +8,9 @@ cleanDestinationDir: true
 # permalinks:
 #   posts: ":filename"
 
-# module:
-#   imports:
-#     - path: github.com/alex-shpak/hugo-book
-#       disable: false
-
-theme:
-  - github.com/alex-shpak/hugo-book
+module:
+  imports:
+    - path: github.com/alex-shpak/hugo-book/v12
 
 # Needed for mermaid/katex shortcodes
 markup:
@@ -29,18 +24,15 @@ markup:
   highlight:
     style: base16-snazzy
 
-# menu:
-#   before:
-#     - name: Home
-#       url: "/"
-#       weight: 10
-  # after:
-  #   - name: "Github"
-  #     url: "https://github.com/alex-shpak/hugo-book"
-  #     weight: 10
-  #   - name: "Hugo Themes"
-  #     url: "https://themes.gohugo.io/themes/hugo-book/"
-  #     weight: 20
+menu:
+  before:
+    - name: "Upgrading to v3"
+      url: "/docs/upgrading-to-v3/"
+      weight: 10
+    - name: "New Features and Enhancements"
+      parent: "Upgrading to v3"
+      url: "/docs/new-features-and-enhancements/"
+      weight: 20
 
 params:
   # Resty site variables
@@ -56,9 +48,9 @@ params:
 
   # (Optional, default light) Sets color theme: light, dark or auto.
   # Theme 'auto' switches between dark and light modes based on browser/os preferences
-  BookTheme: auto
+  BookTheme: "auto"
 
-  # (Optional, default true) Controls table of contents visibility on right side of pages.
+  # (Optional, default none) Controls table of contents visibility on right side of pages.
   # Start and end levels can be controlled with markup.tableOfContents setting.
   # You can also specify this parameter per page in front matter.
   BookToC: true
@@ -76,31 +68,26 @@ params:
   # For backward compatibility you can set '*' to render all sections to menu. Acts same as '/'
   BookSection: docs
 
-  # Set source repository location.
-  # Used for 'Last Modified' and 'Edit this page' links.
-  BookRepo: https://github.com/go-resty/docs
+  # (Optional, default none) Set template for commit link for the page. Requires enableGitInfo.
+  # When set enabled 'Last Modified' and a link to the commit in the footer of the page.
+  # Param is executed as template using .Site, .Page and .GitInfo as context.
+  BookLastChangeLink: 'https://github.com/go-resty/docs/commit/{{ .GitInfo.Hash }}'
 
-  # (Optional, default 'commit') Specifies commit portion of the link to the page's last modified
-  # commit hash for 'doc' page type.
-  # Requires 'BookRepo' param.
-  # Value used to construct a URL consisting of BookRepo/BookCommitPath/<commit-hash>
-  # Github uses 'commit', Bitbucket uses 'commits'
-  # BookCommitPath: commit
+  # (Optional, default none) Set template for edit page link.
+  # When set enabled 'Edit this page' link in the footer of the page.
+  # Param is executed as template using .Site, .Page and .Path as context.
+  BookEditLink: 'https://github.com/go-resty/docs/edit/main/exampleSite/{{ .Path }}'
 
-  # Enable "Edit this page" links for 'doc' page type.
-  # Disabled by default. Uncomment to enable. Requires 'BookRepo' param.
-  # Edit path must point to root directory of repo.
-  BookEditPath: edit/main
-
-  # Configure the date format used on the pages
+  # (Optional, default 'January 2, 2006') Configure the date format used on the pages
   # - In git information
   # - In blog posts
-  BookDateFormat: "January 2, 2006"
+  # https://gohugo.io/functions/time/format/
+  # BookDateFormat: "January 2, 2006"
 
   # (Optional, default true) Enables search function with flexsearch,
   # Index is built on fly, therefore it might slowdown your website.
   # Configuration for indexing can be adjusted in i18n folder per language.
-  BookSearch: true
+  # BookSearch: true
 
   # (Optional, default true) Enables comments template on pages
   # By default partals/docs/comments.html includes Disqus template
@@ -111,12 +98,14 @@ params:
   # /!\ This is an experimental feature, might be removed or changed at any time
   # (Optional, experimental, default false) Enables portable links and link checks in markdown pages.
   # Portable links meant to work with text editors and let you write markdown without {{< relref >}} shortcode
-  # Theme will print warning if page referenced in markdown does not exists.
-  # BookPortableLinks: true
+  # Theme will print warning or error if page referenced in markdown does not exists.
+  # Possible values are false | 'warning' | 'error'
+  # BookPortableLinks: 'warning'
 
   # /!\ This is an experimental feature, might be removed or changed at any time
   # (Optional, experimental, default false) Enables service worker that caches visited pages and resources for offline use.
-  # BookServiceWorker: true
+  # can be false, true or 'precache', precache will try to download all content pages on install.
+  # BookServiceWorker: "precache"
 
   # /!\ This is an experimental feature, might be removed or changed at any time
   # (Optional, experimental, default false) Enables a drop-down menu for translations only if a translation is present.

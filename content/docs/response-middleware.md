@@ -11,10 +11,9 @@ Out of the box, it has -
 * [AutoParseResponseMiddleware]({{% godoc v3 %}}AutoParseResponseMiddleware)
 * [SaveToFileResponseMiddleware]({{% godoc v3 %}}SaveToFileResponseMiddleware)
 
-{{% hint info %}}
-* v3 introduces a fully composable middleware feature that allows the registration of response middleware in any order to accommodate practical use cases.
-* v3 introduces the capability to cascade an error within the response middleware execution chain.
-{{% /hint %}}
+> [!NOTE]
+> * v3 introduces a fully composable middleware feature that allows the registration of response middleware in any order to accommodate practical use cases.
+> * v3 introduces the capability to cascade an error within the response middleware execution chain.
 
 ## Examples
 

@@ -6,17 +6,15 @@ weight: 4
 
 Resty supports various request body types.
 
-{{% hint info %}}
-* Resty v3 streams the content in the request body for the `io.Reader` interface.
-* Setting the Content-Type header in the request skips the auto-detect computation.
-* It does request body automatic marshaling for `struct` and `map` data types.
-{{% /hint %}}
+> [!NOTE]
+> * Resty v3 streams the content in the request body for the `io.Reader` interface.
+> * Setting the Content-Type header in the request skips the auto-detect computation.
+> * It does request body automatic marshaling for `struct` and `map` data types.
 
 ## Struct
 
-{{% hint info %}}
-For the `XML` request body, set Content-Type as `application/xml`.
-{{% /hint %}}
+> [!NOTE]
+> For the `XML` request body, set Content-Type as `application/xml`.
 
 ```go
 res, err := client.R().
@@ -74,11 +72,10 @@ fmt.Println(err, res)
 
 ## io.Reader
 
-{{% hint info %}}
-Resty v3,
-* Streams the content in the request body for the `io.Reader` interface.
-* The content length option no longer applies to the `io.Reader` flow.
-{{% /hint %}}
+> [!NOTE]
+> Resty v3,
+> * Streams the content in the request body for the `io.Reader` interface.
+> * The content length option no longer applies to the `io.Reader` flow.
 
 ```go
 res, err := client.R().

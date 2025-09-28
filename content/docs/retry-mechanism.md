@@ -5,9 +5,8 @@ The retry mechanism plays a crucial role in modern system integration by enablin
 
 Resty provides exponential backoff with a jitter strategy out of the box; a custom retry strategy could be employed to override this default.
 
-{{% hint info %}}
-**Hint:** Combining the Retry strategy with [Circuit Breaker]({{% relref "circuit-breaker" %}}) typically provides a comprehensive approach to handling failures.
-{{% /hint %}}
+> [!NOTE]
+> **Hint:** Combining the Retry strategy with [Circuit Breaker]({{% relref "circuit-breaker" %}}) typically provides a comprehensive approach to handling failures.
 
 {{% hintreqoverride %}}
 

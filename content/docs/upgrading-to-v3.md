@@ -6,9 +6,8 @@ bookHidden: true
 
 Resty v3 release brings many new features, enhancements, and breaking changes. This page outlines upgrading Resty to v3.
 
-{{% hint info %}}
-Minimum required go version is `{{% param Resty.V3.GoMinVersion %}}`
-{{% /hint %}}
+> [!NOTE]
+> Minimum required go version is `{{% param Resty.V3.GoMinVersion %}}`
 
 ## Update go.mod
 

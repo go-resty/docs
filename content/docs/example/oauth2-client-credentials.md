@@ -9,10 +9,9 @@ title: OAuth2 Client Credentials
 
 ## Without Modifying
 
-{{% hint info %}}
-As per the GoDoc of [clientcredentials#Config.Client](https://pkg.go.dev/golang.org/x/oauth2/clientcredentials#Config.Client)
-* The returned `Client` and its `Transport` should not be modified.
-{{% /hint %}}
+> [!NOTE]
+> As per the GoDoc of [clientcredentials#Config.Client](https://pkg.go.dev/golang.org/x/oauth2/clientcredentials#Config.Client)
+> * The returned `Client` and its `Transport` should not be modified.
 
 ```go
 clientCredCfg := &clientcredentials.Config{
@@ -34,11 +33,10 @@ defer c.Close()
 
 This scenario applies to any client and transport-related configurations, such as adding Root CA, Client Root CA, Client SSL certificates, transport timeouts, and so on.
 
-{{% hint info %}}
-* As per the GoDoc of [clientcredentials#Config.Client](https://pkg.go.dev/golang.org/x/oauth2/clientcredentials#Config.Client)
-    * The returned `Client` and its `Transport` should not be modified.
-* To use the oauth2 client credentials package and make modifications to it, a minor adjustment is necessary.
-{{% /hint %}}
+> [!NOTE]
+> * As per the GoDoc of [clientcredentials#Config.Client](https://pkg.go.dev/golang.org/x/oauth2/clientcredentials#Config.Client)
+>     * The returned `Client` and its `Transport` should not be modified.
+> * To use the oauth2 client credentials package and make modifications to it, a minor adjustment is necessary.
 
 ```go
 clientCredCfg := &clientcredentials.Config{

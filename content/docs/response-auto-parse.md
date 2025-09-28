@@ -27,9 +27,8 @@ fmt.Println(res.Error().(*LoginError))
 
 ### SetResult and SetError Usage
 
-{{% hint info %}}
-Examples describe the method `SetResult`, which applies to `SetError`.
-{{% /hint %}}
+> [!NOTE]
+> Examples describe the method `SetResult`, which applies to `SetError`.
 
 #### Usage 1 - Inline Pointer
 
@@ -82,11 +81,10 @@ client.R().SetForceResponseContentType("application/json")
 
 To prevent automatic response parsing for the particular use case, use this setting.
 
-{{% hint warning %}}
-Using the do not parse option means:
-* You have taken over the control of response body parsing from Resty.
-* Do not forget to close the response body. Otherwise, you might get into connection leaks, and connection reuse may not happen.
-{{% /hint %}}
+> [!WARNING]
+> Using the do not parse option means:
+> * You have taken over the control of response body parsing from Resty.
+> * Do not forget to close the response body. Otherwise, you might get into connection leaks, and connection reuse may not happen.
 
 {{% hintreqoverride %}}
 

@@ -7,10 +7,9 @@ weight: 2
 
 This page discusses simple DELETE requests. Users can utilize Resty features across nearly all HTTP methods.
 
-{{% hint info %}}
-* Explore the documentation to fulfill all use cases.
-* Examples use request-level methods; however, Resty also includes client-level methods to configure settings for all requests.
-{{% /hint %}}
+> [!NOTE]
+> * Explore the documentation to fulfill all use cases.
+> * Examples use request-level methods; however, Resty also includes client-level methods to configure settings for all requests.
 
 ## Examples
 

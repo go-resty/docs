@@ -22,9 +22,8 @@ client.R().
 
 ## Digest Auth
 
-{{% hint info %}}
-Digest auth is supported only at the client level; create a dedicated client to utilize it.
-{{% /hint %}}
+> [!NOTE]
+> Digest auth is supported only at the client level; create a dedicated client to utilize it.
 
 Supported QOP -
 * `auth`
@@ -48,9 +47,8 @@ client.SetDigestAuth("username", "password")
 
 ## Bearer Auth Token
 
-{{% hint info %}}
-The default auth scheme is `Bearer`, which can be changed with [Client.SetAuthScheme]({{% godoc v3 %}}Client.SetAuthScheme) or [Request.SetAuthScheme]({{% godoc v3 %}}Request.SetAuthScheme)
-{{% /hint %}}
+> [!NOTE]
+> The default auth scheme is `Bearer`, which can be changed with [Client.SetAuthScheme]({{% godoc v3 %}}Client.SetAuthScheme) or [Request.SetAuthScheme]({{% godoc v3 %}}Request.SetAuthScheme)
 
 ```go
 // for all requests
@@ -68,10 +66,9 @@ client.R().
 
 For application/service that user custom HTTP header for authentication/authorization.
 
-{{% hint info %}}
-* The default authorization key is `Authorization`.
-* The default auth scheme is `Bearer`, which can be changed with [Client.SetAuthScheme]({{% godoc v3 %}}Client.SetAuthScheme) or [Request.SetAuthScheme]({{% godoc v3 %}}Request.SetAuthScheme)
-{{% /hint %}}
+> [!NOTE]
+> * The default authorization key is `Authorization`.
+> * The default auth scheme is `Bearer`, which can be changed with [Client.SetAuthScheme]({{% godoc v3 %}}Client.SetAuthScheme) or [Request.SetAuthScheme]({{% godoc v3 %}}Request.SetAuthScheme)
 
 ```go
 client.SetHeaderAuthorizationKey("X-Custom-Auth")

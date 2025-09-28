@@ -3,9 +3,8 @@
 
 A circuit breaker is used to improve system stability and resiliency. It is different from the retry mechanism.
 
-{{% hint info %}}
-**Hint:** Combining the Circuit Breaker with [Retry Mechanism]({{% relref "retry-mechanism" %}}) typically provides a comprehensive approach to handling failures.
-{{% /hint %}}
+> [!NOTE]
+> **Hint:** Combining the Circuit Breaker with [Retry Mechanism]({{% relref "retry-mechanism" %}}) typically provides a comprehensive approach to handling failures.
 
 ## Default Values
 

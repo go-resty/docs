@@ -9,9 +9,8 @@ Resty v3 allows users to modify all timeout values utilized in the implementatio
 
 ### Transport Timeouts
 
-{{% hint info %}}
-Refer to `godoc` to know all supported fields and their default values, [TransportSettings]({{% godoc v3 %}}TransportSettings).
-{{% /hint %}}
+> [!NOTE]
+> Refer to `godoc` to know all supported fields and their default values, [TransportSettings]({{% godoc v3 %}}TransportSettings).
 
 ```go
 // create transport with timeouts
@@ -29,9 +28,8 @@ defer c.Close()
 
 ### Client Timeout
 
-{{% hint info %}}
-Resty v3 does not use `http.Client.Timeout`.
-{{% /hint %}}
+> [!NOTE]
+> Resty v3 does not use `http.Client.Timeout`.
 
 ```go
 client.SetTimeout(2 * time.Minute)
@@ -39,10 +37,9 @@ client.SetTimeout(2 * time.Minute)
 
 ### Request Timeout
 
-{{% hint info %}}
-* It overrides the client-level timeout value.
-* It does not set a timeout if the user has already set a timeout/deadline.
-{{% /hint %}}
+> [!NOTE]
+> * It overrides the client-level timeout value.
+> * It does not set a timeout if the user has already set a timeout/deadline.
 
 ```go
 // set timeout for current request

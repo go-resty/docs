@@ -9,9 +9,8 @@ Out of the box, it has following redirect polices:
 * [FlexibleRedirectPolicy]({{% godoc v3 %}}FlexibleRedirectPolicy)
 * [DomainCheckRedirectPolicy]({{% godoc v3 %}}DomainCheckRedirectPolicy)
 
-{{% hint info %}}
-v3 [NoRedirectPolicy]({{% godoc v3 %}}NoRedirectPolicy) returns an error `http.ErrUseLastResponse`.
-{{% /hint %}}
+> [!NOTE]
+> v3 [NoRedirectPolicy]({{% godoc v3 %}}NoRedirectPolicy) returns an error `http.ErrUseLastResponse`.
 
 ## Example
 

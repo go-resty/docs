@@ -34,30 +34,29 @@ type: docs
 <div class="resty-go-min">Minimum required Go version is {{% param Resty.V3.GoMinVersion %}}</div>
 
 {{% columns %}}
-```go
-// HTTP, REST Client
-client := resty.New()
-defer client.Close()
+- ```go
+  // HTTP, REST Client
+  client := resty.New()
+  defer client.Close()
+  
+  res, err := client.R().
+      EnableTrace().
+      Get("https://httpbin.org/get")
+  fmt.Println(err, res)
+  fmt.Println(res.Request.TraceInfo())
+  ```
 
-res, err := client.R().
-    EnableTrace().
-    Get("https://httpbin.org/get")
-fmt.Println(err, res)
-fmt.Println(res.Request.TraceInfo())
-```
-<--->
-```go
-// Server-Sent Events Client
-es := NewEventSource().
-    SetURL("https://sse.dev/test").
-    OnMessage(func(e any) {
-        fmt.Println(e.(*resty.Event))
-    }, nil)
-
-err := es.Get()
-fmt.Println(err)
-```
-
+- ```go
+  // Server-Sent Events Client
+  es := NewEventSource().
+      SetURL("https://sse.dev/test").
+      OnMessage(func(e any) {
+          fmt.Println(e.(*resty.Event))
+      }, nil)
+  
+  err := es.Get()
+  fmt.Println(err)
+  ```
 {{% /columns %}}
 
 <p align="center">Resty v3 offers improved performance, memory efficiency, and features compared to Resty v2.</p>
@@ -67,6 +66,7 @@ This website represents Resty v3 and above. For previous v2 documentation, refer
 ## Key Features
 
 {{% columns %}}
+
 * Simple and chainable methods
 * Multipart and Form data with ease
 * Request Path Params
@@ -78,8 +78,6 @@ This website represents Resty v3 and above. For previous v2 documentation, refer
 * Request tracing
 * CURL command generation
 * HTTP/1.1 and HTTP/2. Integrate HTTP/3
-
-
 <p class="ml-20">and much more ...</p>
 
 <--->
@@ -95,8 +93,8 @@ This website represents Resty v3 and above. For previous v2 documentation, refer
 * Bazel support
 * Dynamic reload of TLS certificates
 * Custom root and client certificates
-
 <p class="ml-20">and much more ...</p>
+
 {{% /columns %}}
 
 ## Highly Extensible
