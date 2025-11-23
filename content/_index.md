@@ -38,7 +38,7 @@ type: docs
   // HTTP, REST Client
   client := resty.New()
   defer client.Close()
-  
+
   res, err := client.R().
       EnableTrace().
       Get("https://httpbin.org/get")
@@ -53,7 +53,7 @@ type: docs
       OnMessage(func(e any) {
           fmt.Println(e.(*resty.Event))
       }, nil)
-  
+
   err := es.Get()
   fmt.Println(err)
   ```
@@ -67,33 +67,31 @@ This website represents Resty v3 and above. For previous v2 documentation, refer
 
 {{% columns %}}
 
-* Simple and chainable methods
-* Multipart and Form data with ease
-* Request Path Params
-* Retry Mechanism
-* Circuit Breaker
-* Goroutine & concurrent safe
-* Automatic decompresser (gzip, deflate)
-* Basic auth, Digest auth, Bearer, etc.
-* Request tracing
-* CURL command generation
-* HTTP/1.1 and HTTP/2. Integrate HTTP/3
-<p class="ml-20">and much more ...</p>
+-   * Simple and chainable methods
+    * Multipart and Form data with ease
+    * Request Path Params
+    * Retry Mechanism
+    * Circuit Breaker
+    * Goroutine & concurrent safe
+    * Automatic decompresser (gzip, deflate)
+    * Basic auth, Digest auth, Bearer, etc.
+    * Request tracing
+    * CURL command generation
+    * HTTP/1.1 and HTTP/2. Integrate HTTP/3
+    * Circuit Breaker Policy
+    <p class="ml-20">and much more ...</p>
 
-<--->
-
-* Automatic marshal and unmarshal
-* Large file upload and progress callback
-* Download to file
-* Redirect Policies
-* Circuit Breaker Policy
-* Debug mode with human-readable, JSON log
-* Load Balancer and Service Discovery
-* Response body limit & Unlimited reads
-* Bazel support
-* Dynamic reload of TLS certificates
-* Custom root and client certificates
-<p class="ml-20">and much more ...</p>
+-   * Automatic marshal and unmarshal
+    * Large file upload and progress callback
+    * Download to file
+    * Redirect Policies
+    * Debug mode with human-readable, JSON log
+    * Load Balancer and Service Discovery
+    * Response body limit & Unlimited reads
+    * Bazel support
+    * Dynamic reload of TLS certificates
+    * Custom root and client certificates
+    <p class="ml-20">and much more ...</p>
 
 {{% /columns %}}
 

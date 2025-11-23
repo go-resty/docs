@@ -86,6 +86,9 @@ a .r-icon {
     font-size: 0.9em;
     padding: 0.1rem 0.9rem;
 }
+.r-copyright-details a {
+    display: inline;
+}
 
 .resty-go-mod pre {
     margin-top: 2em;
@@ -132,6 +135,9 @@ a .r-icon {
 
 .book-section-flat {
     margin: 2.5rem 0;
+}
+.book-section-flat ul {
+    padding-left: 0.5rem;
 }
 
 @media screen and (min-width: 80rem) {
