@@ -70,7 +70,7 @@ defer c.Close()
 
 c.R().
     SetRawPathParam("path", "groups/developers").
-    Get("/v1/users/{userId}/details")
+    Get("/v1/users/{path}/details")
 
 // Result:
 //     /v1/users/groups/developers/details
