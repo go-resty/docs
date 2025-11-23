@@ -3,12 +3,11 @@
 
 Resty provides a convenient method to compose multipart form-data or ordered form-data requests.
 
-{{% hint info %}}
-* Only allowed on POST, PUT, and PATCH verbs.
-* Starting v3, ordered multipart form data is possible.
-* [Request.SetMultipartBoundary]({{% godoc v3 %}}Request.SetMultipartBoundary) setting custom boundary can be used together.
-* All form data and multipart methods can be used together.
-{{% /hint %}}
+> [!NOTE]
+> * Only allowed on POST, PUT, and PATCH verbs.
+> * Starting v3, ordered multipart form data is possible.
+> * [Request.SetMultipartBoundary]({{% godoc v3 %}}Request.SetMultipartBoundary) setting custom boundary can be used together.
+> * All form data and multipart methods can be used together.
 
 ```go
 res, err := client.R().
@@ -70,12 +69,11 @@ fmt.Println(err, res)
 
 # Multipart File Upload
 
-{{% hint info %}}
-* By default, Resty streams the content in the request body when a file or `io.Reader` is detected in the MultipartField input.
-* Only allowed on POST, PUT, and PATCH verbs.
-* [Request.SetMultipartBoundary]({{% godoc v3 %}}Request.SetMultipartBoundary) setting custom boundary can be used together.
-* All form data and multipart methods can be used together.
-{{% /hint %}}
+> [!NOTE]
+> * By default, Resty streams the content in the request body when a file or `io.Reader` is detected in the MultipartField input.
+> * Only allowed on POST, PUT, and PATCH verbs.
+> * [Request.SetMultipartBoundary]({{% godoc v3 %}}Request.SetMultipartBoundary) setting custom boundary can be used together.
+> * All form data and multipart methods can be used together.
 
 ## Upload
 

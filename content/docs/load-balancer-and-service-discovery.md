@@ -10,10 +10,9 @@ Out of the box, Resty provides two algorithms -
 
 Also, SRV records discovery using the Weighted Round-Robin (WRR) algorithm, called []().
 
-{{% hint info %}}
-* Version 2 had an SRV record lookup feature but did not utilize a record weight value. Version 3 respects the record weight value and executes the appropriate weighted round-robin.
-* Version 3 enables Resty users to implement any custom method for determining the Base URL through the [LoadBalancer]({{% godoc v3 %}}LoadBalancer) interface.
-{{% /hint %}}
+> [!NOTE]
+> * Version 2 had an SRV record lookup feature but did not utilize a record weight value. Version 3 respects the record weight value and executes the appropriate weighted round-robin.
+> * Version 3 enables Resty users to implement any custom method for determining the Base URL through the [LoadBalancer]({{% godoc v3 %}}LoadBalancer) interface.
 
 ## Examples
 

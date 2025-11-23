@@ -3,9 +3,8 @@
 
 Resty v3 provides the ability to read HTTP response body unlimited times.
 
-{{% hint warning %}}
-* Keeps the response body in memory, which might cause additional memory usage.
-{{% /hint %}}
+> [!WARNING]
+> * Keeps the response body in memory, which might cause additional memory usage.
 
 {{% hintreqoverride %}}
 

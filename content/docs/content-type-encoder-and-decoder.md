@@ -7,11 +7,10 @@ weight: 7
 
  Resty v3 provides an extensible way to handle Request and Response content types. Out-of-the-box, it handles `JSON` and `XML` content types.
 
-{{% hint info %}}
-**NOTE:**
-* User-defined encoder/decoder takes priority over default ones.
-* Add method overwrites encoder/decoder if `Content-Type` key already exists.
-{{% /hint %}}
+> [!NOTE]
+> **NOTE:**
+> * User-defined encoder/decoder takes priority over default ones.
+> * Add method overwrites encoder/decoder if `Content-Type` key already exists.
 
 ## Examples
 

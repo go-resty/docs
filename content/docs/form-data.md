@@ -3,11 +3,10 @@
 
 Resty provides a convenient method to compose form-data requests.
 
-{{% hint info %}}
-* By default, only allowed on payload-supported HTTP verbs, see [allow payload on]({{% relref "allow-payload-on" %}}).
-* Request `Content-Type` set as `application/x-www-form-urlencoded`.
-* Form data values are `URL-encoded`.
-{{% /hint %}}
+> [!NOTE]
+> * By default, only allowed on payload-supported HTTP verbs, see [allow payload on]({{% relref "allow-payload-on" %}}).
+> * Request `Content-Type` set as `application/x-www-form-urlencoded`.
+> * Form data values are `URL-encoded`.
 
 {{% hintreqoverride %}}
 

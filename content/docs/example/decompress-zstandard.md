@@ -3,9 +3,8 @@
 
 Resty v3 allows users to add decompression logic for HTTP responses using their favorite package.
 
-{{% hint info %}}
-Using `sync.Pool` can reuse the reader and reduce allocation if the package supports `Reset`.
-{{% /hint %}}
+> [!NOTE]
+> Using `sync.Pool` can reuse the reader and reduce allocation if the package supports `Reset`.
 
 ## Example
 
