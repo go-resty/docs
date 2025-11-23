@@ -78,6 +78,7 @@ bookHidden: true
 * [Client.SetUnescapeQueryParams]({{% godoc v3 %}}Client.SetUnescapeQueryParams)
 * [Client.OnDebugLog]({{% godoc v3 %}}Client.OnDebugLog)
 * [Client.SetDebugLogFormatter]({{% godoc v3 %}}Client.SetDebugLogFormatter)
+* [Client.OnClose]({{% godoc v3 %}}Client.OnClose)
 
 ## Request
 
