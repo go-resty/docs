@@ -98,6 +98,23 @@ err := es.Get()
 fmt.Println(err)
 ```
 
+### TLS Client Config
+
+The method sets TLSClientConfig for underlying SSE client Transport. Values supported by {{% param Resty.GoDoc %}}/crypto/tls#Config can be configured.
+
+```go
+cer, err := tls.LoadX509KeyPair("server.crt", "server.key")
+if err != nil {
+    log.Println(err)
+    return
+}
+
+es.SetTLSClientConfig(&tls.Config{
+    Certificates: []tls.Certificate{cer}
+})
+```
+
+
 ### OnOpen, OnError Events
 
 ```go
@@ -115,20 +132,45 @@ es := resty.NewEventSource().
 		},
     ).
     OnOpen(
-        func(url string) {
-			fmt.Println("I'm connected:", url)
-		},
+        func(url string, resHdr http.Header) {
+            fmt.Println("I'm connected:", url, resHdr)
+        },
     )
 
 err := es.Get()
 fmt.Println(err)
 
 // Output:
-//  I'm connected: https://sse.dev/test
-//  &{  {"testing":true,"sse_dev":"is great","msg":"It works!","now":1737510458794}}
-//  &{  {"testing":true,"sse_dev":"is great","msg":"It works!","now":1737510460794}}
-//  &{  {"testing":true,"sse_dev":"is great","msg":"It works!","now":1737510462794}}
+// I'm connected: https://sse.dev/test map[Access-Control-Allow-Origin:[*] Cache-Control:[no-cache] Connection:[keep-alive] Content-Type:[text/event-stream] Date:[Sun, 14 Dec 2025 06:29:46 GMT] Server:[nginx/1.27.5]]
+// &{  {"testing":true,"sse_dev":"is great","msg":"It works!","now":1765693786165}}
+// &{  {"testing":true,"sse_dev":"is great","msg":"It works!","now":1765693788165}}
+// &{  {"testing":true,"sse_dev":"is great","msg":"It works!","now":1765693790165}}
 //  ...
+```
+
+### OnRequestFailure Event
+
+The OnRequestFailure callback gets triggered when the HTTP request fails while establishing an SSE connection.
+
+> [!NOTE]
+> **NOTE:**
+> * Do not forget to close the HTTP response body.
+> * HTTP response may be nil.
+
+```go
+es := resty.NewEventSource().
+    SetURL("https://sse.dev/test").
+    OnRequestFailure(
+        func(err error, res *http.Response) {
+            defer res.Body.Close()
+            resBody, _ := io.ReadAll(res.Body)
+
+            fmt.Println(err, string(resBody))
+        },
+    )
+
+err := es.Get()
+fmt.Println(err)
 ```
 
 
@@ -144,9 +186,13 @@ fmt.Println(err)
 * [EventSource.SetRetryWaitTime](EventSource.SetRetryWaitTime)
 * [EventSource.SetRetryMaxWaitTime](EventSource.SetRetryMaxWaitTime)
 * [EventSource.SetMaxBufSize](EventSource.SetMaxBufSize)
+* [EventSource.TLSClientConfig](EventSource.TLSClientConfig)
+* [EventSource.SetTLSClientConfig](EventSource.SetTLSClientConfig)
+* [EventSource.Logger](EventSource.Logger)
 * [EventSource.SetLogger](EventSource.SetLogger)
 * [EventSource.OnOpen](EventSource.OnOpen)
 * [EventSource.OnError](EventSource.OnError)
+* [EventSource.OnRequestFailure](EventSource.OnRequestFailure)
 * [EventSource.OnMessage](EventSource.OnMessage)
 * [EventSource.AddEventListener](EventSource.AddEventListener)
 * [EventSource.Get](EventSource.Get)

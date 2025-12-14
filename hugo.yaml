@@ -41,7 +41,7 @@ params:
     GitHubRepo: https://github.com/go-resty/resty
     GitHubSlug: go-resty/resty
     V3:
-      Version: v3.0.0-beta.4
+      Version: v3.0.0-beta.5
       GoMinVersion: go1.23
       Vanity: resty.dev/v3
       GoDocLinkPrefix: https://pkg.go.dev/resty.dev/v3#
