@@ -28,7 +28,7 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 
 #### Behavior
 
-* The content length option no longer applies to the `io.Reader` flow.
+* By default, the content length value is not set. However, Go’s `net/http` package automatically sets the Content-Length for types `*bytes.Buffer`, `*bytes.Reader`, and `*strings.Reader`, which covers all cases. Therefore, Resty v3 removes the previous boolean method and introduces a new method `SetContentLength(v int64)` at the request level, allowing users to explicitly provide values for file/multipart uploads, etc.
 * By default, payload is not supported in HTTP verb DELETE. Use [Client.AllowMethodDeletePayload]({{% godoc v3 %}}Client.AllowMethodDeletePayload) or [Request.AllowMethodDeletePayload]({{% godoc v3 %}}Request).
 * [Retry Mechanism]({{% relref "retry-mechanism" %}})
     * Request values are inherited from the client upon creation; they do not refresh during a retry attempt. Therefore, value updates are performed on the request instance via [Response.Request]({{% godoc v3 %}}Response).
@@ -89,6 +89,7 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * `Request.DisableGenerateCurlOnDebug` => [Request.DisableGenerateCurlCmd]({{% godoc v3 %}}Request.DisableGenerateCurlCmd)
 * `Request.GenerateCurlCommand` => [Request.CurlCmd]({{% godoc v3 %}}Request.CurlCmd)
 * `Request.AddRetryCondition` => [Request.AddRetryConditions]({{% godoc v3 %}}Request.AddRetryConditions)
+* `Request.SetContentLength(l bool)` => [Request.SetContentLength(v int64)]({{% godoc v3 %}}Request.SetContentLength)
 
 #### Response
 
@@ -123,6 +124,7 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * `Client.SetPreRequestHook` - use [Client.SetRequestMiddlewares]({{% godoc v3 %}}Client.SetRequestMiddlewares) instead. Refer to [docs]({{% relref "request-middleware" %}}).
 * `Client.OnRequestLog` => use [Client.OnDebugLog]({{% godoc v3 %}}Client.OnDebugLog) instead.
 * `Client.OnResponseLog` => use [Client.OnDebugLog]({{% godoc v3 %}}Client.OnDebugLog) instead.
+* `Client.SetContentLength` => use [Request.SetContentLength]({{% godoc v3 %}}Request.SetContentLength) instead.
 
 
 #### Request
