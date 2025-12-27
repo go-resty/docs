@@ -3,26 +3,28 @@
 
 A circuit breaker is used to improve system stability and resiliency. It is different from the retry mechanism.
 
+Out-of-the-box, Resty v3 provides:
+
+* [Count-based]({{% relref "#count-based" %}})
+* [Ratio-based]({{% relref "#ratio-based" %}})
+
 > [!NOTE]
-> **Hint:** Combining the Circuit Breaker with [Retry Mechanism]({{% relref "retry-mechanism" %}}) typically provides a comprehensive approach to handling failures.
+> **HINT:** Combining the Circuit Breaker with [Retry Mechanism]({{% relref "retry-mechanism" %}}) typically provides a comprehensive approach to handling failures.
 
 ## Default Values
 
-* Timeout is `10s`
-* Failure threshold is `3`
-* Success threshold is `1`
-* Circuir break policy
+* Circuit break policy
     * Status Code `500` and above
 
-
-## Example
+## Count-based
 
 ```go
-// create circuit breaker with required values, override as required
-cb := resty.NewCircuitBreaker().
-	SetTimeout(15 * time.Second).
-	SetFailureThreshold(10).
-	SetSuccessThreshold(5)
+// create count-based circuit breaker instance with values
+cb := NewCircuitBreakerWithCount(
+	3, // failure threshold count
+	1, // success threshold count
+	5*time.Second, // reset timeout
+)
 
 // create Resty client
 c := resty.New().
@@ -32,10 +34,64 @@ defer c.Close()
 // start using the client ...
 ```
 
+### Count-based with Policies
+
+```go
+// create count-based circuit breaker instance with values
+cb := NewCircuitBreakerWithCount(
+	3, // failure threshold count
+	1, // success threshold count
+	5*time.Second, // reset timeout
+	resty.CircuitBreaker5xxPolicy,
+	CustomCircuitBreakerPolicy,
+)
+
+// create Resty client
+c := resty.New().
+    SetCircuitBreaker(cb)
+defer c.Close()
+
+// start using the client ...
+```
+
+## Ratio-based
+
+```go
+// create ratio-based circuit breaker instance with values
+cb := NewCircuitBreakerWithRatio(
+	0.3, // Threshold, e.g., 0.3 for 30% failure
+	10,   // Minimum number of requests to consider failure ratio
+	5*time.Second, // reset timeout
+)
+
+// create Resty client
+c := resty.New().
+    SetCircuitBreaker(cb)
+defer c.Close()
+
+// start using the client ...
+```
+
+### Ratio-based with Policies
+
+```go
+// create ratio-based circuit breaker instance with values
+cb := NewCircuitBreakerWithRatio(
+	0.3, // Threshold, e.g., 0.3 for 30% failure
+	10,   // Minimum number of requests to consider failure ratio
+	5*time.Second, // reset timeout
+	resty.CircuitBreaker5xxPolicy,
+	CustomCircuitBreakerPolicy,
+)
+
+// create Resty client
+c := resty.New().
+    SetCircuitBreaker(cb)
+defer c.Close()
+
+// start using the client ...
+```
 
 ## Methods
 
-* [CircuitBreaker.SetTimeout]({{% godoc v3 %}}CircuitBreaker.SetTimeout)
-* [CircuitBreaker.SetFailureThreshold]({{% godoc v3 %}}CircuitBreaker.SetFailureThreshold)
-* [CircuitBreaker.SetSuccessThreshold]({{% godoc v3 %}}CircuitBreaker.SetSuccessThreshold)
-* [CircuitBreaker.SetPolicies]({{% godoc v3 %}}CircuitBreaker.SetPolicies)
+* [CircuitBreaker5xxPolicy]({{% godoc v3 %}}CircuitBreaker5xxPolicy)
