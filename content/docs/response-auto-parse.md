@@ -21,8 +21,8 @@ res, err := client.R().
     Post("https://myapp.com/login")
 
 fmt.Println(err)
-fmt.Println(res.Result().(*LoginResponse))
-fmt.Println(res.Error().(*LoginError))
+fmt.Println(res.Result().(*LoginResponse))  // success: status code > 199 && status code < 300
+fmt.Println(res.Error().(*LoginError))      // error: status code > 399
 ```
 
 ### SetResult and SetError Usage
