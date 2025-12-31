@@ -30,6 +30,7 @@ bookHidden: true
 * Adds the ability to determine the filename automatically from the response for [saving the response]({{% relref "save-response" %}}).
 * [Debug Log]({{% relref "debug-log" %}})
     * Introduced Debug Log formatter, out of the box human-readable and JSON formatter added.
+* Hook functions at Client update to variadic function; it becomes easy to supply one or more values.
 
 
 ## New ways to create Client
@@ -60,8 +61,8 @@ bookHidden: true
 * [Client.IsDisableWarn]({{% godoc v3 %}}Client.IsDisableWarn)
 * [Client.AllowMethodDeletePayload]({{% godoc v3 %}}Client.AllowMethodDeletePayload)
 * [Client.SetAllowMethodDeletePayload]({{% godoc v3 %}}Client.SetAllowMethodDeletePayload)
-* [Client.RetryStrategy]({{% godoc v3 %}}Client.RetryStrategy)
-* [Client.SetRetryStrategy]({{% godoc v3 %}}Client.SetRetryStrategy)
+* [Client.RetryDelayStrategy]({{% godoc v3 %}}Client.RetryDelayStrategy)
+* [Client.SetRetryDelayStrategy]({{% godoc v3 %}}Client.SetRetryDelayStrategy)
 * [Client.IsRetryDefaultConditions]({{% godoc v3 %}}Client.IsRetryDefaultConditions)
 * [Client.EnableRetryDefaultConditions]({{% godoc v3 %}}Client.EnableRetryDefaultConditions)
 * [Client.DisableRetryDefaultConditions]({{% godoc v3 %}}Client.DisableRetryDefaultConditions)
@@ -101,7 +102,7 @@ bookHidden: true
 * [Request.SetRetryCount]({{% godoc v3 %}}Request.SetRetryCount)
 * [Request.SetRetryWaitTime]({{% godoc v3 %}}Request.SetRetryWaitTime)
 * [Request.SetRetryMaxWaitTime]({{% godoc v3 %}}Request.SetRetryMaxWaitTime)
-* [Request.SetRetryStrategy]({{% godoc v3 %}}Request.SetRetryStrategy)
+* [Request.SetRetryDelayStrategy]({{% godoc v3 %}}Request.SetRetryDelayStrategy)
 * [Request.EnableRetryDefaultConditions]({{% godoc v3 %}}Request.EnableRetryDefaultConditions)
 * [Request.DisableRetryDefaultConditions]({{% godoc v3 %}}Request.DisableRetryDefaultConditions)
 * [Request.SetRetryDefaultConditions]({{% godoc v3 %}}Request.SetRetryDefaultConditions)

@@ -71,7 +71,7 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * `Client.DisableWarn` => [Client.IsDisableWarn]({{% godoc v3 %}}Client.IsDisableWarn)
 * `Client.AddRetryCondition` => [Client.AddRetryConditions]({{% godoc v3 %}}Client.AddRetryConditions)
 * `Client.AddRetryHook` => [Client.AddRetryHooks]({{% godoc v3 %}}Client.AddRetryHooks)
-* `Client.SetRetryAfter` => [Client.SetRetryStrategy]({{% godoc v3 %}}Client.SetRetryStrategy)
+* `Client.SetRetryAfter` => [Client.SetRetryDelayStrategy]({{% godoc v3 %}}Client.SetRetryDelayStrategy)
 * `Client.Transport` => [Client.HTTPTransport]({{% godoc v3 %}}Client.HTTPTransport) new method returns `http.Transport`
     * [Client.Transport]({{% godoc v3 %}}Client.Transport) method does exist in v3, which returns `http.RoundTripper`
 * `Client.OnBeforeRequest` => [Client.AddRequestMiddleware]({{% godoc v3 %}}Client.AddRequestMiddleware)
@@ -107,7 +107,7 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 
 * Retry
     * `OnRetryFunc` => [RetryHookFunc]({{% godoc v3 %}}RetryHookFunc)
-    * `RetryStrategyFunc` => [RetryStrategyFunc]({{% godoc v3 %}}RetryStrategyFunc)
+    * `RetryAfterFunc` => [RetryDelayStrategyFunc]({{% godoc v3 %}}RetryDelayStrategyFunc)
 
 ### Removed
 
@@ -118,7 +118,7 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * `Client.RawPathParams` - use `Client.PathParams()` instead.
 * `Client.UserInfo`
 * `Client.SetRetryResetReaders` - it happens automatically.
-* `Client.SetRetryAfter` - use [Client.SetRetryStrategy]({{% godoc v3 %}}Client.SetRetryStrategy) or [Request.SetRetryStrategy]({{% godoc v3 %}}Request.SetRetryStrategy) instead.
+* `Client.SetRetryAfter` - use [Client.SetRetryDelayStrategy]({{% godoc v3 %}}Client.SetRetryDelayStrategy) or [Request.SetRetryDelayStrategy]({{% godoc v3 %}}Request.SetRetryDelayStrategy) instead.
 * `Client.RateLimiter` and `Client.SetRateLimiter` - Retry respects header `Retry-After` if present.
 * `Client.AddRetryAfterErrorCondition` - use [Client.AddRetryConditions]({{% godoc v3 %}}Client.AddRetryConditions) instead.
 * `Client.SetPreRequestHook` - use [Client.SetRequestMiddlewares]({{% godoc v3 %}}Client.SetRequestMiddlewares) instead. Refer to [docs]({{% relref "request-middleware" %}}).

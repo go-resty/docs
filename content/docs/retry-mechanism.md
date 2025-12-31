@@ -65,7 +65,7 @@ Use a custom retry strategy approach to perform constant/fixed delay.
 ```go
 // Retry configuration can be set at the client or request level
 client.
-    SetRetryStrategy(func(_ *resty.Response, _ error) (time.Duration, error) {
+    SetRetryDelayStrategy(func(*resty.Response, error) (time.Duration, error) {
         return 3 * time.Second, nil
     })
 ```
@@ -194,7 +194,7 @@ client.R().
 * [Client.SetRetryCount]({{% godoc v3 %}}Client.SetRetryCount)
 * [Client.SetRetryWaitTime]({{% godoc v3 %}}Client.SetRetryWaitTime)
 * [Client.SetRetryMaxWaitTime]({{% godoc v3 %}}Client.SetRetryMaxWaitTime)
-* [Client.SetRetryStrategy]({{% godoc v3 %}}Client.SetRetryStrategy)
+* [Client.SetRetryDelayStrategy]({{% godoc v3 %}}Client.SetRetryDelayStrategy)
 * [Client.SetRetryDefaultConditions]({{% godoc v3 %}}Client.SetRetryDefaultConditions)
 * [Client.AddRetryHooks]({{% godoc v3 %}}Client.AddRetryHooks)
 * [Client.AddRetryConditions]({{% godoc v3 %}}Client.AddRetryConditions)
@@ -205,7 +205,7 @@ client.R().
 * [Request.SetRetryCount]({{% godoc v3 %}}Request.SetRetryCount)
 * [Request.SetRetryWaitTime]({{% godoc v3 %}}Request.SetRetryWaitTime)
 * [Request.SetRetryMaxWaitTime]({{% godoc v3 %}}Request.SetRetryMaxWaitTime)
-* [Request.SetRetryStrategy]({{% godoc v3 %}}Request.SetRetryStrategy)
+* [Request.SetRetryDelayStrategy]({{% godoc v3 %}}Request.SetRetryDelayStrategy)
 * [Request.SetRetryDefaultConditions]({{% godoc v3 %}}Request.SetRetryDefaultConditions)
 * [Request.AddRetryHooks]({{% godoc v3 %}}Request.AddRetryHooks)
 * [Request.SetRetryHooks]({{% godoc v3 %}}Request.SetRetryHooks)
