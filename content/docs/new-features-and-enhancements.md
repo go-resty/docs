@@ -31,6 +31,7 @@ bookHidden: true
 * [Debug Log]({{% relref "debug-log" %}})
     * Introduced Debug Log formatter, out of the box human-readable and JSON formatter added.
 * Hook functions at Client update to variadic function; it becomes easy to supply one or more values.
+* [Any Value Methods]({{% relref "any-value-methods" %}}) - convenience methods (`*Any` variants) that accept `any` type values and auto-convert to strings for headers, query params, and path params.
 
 
 ## New ways to create Client
@@ -80,6 +81,11 @@ bookHidden: true
 * [Client.OnDebugLog]({{% godoc v3 %}}Client.OnDebugLog)
 * [Client.SetDebugLogFormatter]({{% godoc v3 %}}Client.SetDebugLogFormatter)
 * [Client.OnClose]({{% godoc v3 %}}Client.OnClose)
+* [Client.SetHeaderAny]({{% godoc v3 %}}Client.SetHeaderAny)
+* [Client.SetHeaderVerbatimAny]({{% godoc v3 %}}Client.SetHeaderVerbatimAny)
+* [Client.SetQueryParamAny]({{% godoc v3 %}}Client.SetQueryParamAny)
+* [Client.SetPathParamAny]({{% godoc v3 %}}Client.SetPathParamAny)
+* [Client.SetRawPathParamAny]({{% godoc v3 %}}Client.SetRawPathParamAny)
 
 ## Request
 
@@ -117,6 +123,11 @@ bookHidden: true
 * [Request.Funcs]({{% godoc v3 %}}Request.Funcs)
 * [Request.SetTimeout]({{% godoc v3 %}}Request.SetTimeout)
 * [Request.SetHeaderAuthorizationKey]({{% godoc v3 %}}Request.SetHeaderAuthorizationKey)
+* [Request.SetHeaderAny]({{% godoc v3 %}}Request.SetHeaderAny)
+* [Request.SetHeaderVerbatimAny]({{% godoc v3 %}}Request.SetHeaderVerbatimAny)
+* [Request.SetQueryParamAny]({{% godoc v3 %}}Request.SetQueryParamAny)
+* [Request.SetPathParamAny]({{% godoc v3 %}}Request.SetPathParamAny)
+* [Request.SetRawPathParamAny]({{% godoc v3 %}}Request.SetRawPathParamAny)
 
 ## Response
 
