@@ -24,7 +24,7 @@ res, err := client.R().
         Password: "testpass",
     }). // default request content type is JSON
     SetResult(&LoginResponse{}). // or SetResult(LoginResponse{}).
-    SetError(&LoginError{}).     // or SetError(LoginError{}).
+    SetResultError(&LoginError{}).     // or SetResultError(LoginError{}).
     Post("https://myapp.com/login")
 
 fmt.Println(err, res)
@@ -39,12 +39,12 @@ res, err := client.R().
         "password": "testpass",
     }). // default request content type is JSON
     SetResult(&LoginResponse{}). // or SetResult(LoginResponse{}).
-    SetError(&LoginError{}).     // or SetError(LoginError{}).
+    SetResultError(&LoginError{}).     // or SetResultError(LoginError{}).
     Post("https://myapp.com/login")
 
 fmt.Println(err)
 fmt.Println(res.Result().(*LoginResponse))  // success: status code > 199 && status code < 300
-fmt.Println(res.Error().(*LoginError))      // error: status code > 399
+fmt.Println(res.ResultError().(*LoginError))      // error: status code > 399
 ```
 
 ## String
@@ -54,12 +54,12 @@ res, err := client.R().
     SetContentType("application/json").
     SetBody(`{"username":"testuser", "password":"testpass"}`).
     SetResult(&LoginResponse{}). // or SetResult(LoginResponse{}).
-    SetError(&LoginError{}).     // or SetError(LoginError{}).
+    SetResultError(&LoginError{}).     // or SetResultError(LoginError{}).
     Post("https://myapp.com/login")
 
 fmt.Println(err)
 fmt.Println(res.Result().(*LoginResponse))  // success: status code > 199 && status code < 300
-fmt.Println(res.Error().(*LoginError))      // error: status code > 399
+fmt.Println(res.ResultError().(*LoginError))      // error: status code > 399
 ```
 
 ## Bytes
@@ -69,12 +69,12 @@ res, err := client.R().
     SetContentType("application/json").
     SetBody([]byte(`{"username":"testuser", "password":"testpass"}`)).
     SetResult(&LoginResponse{}). // or SetResult(LoginResponse{}).
-    SetError(&LoginError{}).     // or SetError(LoginError{}).
+    SetResultError(&LoginError{}).     // or SetResultError(LoginError{}).
     Post("https://myapp.com/login")
 
 fmt.Println(err)
 fmt.Println(res.Result().(*LoginResponse))  // success: status code > 199 && status code < 300
-fmt.Println(res.Error().(*LoginError))      // error: status code > 399
+fmt.Println(res.ResultError().(*LoginError))      // error: status code > 399
 ```
 
 ## io.Reader
@@ -89,11 +89,11 @@ res, err := client.R().
     SetContentType("application/json").
     SetBody(strings.NewReader(`{"username":"testuser", "password":"testpass"}`)).
     SetResult(&LoginResponse{}). // or SetResult(LoginResponse{}).
-    SetError(&LoginError{}).     // or SetError(LoginError{}).
+    SetResultError(&LoginError{}).     // or SetResultError(LoginError{}).
     Post("https://myapp.com/login")
 
 fmt.Println(err)
 fmt.Println(res.Result().(*LoginResponse))  // success: status code > 199 && status code < 300
-fmt.Println(res.Error().(*LoginError))      // error: status code > 399
+fmt.Println(res.ResultError().(*LoginError))      // error: status code > 399
 ```
 

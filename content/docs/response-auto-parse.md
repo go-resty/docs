@@ -4,7 +4,7 @@ weight: 4
 
 # Response Auto Parse
 
-Out of the box, Resty does response automatic unmarshaling for JSON and XML based on the response header `Content-Type` with methods [Request.SetResult]({{% godoc v3 %}}Request.SetResult) or [Request.SetError]({{% godoc v3 %}}Request.SetError) are used.
+Out of the box, Resty does response automatic unmarshaling for JSON and XML based on the response header `Content-Type` with methods [Request.SetResult]({{% godoc v3 %}}Request.SetResult) or [Request.SetResultError]({{% godoc v3 %}}Request.SetResultError) are used.
 
 For handling custom content-type or customized parsing, see [Content-Type {Encoder, Decoder}]({{% relref "content-type-encoder-and-decoder" %}}).
 
@@ -17,18 +17,18 @@ res, err := client.R().
         Password: "testpass",
     }). // default request content-type is JSON
     SetResult(&LoginResponse{}).
-    SetError(&LoginError{}).
+    SetResultError(&LoginError{}).
     Post("https://myapp.com/login")
 
 fmt.Println(err)
-fmt.Println(res.Result().(*LoginResponse))  // success: status code > 199 && status code < 300
-fmt.Println(res.Error().(*LoginError))      // error: status code > 399
+fmt.Println(res.Result().(*LoginResponse))    // success: status code > 199 && status code < 300
+fmt.Println(res.ResultError().(*LoginError))  // error: status code > 399
 ```
 
-### SetResult and SetError Usage
+### SetResult and SetResultError Usage
 
 > [!NOTE]
-> Examples describe the method `SetResult`, which applies to `SetError`.
+> Examples describe the method `SetResult`, which applies to `SetResultError`.
 
 #### Usage 1 - Inline Pointer
 
@@ -112,23 +112,23 @@ fmt.Println("Response:", string(resBytes))
 
 ### Client
 
-* [Client.SetError]({{% godoc v3 %}}Client.SetError)
+* [Client.SetResultError]({{% godoc v3 %}}Client.SetResultError)
 * [Client.SetDoNotParseResponse]({{% godoc v3 %}}Client.SetDoNotParseResponse)
 
 ### Request
 
 * [Request.SetResult]({{% godoc v3 %}}Request.SetResult)
-* [Request.SetError]({{% godoc v3 %}}Request.SetError)
+* [Request.SetResultError]({{% godoc v3 %}}Request.SetResultError)
 * [Request.SetExpectResponseContentType]({{% godoc v3 %}}Request.SetExpectResponseContentType)
 * [Request.SetForceResponseContentType]({{% godoc v3 %}}Request.SetForceResponseContentType)
 * [Request.SetDoNotParseResponse]({{% godoc v3 %}}Request.SetDoNotParseResponse)
 
 ### Response
 
-* [Response.IsSuccess]({{% godoc v3 %}}Response.IsSuccess)
-* [Response.IsError]({{% godoc v3 %}}Response.IsError)
+* [Response.IsStatusSuccess]({{% godoc v3 %}}Response.IsStatusSuccess)
+* [Response.IsStatusFailure]({{% godoc v3 %}}Response.IsStatusFailure)
 * [Response.Result]({{% godoc v3 %}}Response.Result)
-* [Response.Error]({{% godoc v3 %}}Response.Error)
+* [Response.ResultError]({{% godoc v3 %}}Response.ResultError)
 * [Response.Body]({{% godoc v3 %}}Response)
 * [Response.String]({{% godoc v3 %}}Response.String)
 * [Response.Bytes]({{% godoc v3 %}}Response.Bytes)
