@@ -26,11 +26,11 @@ defer client.Close()
 ```go
 res, err := client.R().
     SetAuthToken("bc594900518b4f7eac75bd37f019e08fbc594900518b4f7eac75bd37f019e08f").
-    SetError(&Error{}). // or SetError(Error{}).
+    SetResultError(&Error{}). // or SetResultError(Error{}).
     Delete("https://myapp.com/articles/123456")
 
 fmt.Println(err, res)
-fmt.Println(res.Error().(*Error))
+fmt.Println(res.ResultError().(*Error))
 ```
 
 ### With Payload
@@ -43,9 +43,9 @@ res, err := client.R().
     SetBody(map[string]any{
         "article_ids": []int{1002, 1006, 1007, 87683, 45432},
     }). // default request content type is JSON
-    SetError(&Error{}). // or SetError(Error{}).
+    SetResultError(&Error{}). // or SetResultError(Error{}).
     Delete("https://myapp.com/articles")
 
 fmt.Println(err, res)
-fmt.Println(res.Error().(*Error))
+fmt.Println(res.ResultError().(*Error))
 ```

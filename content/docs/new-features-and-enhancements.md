@@ -123,7 +123,7 @@ bookHidden: true
 * [Response.Body]({{% godoc v3 %}}Response)
 * [Response.Bytes]({{% godoc v3 %}}Response.Bytes)
 * [Response.IsRead]({{% godoc v3 %}}Response)
-* [Response.Err]({{% godoc v3 %}}Response)
+* [Response.CascadeError]({{% godoc v3 %}}Response)
 * [Response.RedirectHistory]({{% godoc v3 %}}Response.RedirectHistory)
 
 ## TraceInfo

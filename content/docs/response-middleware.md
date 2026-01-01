@@ -20,7 +20,7 @@ Out of the box, it has -
 ### Typical Use
 
 * Adds after the default response middleware.
-* Cascades response middleware returned `error` downstream via `Respose.Err`
+* Cascades response middleware returned `error` downstream via `Respose.CascadeError`
 
 ```go
 client.AddResponseMiddleware(func(c *resty.Client, res *resty.Response) error {
@@ -35,7 +35,7 @@ client.AddResponseMiddleware(func(c *resty.Client, res *resty.Response) error {
 
 ### Advanced Use
 
-* Cascades response middleware returned `error` downstream via `Respose.Err`
+* Cascades response middleware returned `error` downstream via `Respose.CascadeError`
 
 ```go
 c := resty.New()
