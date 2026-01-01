@@ -5,9 +5,6 @@ The retry mechanism plays a crucial role in modern system integration by enablin
 
 Resty provides exponential backoff with a jitter strategy out of the box; a custom retry strategy could be employed to override this default.
 
-> [!NOTE]
-> **Hint:** Combining the Retry strategy with [Circuit Breaker]({{% relref "circuit-breaker" %}}) typically provides a comprehensive approach to handling failures.
-
 {{% hintreqoverride %}}
 
 ## Default Values
@@ -60,19 +57,38 @@ client.
 
 ### Constant Delay
 
-Use a custom retry strategy approach to perform constant/fixed delay.
+There are two possible approaches to perform constant delay retry.
+
+#### Using Wait Time
+
+ ```go
+ // Retry configuration can be set at the client or request level
+// set same value for both min and max wait time
+constantDelay := 2 * time.Second
+client.
+    SetRetryCount(3).
+    SetRetryWaitTime(constantDelay).
+    SetRetryMaxWaitTime(constantDelay)
+```
+
+#### Using Delay Strategy
 
 ```go
 // Retry configuration can be set at the client or request level
 client.
-    SetRetryDelayStrategy(func(*resty.Response, error) (time.Duration, error) {
-        return 3 * time.Second, nil
-    })
+    SetRetryCount(3).
+    SetRetryDelayStrategy(resty.RetryConstantDelayStrategy(2 * time.Second))
 ```
 
 ### Retry Hooks
 
 Utilize the retry hook(s) to perform logic between retries.
+
+- Retry hooks are executed in the order in which they are added.
+- Retry hooks are executed on each retry attempt.
+- Request-level retry hooks are executed before client-level hooks.
+
+#### Add at Client
 
 ```go
 // Retry configuration can be set at the client or request level
@@ -81,10 +97,12 @@ client.
         func(res *resty.Response, err error) {
             // client retry hook 1
             // perform logic here
+            // access Request instance via res.Request e.g. res.Request.Attempt
         },
         func(res *resty.Response, err error) {
             // client retry hook 2
             // perform logic here
+            // access Request instance via res.Request e.g. res.Request.Attempt
         },
     )
 ```
@@ -97,6 +115,7 @@ client.R().
         func(res *resty.Response, err error) {
             // request retry hook
             // perform logic here
+            // access Request instance via res.Request e.g. res.Request.Attempt
         },
     )
 ```
@@ -111,25 +130,37 @@ client.R().
         func(res *resty.Response, err error) {
             // request retry hook 1
             // perform logic here
+            // access Request instance via res.Request e.g. res.Request.Attempt
         },
         func(res *resty.Response, err error) {
             // request retry hook 2
             // perform logic here
+            // access Request instance via res.Request e.g. res.Request.Attempt
         },
     )
 ```
 
 ### Retry Conditions
 
+Utilize the retry condition(s) to determine whether a retry is required.
+
+- Retry conditions are executed in the order in which they are added.
+- Once a retry condition returns `true`, the remaining retry conditions are not executed.
+- Retry conditions are executed on each retry attempt.
+- Default retry conditions are executed first.
+- Client-level retry conditions are applied to all requests.
+- Request-level retry conditions are executed before client-level retry conditions.
+
+#### Add at Client
+
 ```go
 // Retry configuration can be set at the client or request level
-// NOTE: first default retry conditions get applied
-//       before user-defined retry conditions
 client.
     AddRetryConditions(
         func(res *resty.Response, err error) bool {
             // client retry condition 1
             // perform logic here
+            // access Request instance via res.Request e.g. res.Request.Attempt
 
             // return true if retry is required otherwise, return false
             return false
@@ -137,6 +168,7 @@ client.
         func(res *resty.Response, err error) bool {
             // client retry condition 1
             // perform logic here
+            // access Request instance via res.Request e.g. res.Request.Attempt
 
             // return true if retry is required otherwise, return false
             return true
@@ -147,13 +179,12 @@ client.
 #### Add at Request
 
 ```go
-// NOTE: first default retry conditions get applied
-//       before user-defined retry conditions
 client.R().
     AddRetryConditions(
         func(res *resty.Response, err error) bool {
             // request retry condition
             // perform logic here
+            // access Request instance via res.Request e.g. res.Request.Attempt
 
             // return true if retry is required otherwise, return false
             return true
@@ -166,13 +197,12 @@ client.R().
 If a specific use case requires certain retry conditions only for a particular request and does not want the client to retry conditions, use [Request.SetRetryConditions]({{% godoc v3 %}}Request.SetRetryConditions).
 
 ```go
-// NOTE: first default retry conditions get applied
-//       before user-defined retry conditions
 client.R().
     SetRetryConditions(
         func(res *resty.Response, err error) bool {
             // request retry condition 1
             // perform logic here
+            // access Request instance via res.Request e.g. res.Request.Attempt
 
             // return true if retry is required otherwise, return false
             return false
@@ -180,11 +210,34 @@ client.R().
         func(res *resty.Response, err error) bool {
             // request retry condition 2
             // perform logic here
+            // access Request instance via res.Request e.g. res.Request.Attempt
 
             // return true if retry is required otherwise, return false
             return true
         },
     )
+```
+
+### Retry Delay Strategy
+
+By default, Resty uses a capped exponential backoff with a jitter delay strategy to calculate the delay between retries. It also provides an option to use a custom retry delay strategy. See [Client.SetRetryDelayStrategy]({{% godoc v3 %}}Request.SetRetryDelayStrategy), [Request.SetRetryDelayStrategy]({{% godoc v3 %}}Request.SetRetryDelayStrategy).
+
+And ready to use retry delay strategies are available:
+
+* [RetryConstantDelayStrategy]({{% godoc v3 %}}RetryConstantDelayStrategy)
+
+```go
+// create custom retry delay strategy
+customRetryDelayStrategy := func(*Response, error) (time.Duration, error) {
+    // perform logic here
+    // access Request instance via res.Request e.g. res.Request.Attempt
+
+    return 2 * time.Second, nil
+}
+
+// Retry configuration can be set at the client or request level
+client.
+    SetRetryDelayStrategy(customRetryDelayStrategy)
 ```
 
 ## Methods
