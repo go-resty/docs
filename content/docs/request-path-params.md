@@ -48,11 +48,13 @@ c.R().
 ### Client
 
 * [Client.SetPathParam]({{% godoc v3 %}}Client.SetPathParam)
+* [Client.SetPathParamAny]({{% godoc v3 %}}Client.SetPathParamAny)
 * [Client.SetPathParams]({{% godoc v3 %}}Client.SetPathParams)
 
 ### Request
 
 * [Request.SetPathParam]({{% godoc v3 %}}Request.SetPathParam)
+* [Request.SetPathParamAny]({{% godoc v3 %}}Request.SetPathParamAny)
 * [Request.SetPathParams]({{% godoc v3 %}}Request.SetPathParams)
 
 
@@ -99,9 +101,15 @@ c.R().
 ### Client
 
 * [Client.SetRawPathParam]({{% godoc v3 %}}Client.SetRawPathParam)
+* [Client.SetRawPathParamAny]({{% godoc v3 %}}Client.SetRawPathParamAny)
 * [Client.SetRawPathParams]({{% godoc v3 %}}Client.SetRawPathParams)
 
 ### Request
 
 * [Request.SetRawPathParam]({{% godoc v3 %}}Request.SetRawPathParam)
+* [Request.SetRawPathParamAny]({{% godoc v3 %}}Request.SetRawPathParamAny)
 * [Request.SetRawPathParams]({{% godoc v3 %}}Request.SetRawPathParams)
+
+## See Also
+
+* [Any Value Methods]({{% relref "any-value-methods" %}}) - Methods that accept any type and auto-convert to string

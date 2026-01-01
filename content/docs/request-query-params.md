@@ -80,11 +80,17 @@ c.R().
 ### Client
 
 * [Client.SetQueryParam]({{% godoc v3 %}}Client.SetQueryParam)
+* [Client.SetQueryParamAny]({{% godoc v3 %}}Client.SetQueryParamAny)
 * [Client.SetQueryParams]({{% godoc v3 %}}Client.SetQueryParams)
 
 ### Request
 
 * [Request.SetQueryParam]({{% godoc v3 %}}Request.SetQueryParam)
+* [Request.SetQueryParamAny]({{% godoc v3 %}}Request.SetQueryParamAny)
 * [Request.SetQueryParams]({{% godoc v3 %}}Request.SetQueryParams)
 * [Request.SetQueryParamsFromValues]({{% godoc v3 %}}Request.SetQueryParamsFromValues)
 * [Request.SetQueryString]({{% godoc v3 %}}Request.SetQueryString)
+
+## See Also
+
+* [Any Value Methods]({{% relref "any-value-methods" %}}) - Methods that accept any type and auto-convert to string
