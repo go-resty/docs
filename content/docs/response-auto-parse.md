@@ -17,12 +17,12 @@ res, err := client.R().
         Password: "testpass",
     }). // default request content-type is JSON
     SetResult(&LoginResponse{}).
-    SetResultError(&LoginError{}).
+    SetResultError(&LoginErrorResponse{}).
     Post("https://myapp.com/login")
 
 fmt.Println(err)
 fmt.Println(res.Result().(*LoginResponse))    // success: status code > 199 && status code < 300
-fmt.Println(res.ResultError().(*LoginError))  // error: status code > 399
+fmt.Println(res.ResultError().(*LoginErrorResponse))  // error: status code > 399
 ```
 
 ### SetResult and SetResultError Usage

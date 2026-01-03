@@ -30,12 +30,12 @@ res, err := client.R().
         Password: "testpass",
     }). // default request content type is JSON
     SetResult(&LoginResponse{}). // or SetResult(LoginResponse{}).
-    SetResultError(&LoginError{}).     // or SetResultError(LoginError{}).
+    SetResultError(&LoginErrorResponse{}).     // or SetResultError(LoginErrorResponse{}).
     Post("https://myapp.com/login")
 
 fmt.Println(err, res)
 fmt.Println(res.Result().(*LoginResponse))
-fmt.Println(res.ResultError().(*LoginError))
+fmt.Println(res.ResultError().(*LoginErrorResponse))
 ```
 
 ### PUT
