@@ -9,7 +9,7 @@ Out-of-the-box, Resty v3 provides:
 * [Ratio-based]({{% relref "#ratio-based" %}})
 
 > [!NOTE]
-> **HINT:** Combining the Circuit Breaker with [Retry Mechanism]({{% relref "retry-mechanism" %}}) typically provides a comprehensive approach to handling failures.
+> **HINT:** Combining the Circuit Breaker with [Retry Mechanism]({{% relref "retry" %}}) typically provides a comprehensive approach to handling failures.
 
 ## Default Values
 

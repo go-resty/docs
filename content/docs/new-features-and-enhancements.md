@@ -12,7 +12,7 @@ bookHidden: true
 * [Multipart]({{% relref "multipart" %}}) streaming and [upload progress]({{% relref "multipart#upload-progress" %}}).
 * [Load Balancer and Service Discovery]({{% relref "load-balancer-and-service-discovery" %}})
 * Retry
-    * Retry settings on [Request-level]({{% relref "retry-mechanism#request" %}}).
+    * Retry settings on [Request-level]({{% relref "retry#request" %}}).
     * Respects header `Retry-After` if present.
     * Resets reader on retry request if the `io.ReadSeeker` interface is supported.
 * [Root]({{% relref "root-certificates" %}}), [Client Root]({{% relref "client-root-certificates" %}}) certificates - dynamically reload by interval.
