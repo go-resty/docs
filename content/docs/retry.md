@@ -1,7 +1,7 @@
 
-# Retry Mechanism
+# Retry
 
-The retry mechanism plays a crucial role in modern system integration by enabling effective handling of failures.
+The retry plays a crucial role in modern system integration by enabling effective handling of failures.
 
 Resty provides exponential backoff with a jitter strategy out of the box; a custom retry strategy could be employed to override this default.
 
