@@ -30,13 +30,13 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 
 * By default, the content length value is not set. However, Go’s `net/http` package automatically sets the Content-Length for types `*bytes.Buffer`, `*bytes.Reader`, and `*strings.Reader`, which covers all cases. Therefore, Resty v3 removes the previous boolean method and introduces a new method `SetContentLength(v int64)` at the request level, allowing users to explicitly provide values for file/multipart uploads, etc.
 * By default, payload is not supported in HTTP verb DELETE. Use [Client.AllowMethodDeletePayload]({{% godoc v3 %}}Client.AllowMethodDeletePayload) or [Request.AllowMethodDeletePayload]({{% godoc v3 %}}Request).
-* [Retry Mechanism]({{% relref "retry-mechanism" %}})
+* [Retry Mechanism]({{% relref "retry" %}})
     * Request values are inherited from the client upon creation; they do not refresh during a retry attempt. Therefore, value updates are performed on the request instance via [Response.Request]({{% godoc v3 %}}Response).
     * Respects header `Retry-After` if present.
     * Resets reader on retry request if the `io.ReadSeeker` interface is supported.
     * Retries only on Idempotent HTTP Verb - GET, HEAD, PUT, DELETE, OPTIONS, and TRACE ([RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110.html#name-method-registration), [RFC 5789](https://datatracker.ietf.org/doc/html/rfc5789.html)),
         * Use [Client.SetAllowNonIdempotentRetry]({{% godoc v3 %}}Client.SetAllowNonIdempotentRetry) or [Request.SetAllowNonIdempotentRetry]({{% godoc v3 %}}Request.SetAllowNonIdempotentRetry). If additional control is necessary, utilize the custom retry condition.
-    * Applies [default retry conditions]({{% relref "retry-mechanism#default-conditions" %}})
+    * Applies [default retry conditions]({{% relref "retry#default-conditions" %}})
         * It can be disabled via [Client.SetRetryDefaultConditions]({{% godoc v3 %}}Client.SetRetryDefaultConditions) or [Request.SetRetryDefaultConditions]({{% godoc v3 %}}Request.SetRetryDefaultConditions)
 * [Multipart]({{% relref "multipart" %}})
     * By default, Resty streams the content in the request body when a file or `io.Reader` is detected in the MultipartField input.
