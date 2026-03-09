@@ -26,8 +26,8 @@ Resty provides exponential backoff with a jitter strategy out of the box; a cust
 * Respects header `Retry-After` if present.
 * Resets reader automatically on retry request if the `io.ReadSeeker` interface is supported.
 * Retries only on Idempotent HTTP Verb - GET, HEAD, PUT, DELETE, OPTIONS, and TRACE ([RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110.html#name-method-registration), [RFC 5789](https://datatracker.ietf.org/doc/html/rfc5789.html))
-    * Use [Client.SetAllowNonIdempotentRetry]({{% godoc v3 %}}Client.SetAllowNonIdempotentRetry) or [Request.SetAllowNonIdempotentRetry]({{% godoc v3 %}}Request.SetAllowNonIdempotentRetry). If additional control is necessary, utilize the custom retry condition.
-* [Request.RetryTraceID]({{% godoc v3 %}}Request) - GUID generated for retry count > 0
+    * Use [Client.SetRetryAllowNonIdempotent]({{% godoc v3 %}}Client.SetRetryAllowNonIdempotent) or [Request.SetRetryAllowNonIdempotent]({{% godoc v3 %}}Request.SetRetryAllowNonIdempotent). If additional control is necessary, utilize the custom retry condition.
+* [Request.CorrelationID]({{% godoc v3 %}}Request) - GUID generated for retry count > 0
 
 
 ## Default Conditions

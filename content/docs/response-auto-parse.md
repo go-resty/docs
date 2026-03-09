@@ -113,15 +113,15 @@ fmt.Println("Response:", string(resBytes))
 ### Client
 
 * [Client.SetResultError]({{% godoc v3 %}}Client.SetResultError)
-* [Client.SetDoNotParseResponse]({{% godoc v3 %}}Client.SetDoNotParseResponse)
+* [Client.SetResponseDoNotParse]({{% godoc v3 %}}Client.SetResponseDoNotParse)
 
 ### Request
 
 * [Request.SetResult]({{% godoc v3 %}}Request.SetResult)
 * [Request.SetResultError]({{% godoc v3 %}}Request.SetResultError)
-* [Request.SetExpectResponseContentType]({{% godoc v3 %}}Request.SetExpectResponseContentType)
-* [Request.SetForceResponseContentType]({{% godoc v3 %}}Request.SetForceResponseContentType)
-* [Request.SetDoNotParseResponse]({{% godoc v3 %}}Request.SetDoNotParseResponse)
+* [Request.SetResponseExpectContentType]({{% godoc v3 %}}Request.SetResponseExpectContentType)
+* [Request.SetResponseForceContentType]({{% godoc v3 %}}Request.SetResponseForceContentType)
+* [Request.SetResponseDoNotParse]({{% godoc v3 %}}Request.SetResponseDoNotParse)
 
 ### Response
 

@@ -63,14 +63,12 @@ fmt.Println("  RemoteAddr    :", ti.RemoteAddr.String())
 ### Client
 
 * [Client.SetTrace]({{% godoc v3 %}}Client.SetTrace)
-* [Client.EnableTrace]({{% godoc v3 %}}Client.EnableTrace)
-* [Client.DisableTrace]({{% godoc v3 %}}Client.DisableTrace)
+* [Client.IsTrace]({{% godoc v3 %}}Client.IsTrace)
 
 ### Request
 
 * [Request.SetTrace]({{% godoc v3 %}}Request.SetTrace)
-* [Request.EnableTrace]({{% godoc v3 %}}Request.EnableTrace)
-* [Request.DisableTrace]({{% godoc v3 %}}Request.DisableTrace)
+* [Request.IsTrace]({{% godoc v3 %}}Request)
 
 ### Trace
 

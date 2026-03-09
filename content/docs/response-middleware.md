@@ -8,8 +8,8 @@ Resty provides response middleware that enables the execution of logic after rec
 
 Out of the box, it has -
 
-* [AutoParseResponseMiddleware]({{% godoc v3 %}}AutoParseResponseMiddleware)
-* [SaveToFileResponseMiddleware]({{% godoc v3 %}}SaveToFileResponseMiddleware)
+* [MiddlewareResponseAutoParse]({{% godoc v3 %}}MiddlewareResponseAutoParse)
+* [MiddlewareResponseSaveToFile]({{% godoc v3 %}}MiddlewareResponseSaveToFile)
 
 > [!NOTE]
 > * v3 introduces a fully composable middleware feature that allows the registration of response middleware in any order to accommodate practical use cases.
@@ -44,9 +44,9 @@ defer c.Close()
 c.SetResponseMiddlewares(
     Custom1ResponseMiddleware,
     Custom2ResponseMiddleware,
-    resty.AutoParseResponseMiddleware, // before this, the body is not read except on the debug flow
+    resty.MiddlewareResponseAutoParse, // before this, the body is not read except on the debug flow
     Custom3ResponseMiddleware,
-    resty.SaveToFileResponseMiddleware, // See, Request.SetOutputFileName & Request.SetSaveResponse
+    resty.MiddlewareResponseSaveToFile, // See, Request.SetResponseSaveFileName & Request.SetResponseSaveToFile
     Custom4ResponseMiddleware,
     Custom5ResponseMiddleware,
 )

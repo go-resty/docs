@@ -56,28 +56,24 @@ bookHidden: true
 * [Client.Context]({{% godoc v3 %}}Client.Context)
 * [Client.SetContext]({{% godoc v3 %}}Client.SetContext)
 * [Client.Clone]({{% godoc v3 %}}Client.Clone)
-* [Client.EnableDebug]({{% godoc v3 %}}Client.EnableDebug)
-* [Client.DisableDebug]({{% godoc v3 %}}Client.DisableDebug)
 * [Client.IsTrace]({{% godoc v3 %}}Client.IsTrace)
 * [Client.IsDisableWarn]({{% godoc v3 %}}Client.IsDisableWarn)
-* [Client.AllowMethodDeletePayload]({{% godoc v3 %}}Client.AllowMethodDeletePayload)
-* [Client.SetAllowMethodDeletePayload]({{% godoc v3 %}}Client.SetAllowMethodDeletePayload)
+* [Client.IsMethodDeleteAllowPayload]({{% godoc v3 %}}Client.IsMethodDeleteAllowPayload)
+* [Client.SetMethodDeleteAllowPayload]({{% godoc v3 %}}Client.SetMethodDeleteAllowPayload)
 * [Client.RetryDelayStrategy]({{% godoc v3 %}}Client.RetryDelayStrategy)
 * [Client.SetRetryDelayStrategy]({{% godoc v3 %}}Client.SetRetryDelayStrategy)
 * [Client.IsRetryDefaultConditions]({{% godoc v3 %}}Client.IsRetryDefaultConditions)
-* [Client.EnableRetryDefaultConditions]({{% godoc v3 %}}Client.EnableRetryDefaultConditions)
-* [Client.DisableRetryDefaultConditions]({{% godoc v3 %}}Client.DisableRetryDefaultConditions)
 * [Client.SetRetryDefaultConditions]({{% godoc v3 %}}Client.SetRetryDefaultConditions)
-* [Client.SetAllowNonIdempotentRetry]({{% godoc v3 %}}Client.SetAllowNonIdempotentRetry)
-* [Client.IsSaveResponse]({{% godoc v3 %}}Client.IsSaveResponse)
-* [Client.SetSaveResponse]({{% godoc v3 %}}Client.SetSaveResponse)
-* [Client.SetGenerateCurlCmd]({{% godoc v3 %}}Client.SetGenerateCurlCmd)
-* [Client.SetDebugLogCurlCmd]({{% godoc v3 %}}Client.SetDebugLogCurlCmd)
+* [Client.SetRetryAllowNonIdempotent]({{% godoc v3 %}}Client.SetRetryAllowNonIdempotent)
+* [Client.IsResponseSaveToFile]({{% godoc v3 %}}Client.IsResponseSaveToFile)
+* [Client.SetResponseSaveToFile]({{% godoc v3 %}}Client.SetResponseSaveToFile)
+* [Client.SetCurlCmdGenerate]({{% godoc v3 %}}Client.SetCurlCmdGenerate)
+* [Client.SetCurlCmdDebugLog]({{% godoc v3 %}}Client.SetCurlCmdDebugLog)
 * [Client.SetRootCertificatesWatcher]({{% godoc v3 %}}Client.SetRootCertificatesWatcher)
 * [Client.SetClientRootCertificatesWatcher]({{% godoc v3 %}}Client.SetClientRootCertificatesWatcher)
 * [Client.SetCertificateFromFile]({{% godoc v3 %}}Client.SetCertificateFromFile)
 * [Client.SetCertificateFromString]({{% godoc v3 %}}Client.SetCertificateFromString)
-* [Client.SetUnescapeQueryParams]({{% godoc v3 %}}Client.SetUnescapeQueryParams)
+* [Client.SetQueryParamsUnescape]({{% godoc v3 %}}Client.SetQueryParamsUnescape)
 * [Client.OnDebugLog]({{% godoc v3 %}}Client.OnDebugLog)
 * [Client.SetDebugLogFormatter]({{% godoc v3 %}}Client.SetDebugLogFormatter)
 * [Client.OnClose]({{% godoc v3 %}}Client.OnClose)
@@ -85,7 +81,7 @@ bookHidden: true
 * [Client.SetHeaderVerbatimAny]({{% godoc v3 %}}Client.SetHeaderVerbatimAny)
 * [Client.SetQueryParamAny]({{% godoc v3 %}}Client.SetQueryParamAny)
 * [Client.SetPathParamAny]({{% godoc v3 %}}Client.SetPathParamAny)
-* [Client.SetRawPathParamAny]({{% godoc v3 %}}Client.SetRawPathParamAny)
+* [Client.SetPathRawParamAny]({{% godoc v3 %}}Client.SetPathRawParamAny)
 
 ## Request
 
@@ -93,33 +89,29 @@ bookHidden: true
 * [Request.WithContext]({{% godoc v3 %}}Request.WithContext)
 * [Request.SetResponseBodyUnlimitedReads]({{% godoc v3 %}}Request.SetResponseBodyUnlimitedReads)
 * [Request.DebugBodyLimit]({{% godoc v3 %}}Request)
-* [Request.EnableDebug]({{% godoc v3 %}}Request.EnableDebug)
-* [Request.DisableDebug]({{% godoc v3 %}}Request.DisableDebug)
 * [Request.IsTrace]({{% godoc v3 %}}Request)
 * [Request.SetTrace]({{% godoc v3 %}}Request.SetTrace)
-* [Request.DisableTrace]({{% godoc v3 %}}Request.DisableTrace)
 * [Request.Patch]({{% godoc v3 %}}Request.Patch)
 * [Request.Trace]({{% godoc v3 %}}Request.Trace)
 * [Request.SetMethod]({{% godoc v3 %}}Request.SetMethod)
 * [Request.SetURL](R{{% godoc v3 %}}equest.SetURL)
-* [Request.SetAllowMethodGetPayload]({{% godoc v3 %}}Request.SetAllowMethodGetPayload)
-* [Request.SetAllowMethodDeletePayload]({{% godoc v3 %}}Request.SetAllowMethodDeletePayload)
-* [Request.RetryTraceID]({{% godoc v3 %}}Request)
+* [Request.SetMethodGetAllowPayload]({{% godoc v3 %}}Request.SetMethodGetAllowPayload)
+* [Request.SetMethodDeleteAllowPayload]({{% godoc v3 %}}Request.SetMethodDeleteAllowPayload)
+* [Request.CorrelationID]({{% godoc v3 %}}Request)
+* [Request.SetCorrelationID]({{% godoc v3 %}}Request.SetCorrelationID)
 * [Request.SetRetryCount]({{% godoc v3 %}}Request.SetRetryCount)
 * [Request.SetRetryWaitTime]({{% godoc v3 %}}Request.SetRetryWaitTime)
 * [Request.SetRetryMaxWaitTime]({{% godoc v3 %}}Request.SetRetryMaxWaitTime)
 * [Request.SetRetryDelayStrategy]({{% godoc v3 %}}Request.SetRetryDelayStrategy)
-* [Request.EnableRetryDefaultConditions]({{% godoc v3 %}}Request.EnableRetryDefaultConditions)
-* [Request.DisableRetryDefaultConditions]({{% godoc v3 %}}Request.DisableRetryDefaultConditions)
 * [Request.SetRetryDefaultConditions]({{% godoc v3 %}}Request.SetRetryDefaultConditions)
-* [Request.SetAllowNonIdempotentRetry]({{% godoc v3 %}}Request.SetAllowNonIdempotentRetry)
-* [Request.OutputFileName]({{% godoc v3 %}}Request)
-* [Request.SetOutputFileName]({{% godoc v3 %}}Request.SetOutputFileName)
-* [Request.IsSaveResponse]({{% godoc v3 %}}Request)
-* [Request.SetSaveResponse]({{% godoc v3 %}}Request.SetSaveResponse)
-* [Request.SetGenerateCurlCmd]({{% godoc v3 %}}Request.SetGenerateCurlCmd)
-* [Request.SetDebugLogCurlCmd]({{% godoc v3 %}}Request.SetDebugLogCurlCmd)
-* [Request.SetUnescapeQueryParams]({{% godoc v3 %}}Request.SetUnescapeQueryParams)
+* [Request.SetRetryAllowNonIdempotent]({{% godoc v3 %}}Request.SetRetryAllowNonIdempotent)
+* [Request.ResponseSaveFileName]({{% godoc v3 %}}Request)
+* [Request.SetResponseSaveFileName]({{% godoc v3 %}}Request.SetResponseSaveFileName)
+* [Request.IsResponseSaveToFile]({{% godoc v3 %}}Request)
+* [Request.SetResponseSaveToFile]({{% godoc v3 %}}Request.SetResponseSaveToFile)
+* [Request.SetCurlCmdGenerate]({{% godoc v3 %}}Request.SetCurlCmdGenerate)
+* [Request.SetCurlCmdDebugLog]({{% godoc v3 %}}Request.SetCurlCmdDebugLog)
+* [Request.SetQueryParamsUnescape]({{% godoc v3 %}}Request.SetQueryParamsUnescape)
 * [Request.Funcs]({{% godoc v3 %}}Request.Funcs)
 * [Request.SetTimeout]({{% godoc v3 %}}Request.SetTimeout)
 * [Request.SetHeaderAuthorizationKey]({{% godoc v3 %}}Request.SetHeaderAuthorizationKey)
@@ -127,7 +119,7 @@ bookHidden: true
 * [Request.SetHeaderVerbatimAny]({{% godoc v3 %}}Request.SetHeaderVerbatimAny)
 * [Request.SetQueryParamAny]({{% godoc v3 %}}Request.SetQueryParamAny)
 * [Request.SetPathParamAny]({{% godoc v3 %}}Request.SetPathParamAny)
-* [Request.SetRawPathParamAny]({{% godoc v3 %}}Request.SetRawPathParamAny)
+* [Request.SetPathRawParamAny]({{% godoc v3 %}}Request.SetPathRawParamAny)
 
 ## Response
 
@@ -136,6 +128,20 @@ bookHidden: true
 * [Response.IsRead]({{% godoc v3 %}}Response)
 * [Response.CascadeError]({{% godoc v3 %}}Response)
 * [Response.RedirectHistory]({{% godoc v3 %}}Response.RedirectHistory)
+
+## Middleware
+
+Resty v3 exports the middleware functions.
+
+### Request
+
+* [MiddlewareRequestCreate]({{% godoc v3 %}}MiddlewareRequestCreate)
+
+### Response
+
+* [MiddlewareResponseAutoParse]({{% godoc v3 %}}MiddlewareResponseAutoParse)
+* [MiddlewareResponseSaveToFile]({{% godoc v3 %}}MiddlewareResponseSaveToFile)
+
 
 ## TraceInfo
 

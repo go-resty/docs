@@ -8,12 +8,12 @@ Resty provides request middleware that enables logic execution during the reques
 
 Out of the box, it has -
 
-* [PrepareRequestMiddleware]({{% godoc v3 %}}PrepareRequestMiddleware)
+* [MiddlewareRequestCreate]({{% godoc v3 %}}MiddlewareRequestCreate)
 
 > [!NOTE]
 > * v3 introduces a fully composable middleware feature that allows the registration of request middleware in any order to accommodate practical use cases.
 > * v3 introduces [Request.Funcs]({{% godoc v3 %}}Request.Funcs) feature that could help to perform Request instance manipulation.
-> * `Request.RawRequest` instance available after `PrepareRequestMiddleware` middleware execution.
+> * `Request.RawRequest` instance available after `MiddlewareRequestCreate` middleware execution.
 
 ## Examples
 
@@ -42,7 +42,7 @@ defer c.Close()
 c.SetRequestMiddlewares(
     Custom1RequestMiddleware,
     Custom2RequestMiddleware,
-    resty.PrepareRequestMiddleware, // after this, `Request.RawRequest` instance is available
+    resty.MiddlewareRequestCreate, // after this, `Request.RawRequest` instance is available
     Custom3RequestMiddleware,
     Custom4RequestMiddleware,
 )

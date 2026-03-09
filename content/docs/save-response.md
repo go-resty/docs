@@ -9,7 +9,7 @@ Resty provides a simple method for saving/downloading HTTP responses to the file
 > [!NOTE]
 > Resty v3 adds -
 > * Ability to determine the filename automatically from the response in the following order -
->     * [Request.SetOutputFileName]({{% godoc v3 %}}Request.SetOutputFileName)
+>     * [Request.SetResponseSaveFileName]({{% godoc v3 %}}Request.SetResponseSaveFileName)
 >     * Header `Content-Disposition`
 >     * Request URL using `path.Base`
 >     * Request URL hostname if path is empty or "/"
@@ -57,9 +57,9 @@ client.R().
 ### Client
 
 * [Client.SetOutputDirectory]({{% godoc v3 %}}Client.SetOutputDirectory)
-* [Client.SetSaveResponse]({{% godoc v3 %}}Client.SetSaveResponse)
+* [Client.SetResponseSaveToFile]({{% godoc v3 %}}Client.SetResponseSaveToFile)
 
 ### Request
 
-* [Request.SetOutputFileName]({{% godoc v3 %}}Request.SetOutputFileName)
-* [Request.SetSaveResponse]({{% godoc v3 %}}Request.SetSaveResponse)
+* [Request.SetResponseSaveFileName]({{% godoc v3 %}}Request.SetResponseSaveFileName)
+* [Request.SetResponseSaveToFile]({{% godoc v3 %}}Request.SetResponseSaveToFile)

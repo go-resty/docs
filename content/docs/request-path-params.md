@@ -100,15 +100,15 @@ c.R().
 
 ### Client
 
-* [Client.SetRawPathParam]({{% godoc v3 %}}Client.SetRawPathParam)
-* [Client.SetRawPathParamAny]({{% godoc v3 %}}Client.SetRawPathParamAny)
-* [Client.SetRawPathParams]({{% godoc v3 %}}Client.SetRawPathParams)
+* [Client.SetPathRawParam]({{% godoc v3 %}}Client.SetPathRawParam)
+* [Client.SetPathRawParamAny]({{% godoc v3 %}}Client.SetPathRawParamAny)
+* [Client.SetPathRawParams]({{% godoc v3 %}}Client.SetPathRawParams)
 
 ### Request
 
-* [Request.SetRawPathParam]({{% godoc v3 %}}Request.SetRawPathParam)
-* [Request.SetRawPathParamAny]({{% godoc v3 %}}Request.SetRawPathParamAny)
-* [Request.SetRawPathParams]({{% godoc v3 %}}Request.SetRawPathParams)
+* [Request.SetPathRawParam]({{% godoc v3 %}}Request.SetPathRawParam)
+* [Request.SetPathRawParamAny]({{% godoc v3 %}}Request.SetPathRawParamAny)
+* [Request.SetPathRawParams]({{% godoc v3 %}}Request.SetPathRawParams)
 
 ## See Also
 

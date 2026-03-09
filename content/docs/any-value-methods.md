@@ -187,7 +187,7 @@ c.R().
 
 #### Path Params
 * [Client.SetPathParamAny]({{% godoc v3 %}}Client.SetPathParamAny)
-* [Client.SetRawPathParamAny]({{% godoc v3 %}}Client.SetRawPathParamAny)
+* [Client.SetPathRawParamAny]({{% godoc v3 %}}Client.SetPathRawParamAny)
 
 ### Request
 
@@ -200,7 +200,7 @@ c.R().
 
 #### Path Params
 * [Request.SetPathParamAny]({{% godoc v3 %}}Request.SetPathParamAny)
-* [Request.SetRawPathParamAny]({{% godoc v3 %}}Request.SetRawPathParamAny)
+* [Request.SetPathRawParamAny]({{% godoc v3 %}}Request.SetPathRawParamAny)
 
 ## See Also
 

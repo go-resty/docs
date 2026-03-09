@@ -5,23 +5,23 @@ Resty provides easy-to-use redirect policy implementation and is flexible to ext
 
 Out of the box, it has following redirect polices:
 
-* [NoRedirectPolicy]({{% godoc v3 %}}NoRedirectPolicy)
-* [FlexibleRedirectPolicy]({{% godoc v3 %}}FlexibleRedirectPolicy)
-* [DomainCheckRedirectPolicy]({{% godoc v3 %}}DomainCheckRedirectPolicy)
+* [RedirectNoPolicy]({{% godoc v3 %}}RedirectNoPolicy)
+* [RedirectFlexiblePolicy]({{% godoc v3 %}}RedirectFlexiblePolicy)
+* [RedirectDomainCheckPolicy]({{% godoc v3 %}}RedirectDomainCheckPolicy)
 
 > [!NOTE]
-> v3 [NoRedirectPolicy]({{% godoc v3 %}}NoRedirectPolicy) returns an error `http.ErrUseLastResponse`.
+> v3 [RedirectNoPolicy]({{% godoc v3 %}}RedirectNoPolicy) returns an error `http.ErrUseLastResponse`.
 
 ## Example
 
 ```go
 // default golang client does maximum redirect count as 10,
 // in the Resty, simply set
-client.SetRedirectPolicy(resty.FlexibleRedirectPolicy(5))
+client.SetRedirectPolicy(resty.RedirectFlexiblePolicy(5))
 
 // set one or more redirect policies together
-client.SetRedirectPolicy(resty.FlexibleRedirectPolicy(5),
-    resty.DomainCheckRedirectPolicy("host1.com", "host2.org", "host3.net"))
+client.SetRedirectPolicy(resty.RedirectFlexiblePolicy(5),
+    resty.RedirectDomainCheckPolicy("host1.com", "host2.org", "host3.net"))
 ```
 
 ### Custom Redirect Policy

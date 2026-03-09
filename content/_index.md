@@ -40,7 +40,7 @@ type: docs
   defer client.Close()
 
   res, err := client.R().
-      EnableTrace().
+      SetTrace(true).
       Get("https://httpbin.org/get")
   fmt.Println(err, res)
   fmt.Println(res.Request.TraceInfo())
@@ -48,13 +48,13 @@ type: docs
 
 - ```go
   // Server-Sent Events Client
-  es := NewEventSource().
+  sse := NewSSESource().
       SetURL("https://sse.dev/test").
       OnMessage(func(e any) {
-          fmt.Println(e.(*resty.Event))
+          fmt.Println(e.(*resty.SSE))
       }, nil)
 
-  err := es.Get()
+  err := sse.Get()
   fmt.Println(err)
   ```
 {{% /columns %}}

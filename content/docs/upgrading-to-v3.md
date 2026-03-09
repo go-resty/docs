@@ -29,19 +29,19 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 #### Behavior
 
 * By default, the content length value is not set. However, Go’s `net/http` package automatically sets the Content-Length for types `*bytes.Buffer`, `*bytes.Reader`, and `*strings.Reader`, which covers all cases. Therefore, Resty v3 removes the previous boolean method and introduces a new method `SetContentLength(v int64)` at the request level, allowing users to explicitly provide values for file/multipart uploads, etc.
-* By default, payload is not supported in HTTP verb DELETE. Use [Client.AllowMethodDeletePayload]({{% godoc v3 %}}Client.AllowMethodDeletePayload) or [Request.AllowMethodDeletePayload]({{% godoc v3 %}}Request).
+* By default, payload is not supported in HTTP verb DELETE. Use [Client.IsMethodDeleteAllowPayload]({{% godoc v3 %}}Client.IsMethodDeleteAllowPayload) or [Request.IsMethodDeleteAllowPayload]({{% godoc v3 %}}Request).
 * [Retry Mechanism]({{% relref "retry" %}})
     * Request values are inherited from the client upon creation; they do not refresh during a retry attempt. Therefore, value updates are performed on the request instance via [Response.Request]({{% godoc v3 %}}Response).
     * Respects header `Retry-After` if present.
     * Resets reader on retry request if the `io.ReadSeeker` interface is supported.
     * Retries only on Idempotent HTTP Verb - GET, HEAD, PUT, DELETE, OPTIONS, and TRACE ([RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110.html#name-method-registration), [RFC 5789](https://datatracker.ietf.org/doc/html/rfc5789.html)),
-        * Use [Client.SetAllowNonIdempotentRetry]({{% godoc v3 %}}Client.SetAllowNonIdempotentRetry) or [Request.SetAllowNonIdempotentRetry]({{% godoc v3 %}}Request.SetAllowNonIdempotentRetry). If additional control is necessary, utilize the custom retry condition.
+        * Use [Client.SetRetryAllowNonIdempotent]({{% godoc v3 %}}Client.SetRetryAllowNonIdempotent) or [Request.SetRetryAllowNonIdempotent]({{% godoc v3 %}}Request.SetRetryAllowNonIdempotent). If additional control is necessary, utilize the custom retry condition.
     * Applies [default retry conditions]({{% relref "retry#default-conditions" %}})
         * It can be disabled via [Client.SetRetryDefaultConditions]({{% godoc v3 %}}Client.SetRetryDefaultConditions) or [Request.SetRetryDefaultConditions]({{% godoc v3 %}}Request.SetRetryDefaultConditions)
 * [Multipart]({{% relref "multipart" %}})
     * By default, Resty streams the content in the request body when a file or `io.Reader` is detected in the MultipartField input.
 * [Redirect]({{% relref "redirect-policy" %}})
-    * [NoRedirectPolicy]({{% godoc v3 %}}NoRedirectPolicy) returns an error `http.ErrUseLastResponse`
+    * [RedirectNoPolicy]({{% godoc v3 %}}RedirectNoPolicy) returns an error `http.ErrUseLastResponse`
 * All response middleware executes regardless of the `error`. Instead, it cascades the error to downstream response middleware.
     * It is recommended that the error be checked to determine whether to continue or skip the logic execution.
 * By default, Resty does not set the header `Accept` for requests.
@@ -61,10 +61,9 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * `Client.Token` => [Client.AuthToken]({{% godoc v3 %}}Client.AuthToken)
 * [Client.SetDebugBodyLimit]({{% godoc v3 %}}Client.SetDebugBodyLimit) - datatype changed from `int64` to `int`
 * [Client.ResponseBodyLimit]({{% godoc v3 %}}Client.ResponseBodyLimit) - datatype changed from `int` to `int64`
-* `Client.SetAllowGetMethodPayload` => [Client.SetAllowMethodGetPayload]({{% godoc v3 %}}Client.SetAllowMethodGetPayload)
+* `Client.SetAllowGetMethodPayload` => [Client.SetMethodGetAllowPayload]({{% godoc v3 %}}Client.SetMethodGetAllowPayload)
+* `Client.AllowGetMethodPayload` => [Client.IsMethodGetAllowPayload]({{% godoc v3 %}}Client.IsMethodGetAllowPayload)
 * `Client.Clone()` => [Client.Clone(ctx context.Context)]({{% godoc v3 %}}Client.Clone)
-* `Client.EnableGenerateCurlOnDebug` => [Client.EnableGenerateCurlCmd]({{% godoc v3 %}}Client.EnableGenerateCurlCmd)
-* `Client.DisableGenerateCurlOnDebug` => [Client.DisableGenerateCurlCmd]({{% godoc v3 %}}Client.DisableGenerateCurlCmd)
 * `Client.SetRootCertificate` => [Client.SetRootCertificates]({{% godoc v3 %}}Client.SetRootCertificates)
 * `Client.SetClientRootCertificate` => [Client.SetClientRootCertificates]({{% godoc v3 %}}Client.SetClientRootCertificates)
 * `Client.Debug` => [Client.IsDebug]({{% godoc v3 %}}Client.IsDebug)
@@ -76,20 +75,36 @@ I made necessary breaking changes to improve Resty and open up future growth pos
     * [Client.Transport]({{% godoc v3 %}}Client.Transport) method does exist in v3, which returns `http.RoundTripper`
 * `Client.OnBeforeRequest` => [Client.AddRequestMiddleware]({{% godoc v3 %}}Client.AddRequestMiddleware)
 * `Client.OnAfterResponse` => [Client.AddResponseMiddleware]({{% godoc v3 %}}Client.AddResponseMiddleware)
+* `Client.OutputDirectory` => [Client.ResponseSaveDirectory]({{% godoc v3 %}}Client.ResponseSaveDirectory)
+* `Client.SetOutputDirectory` => [Client.SetResponseSaveDirectory]({{% godoc v3 %}}Client.SetResponseSaveDirectory)
+* `Client.SetDoNotParseResponse` => [Client.SetResponseDoNotParse]({{% godoc v3 %}}Client.SetResponseDoNotParse)
+* `Client.SetUnescapeQueryParams` => [Client.SetQueryParamsUnescape]({{% godoc v3 %}}Client.SetQueryParamsUnescape)
+* `Client.SetDisableWarn` => [Client.SetLoggerWarnLevel]({{% godoc v3 %}}Client.SetLoggerWarnLevel)
+* `Client.SetRawPathParam` => [Client.SetPathRawParam]({{% godoc v3 %}}Client.SetPathRawParam)
+* `Client.SetRawPathParamAny` => [Client.SetPathRawParamAny]({{% godoc v3 %}}Client.SetPathRawParamAny)
+* `Client.SetRawPathParams` => [Client.SetPathRawParams]({{% godoc v3 %}}Client.SetPathRawParams)
+
 
 #### Request
 
 * `Request.QueryParam` => [Request.QueryParams]({{% godoc v3 %}}Request)
 * `Request.Token` => [Request.AuthToken]({{% godoc v3 %}}Request)
-* `Request.NotParseResponse` => [Request.DoNotParseResponse]({{% godoc v3 %}}Request)
-* `Request.ExpectContentType` => [Request.SetExpectResponseContentType]({{% godoc v3 %}}Request.SetExpectResponseContentType)
-* `Request.ForceContentType` => [Request.SetForceResponseContentType]({{% godoc v3 %}}Request.SetForceResponseContentType)
-* `Request.SetOutput` => [Request.SetOutputFileName]({{% godoc v3 %}}Request.SetOutputFileName)
-* `Request.EnableGenerateCurlOnDebug` => [Request.EnableGenerateCurlCmd]({{% godoc v3 %}}Request.EnableGenerateCurlCmd)
-* `Request.DisableGenerateCurlOnDebug` => [Request.DisableGenerateCurlCmd]({{% godoc v3 %}}Request.DisableGenerateCurlCmd)
+* `Request.DoNotParseResponse` => [Request.IsResponseDoNotParse]({{% godoc v3 %}}Request)
+* `Request.SetDoNotParseResponse` => [Request.SetResponseDoNotParse]({{% godoc v3 %}}Request.SetResponseDoNotParse)
+* `Request.ExpectContentType` => [Request.SetResponseExpectContentType]({{% godoc v3 %}}Request.SetResponseExpectContentType)
+* `Request.ForceContentType` => [Request.SetResponseForceContentType]({{% godoc v3 %}}Request.SetResponseForceContentType)
+* `Request.SetOutput` => [Request.SetResponseSaveFileName]({{% godoc v3 %}}Request.SetResponseSaveFileName)
 * `Request.GenerateCurlCommand` => [Request.CurlCmd]({{% godoc v3 %}}Request.CurlCmd)
 * `Request.AddRetryCondition` => [Request.AddRetryConditions]({{% godoc v3 %}}Request.AddRetryConditions)
 * `Request.SetContentLength(l bool)` => [Request.SetContentLength(v int64)]({{% godoc v3 %}}Request.SetContentLength)
+* `Request.SetUnescapeQueryParams` => [Request.SetQueryParamsUnescape]({{% godoc v3 %}}Request.SetQueryParamsUnescape)
+* `Request.SetRawPathParam` => [Request.SetPathRawParam]({{% godoc v3 %}}Request.SetPathRawParam)
+* `Request.SetRawPathParams` => [Request.SetPathRawParams]({{% godoc v3 %}}Request.SetPathRawParams)
+* `Request.Debug` => [Request.IsDebug]({{% godoc v3 %}}Request)
+* `Request.Error` => [Request.ResultError]({{% godoc v3 %}}Request)
+* `Request.Time` => [Request.StartTime]({{% godoc v3 %}}Request)
+* `Request.EnableTrace` => [Request.SetTrace]({{% godoc v3 %}}Request.SetTrace)
+
 
 #### Response
 
@@ -108,6 +123,10 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * Retry
     * `OnRetryFunc` => [RetryHookFunc]({{% godoc v3 %}}RetryHookFunc)
     * `RetryAfterFunc` => [RetryDelayStrategyFunc]({{% godoc v3 %}}RetryDelayStrategyFunc)
+    * `NoRedirectPolicy` => [RedirectNoPolicy]({{% godoc v3 %}}RedirectNoPolicy)
+    * `FlexibleRedirectPolicy` => [RedirectFlexiblePolicy]({{% godoc v3 %}}RedirectFlexiblePolicy)
+    * `DomainCheckRedirectPolicy` => [RedirectDomainCheckPolicy]({{% godoc v3 %}}RedirectDomainCheckPolicy)
+
 
 ### Removed
 
@@ -125,6 +144,10 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * `Client.OnRequestLog` => use [Client.OnDebugLog]({{% godoc v3 %}}Client.OnDebugLog) instead.
 * `Client.OnResponseLog` => use [Client.OnDebugLog]({{% godoc v3 %}}Client.OnDebugLog) instead.
 * `Client.SetContentLength` => use [Request.SetContentLength]({{% godoc v3 %}}Request.SetContentLength) instead.
+* `Client.EnableGenerateCurlOnDebug` => use [Client.SetCurlCmdGenerate]({{% godoc v3 %}}Client.SetCurlCmdGenerate) instead.
+* `Client.DisableGenerateCurlOnDebug` => use [Client.SetCurlCmdGenerate]({{% godoc v3 %}}Client.SetCurlCmdGenerate) instead.
+* `Client.EnableTrace` => use [Client.SetTrace]({{% godoc v3 %}}Client.SetTrace) instead.
+* `Client.DisableTrace` => use [Client.SetTrace]({{% godoc v3 %}}Client.SetTrace) instead.
 
 
 #### Request

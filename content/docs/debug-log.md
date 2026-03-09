@@ -68,8 +68,6 @@ c := resty.New().
 ### Client
 
 * [Client.SetDebug]({{% godoc v3 %}}Client.SetDebug)
-* [Client.EnableDebug]({{% godoc v3 %}}Client.EnableDebug)
-* [Client.DisableDebug]({{% godoc v3 %}}Client.DisableDebug)
 * [Client.SetDebugBodyLimit]({{% godoc v3 %}}Client.SetDebugBodyLimit)
 * [Client.OnDebugLog]({{% godoc v3 %}}Client.OnDebugLog)
 * [Client.SetDebugLogFormatter]({{% godoc v3 %}}Client.SetDebugLogFormatter)
@@ -77,5 +75,4 @@ c := resty.New().
 ### Request
 
 * [Request.SetDebug]({{% godoc v3 %}}Request.SetDebug)
-* [Request.EnableDebug]({{% godoc v3 %}}Request.EnableDebug)
-* [Request.DisableDebug]({{% godoc v3 %}}Request.DisableDebug)
+* [Request.IsDebug]({{% godoc v3 %}}Request)
