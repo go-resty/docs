@@ -106,7 +106,7 @@ Version 3 enables Resty users to implement any custom method for determining the
 
 Interface contains three methods -
 
-* [Next]({{% godoc v3 %}}LoadBalancer)
+* [NextWithContext]({{% godoc v3 %}}LoadBalancer)
 * [Feedback]({{% godoc v3 %}}LoadBalancer)
 * [Close]({{% godoc v3 %}}LoadBalancer)
 
@@ -119,8 +119,8 @@ type MyCustomAlgorithm struct {
 	// defined required fields
 }
 
-// Next method returns the next Base URL based on the custom algorithm
-func (mca *MyCustomAlgorithm) Next() (string, error) {
+// NextWithContext method returns the next Base URL based on the custom algorithm
+func (mca *MyCustomAlgorithm) NextWithContext(ctx context.Context) (string, error) {
     // perform custom load balancer algorithm logic
     // and return Base URL or error
 

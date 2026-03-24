@@ -147,9 +147,16 @@ Utilize the retry condition(s) to determine whether a retry is required.
 - Retry conditions are executed in the order in which they are added.
 - Once a retry condition returns `true`, the remaining retry conditions are not executed.
 - Retry conditions are executed on each retry attempt.
-- Default retry conditions are executed first.
+- Default retry conditions are executed first, it does not check HTTP status codes.
 - Client-level retry conditions are applied to all requests.
 - Request-level retry conditions are executed before client-level retry conditions.
+
+Out-of-the-box, Resty v3 provides:
+
+* [RetryConditionStatusTooManyRequests]({{% godoc v3 %}}RetryConditionStatusTooManyRequests)
+* [RetryConditionStatus5XX]({{% godoc v3 %}}RetryConditionStatus5XX)
+* [RetryConditionStatusZero]({{% godoc v3 %}}RetryConditionStatusZero)
+
 
 #### Add at Client
 

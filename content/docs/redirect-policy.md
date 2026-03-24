@@ -8,6 +8,7 @@ Out of the box, it has following redirect polices:
 * [RedirectNoPolicy]({{% godoc v3 %}}RedirectNoPolicy)
 * [RedirectFlexiblePolicy]({{% godoc v3 %}}RedirectFlexiblePolicy)
 * [RedirectDomainCheckPolicy]({{% godoc v3 %}}RedirectDomainCheckPolicy)
+* [RedirectHeaderStripSensitivePolicy]({{% godoc v3 %}}RedirectHeaderStripSensitivePolicy)
 
 > [!NOTE]
 > v3 [RedirectNoPolicy]({{% godoc v3 %}}RedirectNoPolicy) returns an error `http.ErrUseLastResponse`.

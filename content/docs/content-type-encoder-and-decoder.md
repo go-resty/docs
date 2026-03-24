@@ -15,6 +15,7 @@ weight: 7
 > * User-defined encoder/decoder takes priority over default ones.
 > * Add method overwrites encoder/decoder if `Content-Type` key already exists.
 > * Resty v3 uses a streaming approach by default to handle JSON and XML content types, improving memory efficiency. Resty also provides the [In-Memory Marshal and Unmarshal]({{% relref "#in-memory-marshal-and-unmarshal" %}}) section.
+> * Content-Type encoder and decoder keys are case-insensitive.
 
 ## Examples
 
