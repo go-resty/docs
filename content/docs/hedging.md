@@ -1,12 +1,14 @@
 
 # Hedging
 
-Hedging is a latency reduction technique that sends multiple concurrent requests and returns the first response to complete. This approach is particularly effective for handling "tail latency" - the occasional slow responses that can significantly impact application performance.
+Hedging is a latency-reduction technique that sends multiple concurrent requests and returns the first response to complete. This approach is particularly effective for handling "tail latency" - occasional slow responses that can significantly impact application performance.
+
+Resty v3 provides an extensible [Hedger]({{% godoc v3 %}}Hedger) interface.
 
 Inspired by [hedgedhttp](https://github.com/cristalhq/hedgedhttp) and the paper [Tail at Scale](https://research.google/pubs/the-tail-at-scale/) by Jeffrey Dean, Luiz André Barroso.
 
 > [!NOTE]
-> **Hint:** Hedging is complementary to [Retry Mechanism]({{% relref "retry" %}}). Hedging optimizes latency while retry handles failures. When hedging is enabled, retry is disabled by default; you must enable retry explicitly to avoid overloading your services.
+> **Hint:** Hedging is complementary to the [Retry Mechanism]({{% relref "retry" %}}). Hedging optimizes latency, while retries handle failures. When hedging is enabled, retry is disabled by default; enable retry explicitly only when needed to avoid overloading your services.
 
 ## Default Values
 
@@ -30,7 +32,7 @@ Inspired by [hedgedhttp](https://github.com/cristalhq/hedgedhttp) and the paper 
 
 ```go
 // Create a Resty client with hedging
-c1 := resty.New().
+c := resty.New().
 	SetHedging(resty.NewHedging())
 
 defer c.Close()
@@ -38,14 +40,14 @@ defer c.Close()
 
 ### Customize Hedging Settings
 ```go
-// Create a heading instance with appropriate values
+// Create a hedging instance with appropriate values
 h := resty.NewHedging().
-		SetDelay(10 * time.Millisecond).    // delay between requests
-		SetMaxRequest(10).                  // maximum concurrent requests
-		SetMaxRequestPerSecond(5.0)         // maximum requests per second (rate limit)
+	SetDelay(10 * time.Millisecond).    // delay between requests
+	SetMaxRequest(10).                  // maximum concurrent requests
+	SetMaxRequestPerSecond(5.0)         // maximum requests per second (rate limit)
 
 c := resty.New().
-    SetHedging(h)
+	SetHedging(h)
 
 defer c.Close()
 
