@@ -94,7 +94,7 @@ bookHidden: true
 * [Request.Patch]({{% godoc v3 %}}Request.Patch)
 * [Request.Trace]({{% godoc v3 %}}Request.Trace)
 * [Request.SetMethod]({{% godoc v3 %}}Request.SetMethod)
-* [Request.SetURL](R{{% godoc v3 %}}equest.SetURL)
+* [Request.SetURL]({{% godoc v3 %}}Request.SetURL)
 * [Request.SetMethodGetAllowPayload]({{% godoc v3 %}}Request.SetMethodGetAllowPayload)
 * [Request.SetMethodDeleteAllowPayload]({{% godoc v3 %}}Request.SetMethodDeleteAllowPayload)
 * [Request.CorrelationID]({{% godoc v3 %}}Request)

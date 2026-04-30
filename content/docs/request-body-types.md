@@ -83,6 +83,7 @@ fmt.Println(res.ResultError().(*LoginErrorResponse))      // error: status code 
 > Resty v3,
 > * Streams the content in the request body for the `io.Reader` interface.
 > * The content length option no longer applies to the `io.Reader` flow.
+> * For retried requests, use a reader that implements `io.ReadSeeker` so Resty can rewind it before retrying; otherwise Resty returns `ErrReaderNotSeekable`.
 
 ```go
 res, err := client.R().

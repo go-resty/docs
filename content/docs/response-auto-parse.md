@@ -66,7 +66,7 @@ fmt.Println(loginResponse)
 It provides a fallback Content-Type for automatic unmarshalling when the response header Content-Type is unavailable.
 
 ```go
-client.R().SetExpectResponseContentType("application/json")
+client.R().SetResponseExpectContentType("application/json")
 ```
 
 ## Force Content-Type
@@ -74,7 +74,7 @@ client.R().SetExpectResponseContentType("application/json")
 It forces the Content-Type for automatic unmarshalling to ignore the response header Content-Type value.
 
 ```go
-client.R().SetForceResponseContentType("application/json")
+client.R().SetResponseForceContentType("application/json")
 ```
 
 ## Do Not Parse
@@ -90,7 +90,7 @@ To prevent automatic response parsing for the particular use case, use this sett
 
 ```go
 res, err := client.R().
-    SetDoNotParseResponse(true).
+    SetResponseDoNotParse(true).
     Get("https://httpbin.org/json")
 if err != nil {
     fmt.Println(err)
@@ -137,7 +137,7 @@ fmt.Println("Response:", string(resBytes))
 * [Response.Proto]({{% godoc v3 %}}Response.Proto)
 * [Response.Header]({{% godoc v3 %}}Response.Header)
 * [Response.Cookies]({{% godoc v3 %}}Response.Cookies)
-* [Response.Time]({{% godoc v3 %}}Response.Time)
+* [Response.Duration]({{% godoc v3 %}}Response.Duration)
 * [Response.ReceivedAt]({{% godoc v3 %}}Response.ReceivedAt)
 * [Response.Size]({{% godoc v3 %}}Response.Size)
 * [Response.RedirectHistory]({{% godoc v3 %}}Response.RedirectHistory)
