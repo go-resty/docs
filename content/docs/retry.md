@@ -29,6 +29,37 @@ Resty provides exponential backoff with a jitter strategy out of the box; a cust
     * Use [Client.SetRetryAllowNonIdempotent]({{% godoc v3 %}}Client.SetRetryAllowNonIdempotent) or [Request.SetRetryAllowNonIdempotent]({{% godoc v3 %}}Request.SetRetryAllowNonIdempotent). If additional control is necessary, utilize the custom retry condition.
 * [Request.CorrelationID]({{% godoc v3 %}}Request) - GUID generated for retry count > 0
 
+## Retrying Non-Idempotent Requests
+
+By default, Resty retries only idempotent HTTP methods. Setting `SetRetryCount` on a client that mostly sends `POST` or `PATCH` requests will not retry those requests unless non-idempotent retries are explicitly enabled.
+
+```go
+client.
+    SetRetryCount(2).
+    SetRetryAllowNonIdempotent(true)
+```
+
+You can enable this per request when only one endpoint is safe to retry.
+
+```go
+res, err := client.R().
+    SetRetryCount(2).
+    SetRetryAllowNonIdempotent(true).
+    SetBody(payload).
+    Post("/v1/messages")
+```
+
+Only enable non-idempotent retries for operations that are safe for your API, such as requests protected by idempotency keys or endpoints where duplicate processing is acceptable.
+
+## Retrying Request Bodies
+
+Resty automatically resets request bodies that implement `io.ReadSeeker` before a retry. Non-seekable reader bodies cannot be replayed safely, so Resty returns `ErrReaderNotSeekable` instead of sending a retry with an empty or partially-consumed body.
+
+For retried requests with bodies, prefer `[]byte`, `string`, `*bytes.Reader`, `*strings.Reader`, or another `io.ReadSeeker`. For multipart uploads, prefer `FilePath` or ensure `MultipartField.Reader` implements `io.ReadSeeker`.
+
+> [!WARNING]
+> Retried reader bodies must be rewindable. Resty returns `ErrReaderNotSeekable` when a retry needs to reuse a non-seekable `io.Reader` set with `SetBody` or a non-seekable `MultipartField.Reader`.
+
 
 ## Default Conditions
 
@@ -256,6 +287,7 @@ client.
 * [Client.SetRetryMaxWaitTime]({{% godoc v3 %}}Client.SetRetryMaxWaitTime)
 * [Client.SetRetryDelayStrategy]({{% godoc v3 %}}Client.SetRetryDelayStrategy)
 * [Client.SetRetryDefaultConditions]({{% godoc v3 %}}Client.SetRetryDefaultConditions)
+* [Client.SetRetryAllowNonIdempotent]({{% godoc v3 %}}Client.SetRetryAllowNonIdempotent)
 * [Client.AddRetryHooks]({{% godoc v3 %}}Client.AddRetryHooks)
 * [Client.AddRetryConditions]({{% godoc v3 %}}Client.AddRetryConditions)
 
@@ -267,6 +299,7 @@ client.
 * [Request.SetRetryMaxWaitTime]({{% godoc v3 %}}Request.SetRetryMaxWaitTime)
 * [Request.SetRetryDelayStrategy]({{% godoc v3 %}}Request.SetRetryDelayStrategy)
 * [Request.SetRetryDefaultConditions]({{% godoc v3 %}}Request.SetRetryDefaultConditions)
+* [Request.SetRetryAllowNonIdempotent]({{% godoc v3 %}}Request.SetRetryAllowNonIdempotent)
 * [Request.AddRetryHooks]({{% godoc v3 %}}Request.AddRetryHooks)
 * [Request.SetRetryHooks]({{% godoc v3 %}}Request.SetRetryHooks)
 * [Request.AddRetryConditions]({{% godoc v3 %}}Request.AddRetryConditions)

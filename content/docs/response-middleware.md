@@ -20,7 +20,7 @@ Out of the box, it has -
 ### Typical Use
 
 * Adds after the default response middleware.
-* Cascades response middleware returned `error` downstream via `Respose.CascadeError`
+* Cascades response middleware returned `error` downstream via `Response.CascadeError`
 
 ```go
 client.AddResponseMiddleware(func(c *resty.Client, res *resty.Response) error {
@@ -35,7 +35,7 @@ client.AddResponseMiddleware(func(c *resty.Client, res *resty.Response) error {
 
 ### Advanced Use
 
-* Cascades response middleware returned `error` downstream via `Respose.CascadeError`
+* Cascades response middleware returned `error` downstream via `Response.CascadeError`
 
 ```go
 c := resty.New()
@@ -56,7 +56,7 @@ c.SetResponseMiddlewares(
 
 * [ResponseMiddleware]({{% godoc v3 %}}ResponseMiddleware)
 
-### Cilent
+### Client
 
 * [Client.AddResponseMiddleware]({{% godoc v3 %}}Client.AddResponseMiddleware)
 * [Client.SetResponseMiddlewares]({{% godoc v3 %}}Client.SetResponseMiddlewares)

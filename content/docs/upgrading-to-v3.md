@@ -9,13 +9,90 @@ Resty v3 release brings many new features, enhancements, and breaking changes. T
 > [!NOTE]
 > Minimum required go version is `{{% param Resty.V3.GoMinVersion %}}`
 
-## Update go.mod
+## Update go.mod and imports
 
 Resty v3 provides a Go vanity URL.
 
 ```bash
 require resty.dev/v3 {{% param Resty.V3.Version %}}
 ```
+
+Update imports from v2 to the v3 vanity import path.
+
+```go
+import "resty.dev/v3"
+```
+
+## Common Migration Patterns
+
+Common v2-to-v3 changes for client wrappers and API integrations.
+
+### Client lifecycle
+
+Resty v2 did not have a `Client.Close` method. Resty v3 adds one to run close hooks and stop client-owned background resources, such as certificate watchers and load balancers. Do not close the client after each request; for long-lived clients, close it during application shutdown.
+
+```go
+client := resty.New()
+defer client.Close()
+```
+
+### API error responses
+
+`SetError` and `Response.IsError` were renamed to make a clearer distinction between transport/request errors and HTTP status failures.
+
+```go
+var result APIResponse
+var apiErr APIError
+
+res, err := client.R().
+    SetResult(&result).
+    SetResultError(&apiErr).
+    Post("/v1/messages")
+if err != nil {
+    return err // connection, timeout, request preparation, unmarshalling, etc.
+}
+if res.IsStatusFailure() {
+    return apiErr // HTTP status code >= 400
+}
+```
+
+### Response body access
+
+`Response.Body()` was removed. Use [Response.Bytes]({{% godoc v3 %}}Response.Bytes) or [Response.String]({{% godoc v3 %}}Response.String) for the buffered response body. When automatic unmarshalling consumes the body, enable `SetResponseBodyUnlimitedReads(true)` if you also need `Bytes` or `String` afterward. Use the [Response.Body]({{% godoc v3 %}}Response) field only when response parsing is disabled with `SetResponseDoNotParse(true)`, and close it yourself.
+
+### Request and response hooks
+
+`OnBeforeRequest` and `OnAfterResponse` are now request and response middleware.
+
+```go
+client.
+    AddRequestMiddleware(func(c *resty.Client, req *resty.Request) error {
+        // inspect or mutate req before Resty creates the http.Request
+        return nil
+    }).
+    AddResponseMiddleware(func(c *resty.Client, res *resty.Response) error {
+        if res.CascadeError != nil {
+            return nil
+        }
+        // inspect response status, headers, and parsed results
+        return nil
+    })
+```
+
+### Retrying POST, PATCH, and other non-idempotent methods
+
+`SetRetryCount` only enables retries for idempotent methods by default. If your v2 client intentionally retried POST/PATCH requests, opt in explicitly and ensure the request body can be reused safely.
+
+```go
+client.
+    SetRetryCount(2).
+    SetRetryAllowNonIdempotent(true)
+```
+
+For `io.Reader` request bodies, use a reader that supports `io.ReadSeeker` so Resty can rewind it before retrying.
+
+> [!WARNING]
+> Retried reader bodies must be rewindable. Resty returns `ErrReaderNotSeekable` when a retry needs to reuse a non-seekable `io.Reader` set with `SetBody` or a non-seekable `MultipartField.Reader`. Use `FilePath` or a reader that implements `io.ReadSeeker` for retried multipart uploads.
 
 ## Breaking Changes
 
@@ -59,6 +136,7 @@ I made necessary breaking changes to improve Resty and open up future growth pos
         * etc.
 * Getter naming convention alignment - `Client.GetClient()` => [Client.Client()]({{% godoc v3 %}}Client.Client)
 * `Client.Token` => [Client.AuthToken]({{% godoc v3 %}}Client.AuthToken)
+* `Client.SetError` => [Client.SetResultError]({{% godoc v3 %}}Client.SetResultError)
 * [Client.SetDebugBodyLimit]({{% godoc v3 %}}Client.SetDebugBodyLimit) - datatype changed from `int64` to `int`
 * [Client.ResponseBodyLimit]({{% godoc v3 %}}Client.ResponseBodyLimit) - datatype changed from `int` to `int64`
 * `Client.SetAllowGetMethodPayload` => [Client.SetMethodGetAllowPayload]({{% godoc v3 %}}Client.SetMethodGetAllowPayload)
@@ -102,6 +180,7 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * `Request.SetRawPathParams` => [Request.SetPathRawParams]({{% godoc v3 %}}Request.SetPathRawParams)
 * `Request.Debug` => [Request.IsDebug]({{% godoc v3 %}}Request)
 * `Request.Error` => [Request.ResultError]({{% godoc v3 %}}Request)
+* `Request.SetError` => [Request.SetResultError]({{% godoc v3 %}}Request.SetResultError)
 * `Request.Time` => [Request.StartTime]({{% godoc v3 %}}Request)
 * `Request.EnableTrace` => [Request.SetTrace]({{% godoc v3 %}}Request.SetTrace)
 
@@ -109,6 +188,8 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 #### Response
 
 * `Response.Time` => [Response.Duration]({{% godoc v3 %}}Response.Duration)
+* `Response.IsError()` => [Response.IsStatusFailure]({{% godoc v3 %}}Response.IsStatusFailure)
+* `Response.IsSuccess()` => [Response.IsStatusSuccess]({{% godoc v3 %}}Response.IsStatusSuccess)
 
 #### Multipart
 
@@ -161,7 +242,7 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 #### Response
 
 * `Response.SetBody`
-* `Response.Body()`
+* `Response.Body()` - use [Response.Bytes]({{% godoc v3 %}}Response.Bytes), [Response.String]({{% godoc v3 %}}Response.String), or the [Response.Body]({{% godoc v3 %}}Response) field when response parsing is disabled
 
 
 #### Package Level
