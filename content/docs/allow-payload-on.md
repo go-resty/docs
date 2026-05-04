@@ -1,15 +1,15 @@
 
 # Allow Payload On
 
-By default, Resty allows request payload on POST, PUT, and PATCH per the latest [RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110.html) as of Jun 2022.
+By default, Resty allows request payloads on POST, PUT, and PATCH under [RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110.html) as of June 2022.
 
-However, the methods GET and DELETE have been the subject of debate or interpretation in the past, at least with the latest [RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110.html), which states that -
+However, GET and DELETE have historically been subject to debate or interpretation. [RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110.html) states:
 
     request has no generally defined semantics...
 
-So Resty, by default, disallows the request payload on GET and DELETE HTTP verbs.
+So, by default, Resty disallows request payloads on the GET and DELETE HTTP verbs.
 
-Some systems, in real-world use, request payloads on GET and DELETE. Resty provides explicit methods to enable payload for these verbs.
+Some real-world systems use request payloads on GET and DELETE. Resty provides explicit methods to enable payloads for these verbs.
 
 ## Methods
 

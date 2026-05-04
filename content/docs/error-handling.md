@@ -1,6 +1,6 @@
 # Error Handling
 
-In the Resty request and response flow, error handling is a crucial part of the implementation. It’s recommended to check and handle it appropriately. For more information, continue reading the page.
+In Resty's request and response flow, error handling is crucial. Check and handle errors appropriately.
 
 ## Possible Area of Errors/Failures
 
@@ -18,14 +18,14 @@ In the Resty request and response flow, error handling is a crucial part of the 
     * Success: Typically indicated by status code 2xx range.
     * Failure: Typically indicated by status code 4xx and 5xx range.
 
-Let's take a simple example to cover the above-mentioned errors.
+Let's take a simple example that covers the errors above.
 
 ```go
 // create a Resty client
 client := resty.New()
 defer client.Close()
 
-// We are going to make a login request to demonstrate the above-mentioned
+// We are going to make a login request to demonstrate the
 // Request and Response Errors
 res, err := client.R().
     SetBody(User{

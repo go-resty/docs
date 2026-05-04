@@ -1,7 +1,7 @@
 
 # Request Tracing
 
-Request tracing is often utilized to collect information about HTTP requests. Resty offers simple access to this information. These details include:
+Request tracing is often used to collect information about HTTP requests. Resty provides simple access to this information. These details include:
 
 * DNS Lookup Time
 * Connection Time
@@ -10,9 +10,9 @@ Request tracing is often utilized to collect information about HTTP requests. Re
 * Server Time
 * Response Time
 * Total Time
-* Is Connection Reused
-* Is Connection Was Idle
-* Connection IdleTime
+* Whether the connection is reused
+* Whether the connection was idle
+* Connection idle time
 * Request Attempt
 * Remote Address
 

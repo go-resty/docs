@@ -3,16 +3,16 @@
 
 Resty v3 provides new ways to discover the Base URL and client-side load balancing.
 
-Out of the box, Resty provides two algorithms -
+Out of the box, Resty provides two algorithms:
 
 * [Round-Robin (RR)]({{% godoc v3 %}}RoundRobin)
 * [Weighted Round-Robin (WRR)]({{% godoc v3 %}}WeightedRoundRobin)
 
-Also, SRV records discovery using the Weighted Round-Robin (WRR) algorithm, called []().
+Resty also supports SRV record discovery using the Weighted Round-Robin algorithm via [NewSRVWeightedRoundRobin]({{% godoc v3 %}}NewSRVWeightedRoundRobin).
 
 > [!NOTE]
-> * Version 2 had an SRV record lookup feature but did not utilize a record weight value. Version 3 respects the record weight value and executes the appropriate weighted round-robin.
-> * Version 3 enables Resty users to implement any custom method for determining the Base URL through the [LoadBalancer]({{% godoc v3 %}}LoadBalancer) interface.
+> * Version 2 had an SRV record lookup feature but did not use record weight values. Version 3 respects record weights and uses the appropriate weighted round-robin algorithm.
+> * Version 3 lets users implement any custom method for determining the Base URL through the [LoadBalancer]({{% godoc v3 %}}LoadBalancer) interface.
 
 ## Examples
 
@@ -43,7 +43,7 @@ defer c.Close()
 
 ```go
 // create a load balancer
-// accepts one or more Host(s)
+// accepts one or more hosts
 wrr, err := resty.NewWeightedRoundRobin(
     3*time.Second, // recovery duration
     []*resty.Host{
@@ -102,9 +102,9 @@ defer c.Close()
 
 ### User-defined Algorithm
 
-Version 3 enables Resty users to implement any custom method for determining the Base URL through the [LoadBalancer]({{% godoc v3 %}}LoadBalancer) interface.
+Version 3 lets users implement any custom method for determining the Base URL through the [LoadBalancer]({{% godoc v3 %}}LoadBalancer) interface.
 
-Interface contains three methods -
+The interface contains three methods:
 
 * [NextWithContext]({{% godoc v3 %}}LoadBalancer)
 * [Feedback]({{% godoc v3 %}}LoadBalancer)
@@ -127,23 +127,23 @@ func (mca *MyCustomAlgorithm) NextWithContext(ctx context.Context) (string, erro
 	return baseURL, nil
 }
 
-// Feedback method process the request feedback for custom
+// Feedback method processes request feedback for the custom
 // load balancer algorithm
 func (mca *MyCustomAlgorithm) Feedback(rf_ *RequestFeedback) {
     // process the request feedback and use it
-    // for next Base URL calculation
+    // for the next Base URL calculation
 }
 
-// Close method does the cleanup activities for the custom load balancer
+// Close method performs cleanup for the custom load balancer
 func (mca *MyCustomAlgorithm) Close() error {
-    // perform clean up activities
+    // perform cleanup activities
     // such as closing channels, etc.
 
     return nil
 }
 
 // initialize the custom load balancer
-mc := &MyCustomAlgorithm {
+mc := &MyCustomAlgorithm{
     // initialize here ...
 }
 

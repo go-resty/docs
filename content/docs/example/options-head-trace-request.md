@@ -5,10 +5,10 @@ weight: 2
 
 # OPTIONS, HEAD, TRACE Request
 
-This page discusses simple OPTIONS, HEAD, and TRACE requests. Users can utilize Resty features across nearly all HTTP methods.
+This page discusses simple OPTIONS, HEAD, and TRACE requests. Resty features can be used across nearly all HTTP methods.
 
 > [!NOTE]
-> * Explore the documentation to fulfill all use cases.
+> * Explore the documentation for additional use cases.
 > * Examples use request-level methods; however, Resty also includes client-level methods to configure settings for all requests.
 
 ## Examples

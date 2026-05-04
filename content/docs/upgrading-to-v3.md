@@ -96,40 +96,41 @@ For `io.Reader` request bodies, use a reader that supports `io.ReadSeeker` so Re
 
 ## Breaking Changes
 
-I made necessary breaking changes to improve Resty and open up future growth possibilities.
+Resty v3 includes necessary breaking changes to improve the project and support future growth.
 
 ### Changed
 
-* All the Resty errors start with `resty: ...` prefix and sub feature errors contain feature name in them, e.g., `resty: digest: ...`
-* Add `defer client.Close()` after the Client creation.
+* All Resty errors start with the `resty: ...` prefix, and sub-feature errors include the feature name, for example, `resty: digest: ...`
+* Add `defer client.Close()` after creating the client.
 
 #### Behavior
 
 * By default, the content length value is not set. However, Go’s `net/http` package automatically sets the Content-Length for types `*bytes.Buffer`, `*bytes.Reader`, and `*strings.Reader`, which covers all cases. Therefore, Resty v3 removes the previous boolean method and introduces a new method `SetContentLength(v int64)` at the request level, allowing users to explicitly provide values for file/multipart uploads, etc.
-* By default, payload is not supported in HTTP verb DELETE. Use [Client.IsMethodDeleteAllowPayload]({{% godoc v3 %}}Client.IsMethodDeleteAllowPayload) or [Request.IsMethodDeleteAllowPayload]({{% godoc v3 %}}Request).
+* By default, payload is not supported in HTTP verb DELETE. Use [Client.SetMethodDeleteAllowPayload]({{% godoc v3 %}}Client.SetMethodDeleteAllowPayload) or [Request.SetMethodDeleteAllowPayload]({{% godoc v3 %}}Request.SetMethodDeleteAllowPayload).
 * [Retry Mechanism]({{% relref "retry" %}})
     * Request values are inherited from the client upon creation; they do not refresh during a retry attempt. Therefore, value updates are performed on the request instance via [Response.Request]({{% godoc v3 %}}Response).
     * Respects header `Retry-After` if present.
     * Resets reader on retry request if the `io.ReadSeeker` interface is supported.
     * Retries only on Idempotent HTTP Verb - GET, HEAD, PUT, DELETE, OPTIONS, and TRACE ([RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110.html#name-method-registration), [RFC 5789](https://datatracker.ietf.org/doc/html/rfc5789.html)),
-        * Use [Client.SetRetryAllowNonIdempotent]({{% godoc v3 %}}Client.SetRetryAllowNonIdempotent) or [Request.SetRetryAllowNonIdempotent]({{% godoc v3 %}}Request.SetRetryAllowNonIdempotent). If additional control is necessary, utilize the custom retry condition.
+        * Use [Client.SetRetryAllowNonIdempotent]({{% godoc v3 %}}Client.SetRetryAllowNonIdempotent) or [Request.SetRetryAllowNonIdempotent]({{% godoc v3 %}}Request.SetRetryAllowNonIdempotent). If additional control is necessary, use a custom retry condition.
     * Applies [default retry conditions]({{% relref "retry#default-conditions" %}})
         * It can be disabled via [Client.SetRetryDefaultConditions]({{% godoc v3 %}}Client.SetRetryDefaultConditions) or [Request.SetRetryDefaultConditions]({{% godoc v3 %}}Request.SetRetryDefaultConditions)
 * [Multipart]({{% relref "multipart" %}})
     * By default, Resty streams the content in the request body when a file or `io.Reader` is detected in the MultipartField input.
 * [Redirect]({{% relref "redirect-policy" %}})
-    * [RedirectNoPolicy]({{% godoc v3 %}}RedirectNoPolicy) returns an error `http.ErrUseLastResponse`
-* All response middleware executes regardless of the `error`. Instead, it cascades the error to downstream response middleware.
-    * It is recommended that the error be checked to determine whether to continue or skip the logic execution.
+    * [RedirectNoPolicy]({{% godoc v3 %}}RedirectNoPolicy) returns the error `http.ErrUseLastResponse`
+    * Request URL host for comparison does not strip the port; the request URL host is used as-is.
+* All response middleware runs regardless of the `error`. Instead, the error is cascaded to downstream response middleware.
+    * It is recommended to check the error to determine whether to continue or skip the logic.
 * By default, Resty does not set the header `Accept` for requests.
-* Digest auth is supported only at the client level; create a dedicated client to utilize it.
-* It does not use `http.Client.Timeout` instead, it uses context with [timeout]({{% relref "timeout" %}}).
-* Generate `curl` command flow is independent. It does not require debugging or tracing to be enabled.
+* Digest auth is supported only at the client level; create a dedicated client to use it.
+* It does not use `http.Client.Timeout`; instead, it uses context with [timeout]({{% relref "timeout" %}}).
+* `curl` command generation is independent. It does not require debugging or tracing to be enabled.
 
 #### Client
 
-* Client Getter Methods - Added thread safety to the client settings modification, so all the getter fields become methods.
-    * For Example:
+* Client Getter Methods - Thread-safe client setting updates were added, so all getter fields became methods.
+    * For example:
         * `Client.BaseURL => Client.BaseURL()`
         * `Client.FormData => Client.FormData()`
         * `Client.Header => Client.Header()`
@@ -137,8 +138,8 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * Getter naming convention alignment - `Client.GetClient()` => [Client.Client()]({{% godoc v3 %}}Client.Client)
 * `Client.Token` => [Client.AuthToken]({{% godoc v3 %}}Client.AuthToken)
 * `Client.SetError` => [Client.SetResultError]({{% godoc v3 %}}Client.SetResultError)
-* [Client.SetDebugBodyLimit]({{% godoc v3 %}}Client.SetDebugBodyLimit) - datatype changed from `int64` to `int`
-* [Client.ResponseBodyLimit]({{% godoc v3 %}}Client.ResponseBodyLimit) - datatype changed from `int` to `int64`
+* [Client.SetDebugBodyLimit]({{% godoc v3 %}}Client.SetDebugBodyLimit) - data type changed from `int64` to `int`
+* [Client.ResponseBodyLimit]({{% godoc v3 %}}Client.ResponseBodyLimit) - data type changed from `int` to `int64`
 * `Client.SetAllowGetMethodPayload` => [Client.SetMethodGetAllowPayload]({{% godoc v3 %}}Client.SetMethodGetAllowPayload)
 * `Client.AllowGetMethodPayload` => [Client.IsMethodGetAllowPayload]({{% godoc v3 %}}Client.IsMethodGetAllowPayload)
 * `Client.Clone()` => [Client.Clone(ctx context.Context)]({{% godoc v3 %}}Client.Clone)
@@ -217,7 +218,7 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * `Client.{SetJSONMarshaler, SetJSONUnmarshaler, SetXMLMarshaler, SetXMLUnmarshaler}` - use [Client.AddContentTypeEncoder]({{% godoc v3 %}}Client.AddContentTypeEncoder) and [Client.AddContentTypeDecoder]({{% godoc v3 %}}Client.AddContentTypeDecoder) instead.
 * `Client.RawPathParams` - use `Client.PathParams()` instead.
 * `Client.UserInfo`
-* `Client.SetRetryResetReaders` - it happens automatically.
+* `Client.SetRetryResetReaders` - this is handled automatically.
 * `Client.SetRetryAfter` - use [Client.SetRetryDelayStrategy]({{% godoc v3 %}}Client.SetRetryDelayStrategy) or [Request.SetRetryDelayStrategy]({{% godoc v3 %}}Request.SetRetryDelayStrategy) instead.
 * `Client.RateLimiter` and `Client.SetRateLimiter` - Retry respects header `Retry-After` if present.
 * `Client.AddRetryAfterErrorCondition` - use [Client.AddRetryConditions]({{% godoc v3 %}}Client.AddRetryConditions) instead.
@@ -236,7 +237,7 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 * `Request.RawPathParams` - use [Request.PathParams]({{% godoc v3 %}}Request) instead
 * `Request.UserInfo`
 * `Request.SRV` and `Request.SetSRV` - use [NewSRVWeightedRoundRobin]({{% godoc v3 %}}NewSRVWeightedRoundRobin) and [Client.SetLoadBalancer]({{% godoc v3 %}}Client.SetLoadBalancer) instead. It respects weight value from SRV record
-* `Request.SetDigestAuth` - use [Client.SetDigestAuth] instead.
+* `Request.SetDigestAuth` - use [Client.SetDigestAuth]({{% godoc v3 %}}Client.SetDigestAuth) instead.
 
 
 #### Response
@@ -249,7 +250,7 @@ I made necessary breaking changes to improve Resty and open up future growth pos
 
 ##### Types
 
-* `User` - become unexported as `credentials`.
+* `User` - became unexported as `credentials`.
 * `SRVRecord` - in favor of new [Load Balancer feature]({{% relref "load-balancer-and-service-discovery" %}}) that supports SRV record lookup.
 * `File` - in favor of enhanced [MultipartField]({{% godoc v3 %}}MultipartField) feature.
 * `RequestLog`, `ResponseLog` => use [DebugLog]({{% godoc v3 %}}DebugLog) instead.

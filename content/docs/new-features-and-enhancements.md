@@ -4,7 +4,7 @@ bookHidden: true
 
 # New Features and Enhancements
 
-* Override all transport settings and timeout values used by Resty using [NewWithTransportSettings]({{% godoc v3 %}}NewWithTransportSettings).
+* Override all transport settings and timeout values used by Resty with [NewWithTransportSettings]({{% godoc v3 %}}NewWithTransportSettings).
 * Fully composable [request]({{% relref "request-middleware" %}}) and [response]({{% relref "response-middleware" %}}) middleware
 * [Content-Type {Encoder, Decoder}]({{% relref "content-type-encoder-and-decoder" %}})
 * [Content Decompresser]({{% relref "content-decompresser" %}})
@@ -12,25 +12,25 @@ bookHidden: true
 * [Multipart]({{% relref "multipart" %}}) streaming and [upload progress]({{% relref "multipart#upload-progress" %}}).
 * [Load Balancer and Service Discovery]({{% relref "load-balancer-and-service-discovery" %}})
 * Retry
-    * Retry settings on [Request-level]({{% relref "retry#request" %}}).
+    * Retry settings at the [request level]({{% relref "retry#retry-hooks" %}}).
     * Respects header `Retry-After` if present.
     * Resets reader on retry request if the `io.ReadSeeker` interface is supported.
-* [Root]({{% relref "root-certificates" %}}), [Client Root]({{% relref "client-root-certificates" %}}) certificates - dynamically reload by interval.
+* [Root]({{% relref "root-certificates" %}}) and [Client Root]({{% relref "client-root-certificates" %}}) certificates support dynamic reload by interval.
 * [Server-Sent Events]({{% relref "server-sent-events" %}})
-* SRV lookup got a facelift with weighted round-robin algorithm and weight value respected from SRV record.
+* SRV lookup now uses a weighted round-robin algorithm and respects weight values from SRV records.
 * Ability to set empty header value for `User-Agent` and `Accept-Encoding`.
 * Ability to set `TLSClientConfig` on custom RoundTripper via [TLSClientConfiger interface]({{% relref "tls-client-config-on-custom-roundtriper" %}}).
-* Adds Retry Trace ID and Attempt details to the debug log.
+* Adds retry trace IDs and attempt details to the debug log.
 * [Digest Auth]({{% relref "authentication#digest-auth" %}})
-    * Internal flow improvements and optimization.
+    * Internal flow improvements and optimizations.
     * Adds `auth-int` QOP support.
-    * Adds new Hash functions `SHA-512` and `SHA-512-sess`.
+    * Adds new hash functions `SHA-512` and `SHA-512-sess`.
     * Updates hash functions for `SHA-512-256` and `SHA-512-256-sess`.
 * Adds Request level [timeout]({{% relref "timeout" %}}) support.
 * Adds the ability to determine the filename automatically from the response for [saving the response]({{% relref "save-response" %}}).
 * [Debug Log]({{% relref "debug-log" %}})
-    * Introduced Debug Log formatter, out of the box human-readable and JSON formatter added.
-* Hook functions at Client update to variadic function; it becomes easy to supply one or more values.
+    * Adds a debug log formatter with built-in human-readable and JSON formats.
+* Client hook functions now use variadic arguments, making it easy to supply one or more values.
 * [Any Value Methods]({{% relref "any-value-methods" %}}) - convenience methods (`*Any` variants) that accept `any` type values and auto-convert to strings for headers, query params, and path params.
 
 

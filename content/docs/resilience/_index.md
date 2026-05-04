@@ -11,4 +11,4 @@ Resty provides several design patterns out-of-the-box to make HTTP requests more
 * [Retry]({{% relref "retry" %}})
 * [Timeout]({{% relref "timeout" %}})
 * [Circuit Breaker]({{% relref "circuit-breaker" %}})
-* [Hedging]({{% relref "" %}})
+* [Hedging]({{% relref "hedging" %}})

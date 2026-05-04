@@ -1,9 +1,12 @@
 
 # Retry
 
-The retry plays a crucial role in modern system integration by enabling effective handling of failures.
+Retry plays a crucial role in modern system integration by helping handle failures effectively.
 
-Resty provides exponential backoff with a jitter strategy out of the box; a custom retry strategy could be employed to override this default.
+Resty provides exponential backoff with a jitter strategy out of the box; a custom retry strategy can be used to override this default.
+
+> [!NOTE]
+> Combining retry with [Circuit Breaker]({{% relref "circuit-breaker" %}}) provides a comprehensive approach to transient and sustained failures.
 
 {{% hintreqoverride %}}
 
@@ -19,15 +22,15 @@ Resty provides exponential backoff with a jitter strategy out of the box; a cust
 ## Default Behavior
 
 * Request values are inherited from the client upon creation; they do not refresh during a retry attempt. Therefore, value updates are performed on the request instance via [Response.Request]({{% godoc v3 %}}Response).
-* Applies [default retry conditions]({{% relref "#default-conditions" %}}) first before user-defined retry conditions.
-    * It can be disabled via [Client.SetRetryDefaultConditions]({{% godoc v3 %}}Client.SetRetryDefaultConditions) or [Request.SetRetryDefaultConditions]({{% godoc v3 %}}Request.SetRetryDefaultConditions)
-* Executes request retry conditions first, then the client retry conditions, until it gets the return value `true`. Then, it doesn't proceed to execute the remaining conditions.
-* Executes request retry hooks first, and then the client retry hooks.
+* Applies [default retry conditions]({{% relref "#default-conditions" %}}) before user-defined retry conditions.
+    * This can be disabled via [Client.SetRetryDefaultConditions]({{% godoc v3 %}}Client.SetRetryDefaultConditions) or [Request.SetRetryDefaultConditions]({{% godoc v3 %}}Request.SetRetryDefaultConditions)
+* Executes request retry conditions first, then client retry conditions, until one returns `true`. Remaining conditions are not executed.
+* Executes request retry hooks first, then client retry hooks.
 * Respects header `Retry-After` if present.
-* Resets reader automatically on retry request if the `io.ReadSeeker` interface is supported.
-* Retries only on Idempotent HTTP Verb - GET, HEAD, PUT, DELETE, OPTIONS, and TRACE ([RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110.html#name-method-registration), [RFC 5789](https://datatracker.ietf.org/doc/html/rfc5789.html))
-    * Use [Client.SetRetryAllowNonIdempotent]({{% godoc v3 %}}Client.SetRetryAllowNonIdempotent) or [Request.SetRetryAllowNonIdempotent]({{% godoc v3 %}}Request.SetRetryAllowNonIdempotent). If additional control is necessary, utilize the custom retry condition.
-* [Request.CorrelationID]({{% godoc v3 %}}Request) - GUID generated for retry count > 0
+* Resets the reader automatically before a retry request if the `io.ReadSeeker` interface is supported. Otherwise it throws [ErrReaderNotSeekable]({{% godoc v3 %}}ErrReaderNotSeekable)
+* Retries only idempotent HTTP verbs: GET, HEAD, PUT, DELETE, OPTIONS, and TRACE ([RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110.html#name-method-registration), [RFC 5789](https://datatracker.ietf.org/doc/html/rfc5789.html))
+    * Use [Client.SetRetryAllowNonIdempotent]({{% godoc v3 %}}Client.SetRetryAllowNonIdempotent) or [Request.SetRetryAllowNonIdempotent]({{% godoc v3 %}}Request.SetRetryAllowNonIdempotent). If additional control is necessary, use a custom retry condition.
+* [Request.CorrelationID]({{% godoc v3 %}}Request) - a GUID is generated when retry count > 0
 
 ## Retrying Non-Idempotent Requests
 
@@ -63,7 +66,7 @@ For retried requests with bodies, prefer `[]byte`, `string`, `*bytes.Reader`, `*
 
 ## Default Conditions
 
-* Condition gets applied in the following order
+* Conditions are applied in the following order:
     * No Retry
         * TLS certificate verification error
         * Too many redirects error
@@ -71,9 +74,7 @@ For retried requests with bodies, prefer `[]byte`, `string`, `*bytes.Reader`, `*
         * Invalid header error
         * Response is nil
     * Retry
-        * Status Code is 429 Too Many Requests
-        * Status Code is 500 or above (but not Status Code 501 Not Implemented)
-        * Status Code is 0
+        * Temporary URL error
 
 
 ## Examples
@@ -88,7 +89,7 @@ client.
 
 ### Constant Delay
 
-There are two possible approaches to perform constant delay retry.
+There are two ways to use a constant retry delay.
 
 #### Using Wait Time
 
@@ -113,7 +114,7 @@ client.
 
 ### Retry Hooks
 
-Utilize the retry hook(s) to perform logic between retries.
+Use retry hooks to run logic between retries.
 
 - Retry hooks are executed in the order in which they are added.
 - Retry hooks are executed on each retry attempt.
@@ -153,7 +154,7 @@ client.R().
 
 #### Overwrite at Request
 
-If a specific use case requires certain retry hooks only for a particular request and does not want the client to retry hooks, use [Request.SetRetryHooks]({{% godoc v3 %}}Request.SetRetryHooks).
+If a specific use case requires retry hooks only for a particular request and should not use the client retry hooks, use [Request.SetRetryHooks]({{% godoc v3 %}}Request.SetRetryHooks).
 
 ```go
 client.R().
@@ -173,12 +174,12 @@ client.R().
 
 ### Retry Conditions
 
-Utilize the retry condition(s) to determine whether a retry is required.
+Use retry conditions to determine whether a retry is required.
 
 - Retry conditions are executed in the order in which they are added.
 - Once a retry condition returns `true`, the remaining retry conditions are not executed.
 - Retry conditions are executed on each retry attempt.
-- Default retry conditions are executed first, it does not check HTTP status codes.
+- Default retry conditions are executed first; they do not check HTTP status codes.
 - Client-level retry conditions are applied to all requests.
 - Request-level retry conditions are executed before client-level retry conditions.
 
@@ -232,7 +233,7 @@ client.R().
 
 #### Overwrite at Request
 
-If a specific use case requires certain retry conditions only for a particular request and does not want the client to retry conditions, use [Request.SetRetryConditions]({{% godoc v3 %}}Request.SetRetryConditions).
+If a specific use case requires retry conditions only for a particular request and should not use the client retry conditions, use [Request.SetRetryConditions]({{% godoc v3 %}}Request.SetRetryConditions).
 
 ```go
 client.R().

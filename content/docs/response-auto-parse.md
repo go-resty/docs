@@ -4,9 +4,9 @@ weight: 4
 
 # Response Auto Parse
 
-Out of the box, Resty does response automatic unmarshaling for JSON and XML based on the response header `Content-Type` with methods [Request.SetResult]({{% godoc v3 %}}Request.SetResult) or [Request.SetResultError]({{% godoc v3 %}}Request.SetResultError) are used.
+Out of the box, Resty automatically unmarshals JSON and XML responses based on the response header `Content-Type` when [Request.SetResult]({{% godoc v3 %}}Request.SetResult) or [Request.SetResultError]({{% godoc v3 %}}Request.SetResultError) is used.
 
-For handling custom content-type or customized parsing, see [Content-Type {Encoder, Decoder}]({{% relref "content-type-encoder-and-decoder" %}}).
+For custom content types or custom parsing, see [Content-Type {Encoder, Decoder}]({{% relref "content-type-encoder-and-decoder" %}}).
 
 ## Examples
 
@@ -63,7 +63,7 @@ fmt.Println(loginResponse)
 
 ## Expect Content-Type
 
-It provides a fallback Content-Type for automatic unmarshalling when the response header Content-Type is unavailable.
+This sets a fallback Content-Type for automatic unmarshalling when the response header Content-Type is unavailable.
 
 ```go
 client.R().SetResponseExpectContentType("application/json")
@@ -71,7 +71,7 @@ client.R().SetResponseExpectContentType("application/json")
 
 ## Force Content-Type
 
-It forces the Content-Type for automatic unmarshalling to ignore the response header Content-Type value.
+This forces the Content-Type used for automatic unmarshalling and ignores the response header Content-Type value.
 
 ```go
 client.R().SetResponseForceContentType("application/json")
@@ -79,12 +79,12 @@ client.R().SetResponseForceContentType("application/json")
 
 ## Do Not Parse
 
-To prevent automatic response parsing for the particular use case, use this setting.
+To prevent automatic response parsing for a particular use case, use this setting.
 
 > [!WARNING]
 > Using the do not parse option means:
-> * You have taken over the control of response body parsing from Resty.
-> * Do not forget to close the response body. Otherwise, you might get into connection leaks, and connection reuse may not happen.
+> * You have taken control of response body parsing from Resty.
+> * Do not forget to close the response body. Otherwise, you may cause connection leaks, and connection reuse may not happen.
 
 {{% hintreqoverride %}}
 

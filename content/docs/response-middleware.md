@@ -4,9 +4,9 @@ weight: 8
 
 # Response Middleware
 
-Resty provides response middleware that enables the execution of logic after receiving the request response.
+Resty provides response middleware that lets you run logic after receiving a response.
 
-Out of the box, it has -
+Out of the box, Resty provides:
 
 * [MiddlewareResponseAutoParse]({{% godoc v3 %}}MiddlewareResponseAutoParse)
 * [MiddlewareResponseSaveToFile]({{% godoc v3 %}}MiddlewareResponseSaveToFile)
@@ -19,8 +19,8 @@ Out of the box, it has -
 
 ### Typical Use
 
-* Adds after the default response middleware.
-* Cascades response middleware returned `error` downstream via `Response.CascadeError`
+* Adds middleware after the default response middleware.
+* Cascades errors returned by response middleware downstream via `Response.CascadeError`.
 
 ```go
 client.AddResponseMiddleware(func(c *resty.Client, res *resty.Response) error {
@@ -35,7 +35,7 @@ client.AddResponseMiddleware(func(c *resty.Client, res *resty.Response) error {
 
 ### Advanced Use
 
-* Cascades response middleware returned `error` downstream via `Response.CascadeError`
+* Cascades errors returned by response middleware downstream via `Response.CascadeError`.
 
 ```go
 c := resty.New()

@@ -7,7 +7,7 @@ weight: 6
 Resty offers a convenient method to add `client root` certificates.
 
 > [!NOTE]
-> * Starting v3, Resty lets a watcher reload certificates dynamically at configured intervals if modified.
+> * Starting in v3, Resty can use a watcher to reload certificates dynamically at configured intervals when files are modified.
 > * Default watcher reload interval is 24 hours.
 
 ## Examples
@@ -18,14 +18,14 @@ Resty offers a convenient method to add `client root` certificates.
 // one pem file path
 client.SetClientRootCertificates("/path/to/client-root/pemFile.pem")
 
-// one or more pem file path(s)
+// one or more PEM file paths
 client.SetClientRootCertificates(
     "/path/to/client-root/pemFile1.pem",
-    "/path/to/client-root/pemFile2.pem"
+    "/path/to/client-root/pemFile2.pem",
     "/path/to/client-root/pemFile3.pem"
 )
 
-// if you happen to have string slices
+// if you already have a string slice
 client.SetClientRootCertificates(certs...)
 ```
 
@@ -40,15 +40,15 @@ certWatcherOpts := &resty.CertWatcherOptions{
 // one pem file path
 client.SetClientRootCertificatesWatcher(certWatcherOpts, "/path/to/client-root/pemFile.pem")
 
-// one or more pem file path(s)
+// one or more PEM file paths
 client.SetClientRootCertificatesWatcher(
     certWatcherOpts,
     "/path/to/client-root/pemFile1.pem",
-    "/path/to/client-root/pemFile2.pem"
+    "/path/to/client-root/pemFile2.pem",
     "/path/to/client-root/pemFile3.pem"
 )
 
-// if you happen to have string slices
+// if you already have a string slice
 client.SetClientRootCertificatesWatcher(certWatcherOpts, certs...)
 ```
 

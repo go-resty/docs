@@ -6,20 +6,20 @@ weight: 8
 
 Resty provides request middleware that enables logic execution during the request preparation phase.
 
-Out of the box, it has -
+Out of the box, Resty provides:
 
 * [MiddlewareRequestCreate]({{% godoc v3 %}}MiddlewareRequestCreate)
 
 > [!NOTE]
 > * v3 introduces a fully composable middleware feature that allows the registration of request middleware in any order to accommodate practical use cases.
-> * v3 introduces [Request.Funcs]({{% godoc v3 %}}Request.Funcs) feature that could help to perform Request instance manipulation.
-> * `Request.RawRequest` instance available after `MiddlewareRequestCreate` middleware execution.
+> * v3 introduces the [Request.Funcs]({{% godoc v3 %}}Request.Funcs) feature, which can help with request instance manipulation.
+> * The `Request.RawRequest` instance is available after `MiddlewareRequestCreate` middleware execution.
 
 ## Examples
 
 ### Typical Use
 
-* Adds before the default request middleware.
+* Adds middleware before the default request middleware.
 * `non-nil` error return value terminates the request preparation phase.
 
 ```go
@@ -32,7 +32,7 @@ client.AddRequestMiddleware(func(c *resty.Client, req *resty.Request) error {
 
 ### Advanced Use
 
-* Users can register `N` of request middlewares in an appropriate order based on the use case.
+* Users can register `N` request middleware functions in an order appropriate for the use case.
 * `non-nil` error return value terminates the request preparation phase.
 
 ```go

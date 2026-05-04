@@ -1,9 +1,9 @@
 
 # Redirect Policy
 
-Resty provides easy-to-use redirect policy implementation and is flexible to extend for custom use cases.
+Resty provides easy-to-use redirect policy implementations and can be extended for custom use cases.
 
-Out of the box, it has following redirect polices:
+Out of the box, it provides the following redirect policies:
 
 * [RedirectNoPolicy]({{% godoc v3 %}}RedirectNoPolicy)
 * [RedirectFlexiblePolicy]({{% godoc v3 %}}RedirectFlexiblePolicy)
@@ -11,13 +11,14 @@ Out of the box, it has following redirect polices:
 * [RedirectHeaderStripSensitivePolicy]({{% godoc v3 %}}RedirectHeaderStripSensitivePolicy)
 
 > [!NOTE]
-> v3 [RedirectNoPolicy]({{% godoc v3 %}}RedirectNoPolicy) returns an error `http.ErrUseLastResponse`.
+> * v3 [RedirectNoPolicy]({{% godoc v3 %}}RedirectNoPolicy) returns the error `http.ErrUseLastResponse`.
+> * v3 does not strip the port from the request URL host for comparison; the request URL host is used as-is.
 
 ## Example
 
 ```go
-// default golang client does maximum redirect count as 10,
-// in the Resty, simply set
+// The default Go client allows up to 10 redirects.
+// In Resty, configure it as follows.
 client.SetRedirectPolicy(resty.RedirectFlexiblePolicy(5))
 
 // set one or more redirect policies together
@@ -27,11 +28,11 @@ client.SetRedirectPolicy(resty.RedirectFlexiblePolicy(5),
 
 ### Custom Redirect Policy
 
-There are two ways users can implement redirect policy.
+There are two ways to implement a redirect policy.
 
 #### Simple
 
-Create a simple function to implement redirect policy using [RedirectPolicyFunc]({{% godoc v3 %}}RedirectPolicyFunc).
+Create a simple function that implements a redirect policy by using [RedirectPolicyFunc]({{% godoc v3 %}}RedirectPolicyFunc).
 
 ```go
 client.SetRedirectPolicy(
@@ -46,7 +47,7 @@ client.SetRedirectPolicy(
 
 #### Advanced
 
-Implement advanced redirect policy usage by utilizing the [RedirectPolicy]({{% godoc v3 %}}RedirectPolicy) interface.
+Implement an advanced redirect policy by using the [RedirectPolicy]({{% godoc v3 %}}RedirectPolicy) interface.
 
 ```go
 var _ resty.RedirectPolicy = (*AdvancedRedirectPolicy)(nil)
@@ -64,7 +65,7 @@ func (a *AdvancedRedirectPolicy) Apply(req *http.Request, via []*http.Request) e
 
 // set the redirect policy
 client.SetRedirectPolicy(&AdvancedRedirectPolicy{
-    // initialize field here
+    // initialize fields here
 })
 ```
 
