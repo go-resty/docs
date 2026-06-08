@@ -11,7 +11,8 @@ bookHidden: true
 | [v1.0.0]({{% restyrelease v1.0.0 %}}) | Sep 25, 2017 | First major release |
 | [v1.12.0]({{% restyrelease v1.12.0 %}}) | Feb 27, 2019 | Final release of v1 series |
 | [v2.0.0]({{% restyrelease v2.0.0 %}}) | Jul 16, 2019 | Second major release |
-| [v2.16.5]({{% restyrelease v2.16.2 %}}) | Jan 22, 2025 | Final (guessing) release of v2 series |
+| [v2.17.2]({{% restyrelease v2.17.2 %}}) | Feb 14, 2026 | Final (maybe) release of v2 series |
+| [v3.0.0-rc.1]({{% restyrelease v3.0.0-rc.1 %}}) | Jun 7, 2026 | Third major release candidate 1 |
 | v3.0.0 | TBD | Third major release |
 
 Currently v3 is in [{{% param Resty.V3.Version %}}](https://github.com/go-resty/resty/releases/tag/{{% param Resty.V3.Version %}})

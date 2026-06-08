@@ -1,7 +1,7 @@
 
 # Request Tracing
 
-Request tracing is often utilized to collect information about HTTP requests. Resty offers simple access to this information. These details include:
+Request tracing is often used to collect information about HTTP requests. Resty provides simple access to this information. These details include:
 
 * DNS Lookup Time
 * Connection Time
@@ -10,9 +10,9 @@ Request tracing is often utilized to collect information about HTTP requests. Re
 * Server Time
 * Response Time
 * Total Time
-* Is Connection Reused
-* Is Connection Was Idle
-* Connection IdleTime
+* Whether the connection is reused
+* Whether the connection was idle
+* Connection idle time
 * Request Attempt
 * Remote Address
 
@@ -63,14 +63,12 @@ fmt.Println("  RemoteAddr    :", ti.RemoteAddr.String())
 ### Client
 
 * [Client.SetTrace]({{% godoc v3 %}}Client.SetTrace)
-* [Client.EnableTrace]({{% godoc v3 %}}Client.EnableTrace)
-* [Client.DisableTrace]({{% godoc v3 %}}Client.DisableTrace)
+* [Client.IsTrace]({{% godoc v3 %}}Client.IsTrace)
 
 ### Request
 
 * [Request.SetTrace]({{% godoc v3 %}}Request.SetTrace)
-* [Request.EnableTrace]({{% godoc v3 %}}Request.EnableTrace)
-* [Request.DisableTrace]({{% godoc v3 %}}Request.DisableTrace)
+* [Request.IsTrace]({{% godoc v3 %}}Request)
 
 ### Trace
 

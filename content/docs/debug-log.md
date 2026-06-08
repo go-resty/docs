@@ -1,7 +1,7 @@
 
 # Debug Log
 
-The debug log provides insights into Resty's request and response details for troubleshooting. The v3 introduces the debug log formatter feature, allowing the debug log content customization for the user's use case. Out of the box, the following formatters are available:
+The debug log provides insights into Resty's request and response details for troubleshooting. v3 introduces debug log formatters, allowing users to customize debug log content for their use cases. Out of the box, the following formatters are available:
 
 * [DebugLogFormatter]({{% godoc v3 %}}DebugLogFormatter) (default)
 * [DebugLogJSONFormatter]({{% godoc v3 %}}DebugLogJSONFormatter)
@@ -28,7 +28,7 @@ req := c.R().SetDebug(true)
 
 ### Editing Log Details
 
-Register to debug log callback for any log modification; see [DebugLog]({{% godoc v3 %}}DebugLog).
+Register a debug log callback for any log modification; see [DebugLog]({{% godoc v3 %}}DebugLog).
 
 ```go
 c := resty.New().
@@ -68,8 +68,6 @@ c := resty.New().
 ### Client
 
 * [Client.SetDebug]({{% godoc v3 %}}Client.SetDebug)
-* [Client.EnableDebug]({{% godoc v3 %}}Client.EnableDebug)
-* [Client.DisableDebug]({{% godoc v3 %}}Client.DisableDebug)
 * [Client.SetDebugBodyLimit]({{% godoc v3 %}}Client.SetDebugBodyLimit)
 * [Client.OnDebugLog]({{% godoc v3 %}}Client.OnDebugLog)
 * [Client.SetDebugLogFormatter]({{% godoc v3 %}}Client.SetDebugLogFormatter)
@@ -77,5 +75,4 @@ c := resty.New().
 ### Request
 
 * [Request.SetDebug]({{% godoc v3 %}}Request.SetDebug)
-* [Request.EnableDebug]({{% godoc v3 %}}Request.EnableDebug)
-* [Request.DisableDebug]({{% godoc v3 %}}Request.DisableDebug)
+* [Request.IsDebug]({{% godoc v3 %}}Request)

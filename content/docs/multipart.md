@@ -6,7 +6,7 @@ Resty provides a convenient method to compose multipart form-data or ordered for
 > [!NOTE]
 > * Only allowed on POST, PUT, and PATCH verbs.
 > * Starting v3, ordered multipart form data is possible.
-> * [Request.SetMultipartBoundary]({{% godoc v3 %}}Request.SetMultipartBoundary) setting custom boundary can be used together.
+> * [Request.SetMultipartBoundary]({{% godoc v3 %}}Request.SetMultipartBoundary) can be used to set a custom boundary.
 > * All form data and multipart methods can be used together.
 
 ```go
@@ -38,7 +38,7 @@ fmt.Println(err, res)
 ### Example 2
 
 ```go
-// it is possible to use SetMultipartFields for ordered form-data
+// SetMultipartFields can be used for ordered form data
 fields := []*resty.MultipartField{
     {
         Name:   "field1",
@@ -72,7 +72,7 @@ fmt.Println(err, res)
 > [!NOTE]
 > * By default, Resty streams the content in the request body when a file or `io.Reader` is detected in the MultipartField input.
 > * Only allowed on POST, PUT, and PATCH verbs.
-> * [Request.SetMultipartBoundary]({{% godoc v3 %}}Request.SetMultipartBoundary) setting custom boundary can be used together.
+> * [Request.SetMultipartBoundary]({{% godoc v3 %}}Request.SetMultipartBoundary) can be used to set a custom boundary.
 > * All form data and multipart methods can be used together.
 
 ## Upload
@@ -119,10 +119,10 @@ client.R().
 
 ## Upload Progress
 
-Resty v3 provides an optional multipart live upload progress count in bytes, see
+Resty v3 provides optional live multipart upload progress in bytes. See:
 * [Request.SetMultipartFields]({{% godoc v3 %}}Request.SetMultipartFields) - it is quite powerful, supports various combinations, [see example](#power-of-requestsetmultipartfields)
 * [MultipartField]({{% godoc v3 %}}MultipartField) input type
-    * Refer to the godoc to know more about `Optional` fields.
+    * Refer to the godoc for more information about `Optional` fields.
 * [MultipartField.ProgressCallback]({{% godoc v3 %}}MultipartField) - callback method
 * [MultipartFieldProgress]({{% godoc v3 %}}MultipartFieldProgress) - callback method argument
 
@@ -219,8 +219,8 @@ client.R().
 
 # Power of Request.SetMultipartFields
 
-* This [MultipartField]({{% godoc v3 %}}MultipartField) input has various combinations; take advantage of it as per your use case.
-    * Refer to the godoc to know more about `Optional` fields.
+* This [MultipartField]({{% godoc v3 %}}MultipartField) input supports various combinations; choose what fits your use case.
+    * Refer to the godoc for more information about `Optional` fields.
 
 ```go
 myImageFile, _ := os.Open("/path/to/image-1.png")

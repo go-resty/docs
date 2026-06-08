@@ -3,7 +3,7 @@
 
 Resty provides an option to generate the curl command for the request.
 
-By default, Resty does not log the curl command in the debug log since it has the potential to leak sensitive data unless explicitly enabled via [Client.SetDebugLogCurlCmd]({{% godoc v3 %}}Client.SetDebugLogCurlCmd) or [Request.SetDebugLogCurlCmd]({{% godoc v3 %}}Request.SetDebugLogCurlCmd).
+By default, Resty does not log the curl command in the debug log since it has the potential to leak sensitive data unless explicitly enabled via [Client.SetCurlCmdDebugLog]({{% godoc v3 %}}Client.SetCurlCmdDebugLog) or [Request.SetCurlCmdDebugLog]({{% godoc v3 %}}Request.SetCurlCmdDebugLog).
 
 {{% hintreqoverride %}}
 
@@ -37,15 +37,11 @@ fmt.Println(curlCmdStr)
 
 ### Client
 
-* [Client.EnableGenerateCurlCmd]({{% godoc v3 %}}Client.EnableGenerateCurlCmd)
-* [Client.DisableGenerateCurlCmd]({{% godoc v3 %}}Client.DisableGenerateCurlCmd)
-* [Client.SetGenerateCurlCmd]({{% godoc v3 %}}Client.SetGenerateCurlCmd)
-* [Client.SetDebugLogCurlCmd]({{% godoc v3 %}}Client.SetDebugLogCurlCmd)
+* [Client.SetCurlCmdGenerate]({{% godoc v3 %}}Client.SetCurlCmdGenerate)
+* [Client.SetCurlCmdDebugLog]({{% godoc v3 %}}Client.SetCurlCmdDebugLog)
 
 ### Request
 
 * [Request.CurlCmd]({{% godoc v3 %}}Request.CurlCmd)
-* [Request.EnableGenerateCurlCmd]({{% godoc v3 %}}Request.EnableGenerateCurlCmd)
-* [Request.DisableGenerateCurlCmd]({{% godoc v3 %}}Request.DisableGenerateCurlCmd)
-* [Request.SetGenerateCurlCmd]({{% godoc v3 %}}Request.SetGenerateCurlCmd)
-* [Request.SetDebugLogCurlCmd]({{% godoc v3 %}}Request.SetDebugLogCurlCmd)
+* [Request.SetCurlCmdGenerate]({{% godoc v3 %}}Request.SetCurlCmdGenerate)
+* [Request.SetCurlCmdDebugLog]({{% godoc v3 %}}Request.SetCurlCmdDebugLog)

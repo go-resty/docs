@@ -1,7 +1,7 @@
 
 # Timeout
 
-Resty v3 allows users to modify all timeout values utilized in the implementation.
+Resty v3 allows users to modify all timeout values used by the client.
 
 {{% hintreqoverride %}}
 
@@ -10,7 +10,7 @@ Resty v3 allows users to modify all timeout values utilized in the implementatio
 ### Transport Timeouts
 
 > [!NOTE]
-> Refer to `godoc` to know all supported fields and their default values, [TransportSettings]({{% godoc v3 %}}TransportSettings).
+> Refer to `godoc` for all supported fields and their default values: [TransportSettings]({{% godoc v3 %}}TransportSettings).
 
 ```go
 // create transport with timeouts
@@ -39,7 +39,7 @@ client.SetTimeout(2 * time.Minute)
 
 > [!NOTE]
 > * It overrides the client-level timeout value.
-> * It does not set a timeout if the user has already set a timeout/deadline.
+> * It does not set a timeout if the user has already set a timeout or deadline.
 
 ```go
 // set timeout for current request

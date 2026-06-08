@@ -8,13 +8,13 @@ Resty v3 adds Server-Sent Events feature. It provides APIs similar to the [speci
 ### Get Started
 
 ```go
-es := resty.NewEventSource().
+sse := resty.NewSSESource().
     SetURL("https://sse.dev/test").
     OnMessage(func(e any) {
-        fmt.Println(e.(*resty.Event))
+        fmt.Println(e.(*resty.SSE))
     }, nil)
 
-err := es.Get()
+err := sse.Get()
 fmt.Println(err)
 ```
 
@@ -30,7 +30,7 @@ type Data struct {
     Now     int64  `json:"now"`
 }
 
-es := resty.NewEventSource().
+sse := resty.NewSSESource().
     SetURL("https://sse.dev/test").
     OnMessage(
         func(e any) {
@@ -44,7 +44,7 @@ es := resty.NewEventSource().
         Data{},
     )
 
-err := es.Get()
+err := sse.Get()
 fmt.Println(err)
 
 // Output:
@@ -71,11 +71,11 @@ type UserEvent struct {
     Time     time.Time `json:"time"`
 }
 
-es := resty.NewEventSource().
+sse := resty.NewSSESource().
     SetURL("https://sse.dev/test").
     OnMessage(
         func(e any) {
-            fmt.Println(e.(*resty.Event))
+            fmt.Println(e.(*resty.SSE))
         },
         nil,
     ).
@@ -94,7 +94,7 @@ es := resty.NewEventSource().
         UserEvent{},
     )
 
-err := es.Get()
+err := sse.Get()
 fmt.Println(err)
 ```
 
@@ -118,11 +118,11 @@ es.SetTLSClientConfig(&tls.Config{
 ### OnOpen, OnError Events
 
 ```go
-es := resty.NewEventSource().
+sse := resty.NewSSESource().
     SetURL("https://sse.dev/test").
     OnMessage(
         func(e any) {
-            fmt.Println(e.(*resty.Event))
+            fmt.Println(e.(*resty.SSE))
         },
         nil,
     ).
@@ -137,7 +137,7 @@ es := resty.NewEventSource().
         },
     )
 
-err := es.Get()
+err := sse.Get()
 fmt.Println(err)
 
 // Output:
@@ -158,7 +158,7 @@ The OnRequestFailure callback gets triggered when the HTTP request fails while e
 > * HTTP response may be nil.
 
 ```go
-es := resty.NewEventSource().
+sse := resty.NewSSESource().
     SetURL("https://sse.dev/test").
     OnRequestFailure(
         func(err error, res *http.Response) {
@@ -169,31 +169,31 @@ es := resty.NewEventSource().
         },
     )
 
-err := es.Get()
+err := sse.Get()
 fmt.Println(err)
 ```
 
 
 ## Methods
 
-### EventSource
+### SSESource
 
-* [NewEventSource](NewEventSource)
-* [EventSource.SetURL](EventSource.SetURL)
-* [EventSource.SetHeader](EventSource.SetHeader)
-* [EventSource.AddHeader](EventSource.AddHeader)
-* [EventSource.SetRetryCount](EventSource.SetRetryCount])
-* [EventSource.SetRetryWaitTime](EventSource.SetRetryWaitTime)
-* [EventSource.SetRetryMaxWaitTime](EventSource.SetRetryMaxWaitTime)
-* [EventSource.SetMaxBufSize](EventSource.SetMaxBufSize)
-* [EventSource.TLSClientConfig](EventSource.TLSClientConfig)
-* [EventSource.SetTLSClientConfig](EventSource.SetTLSClientConfig)
-* [EventSource.Logger](EventSource.Logger)
-* [EventSource.SetLogger](EventSource.SetLogger)
-* [EventSource.OnOpen](EventSource.OnOpen)
-* [EventSource.OnError](EventSource.OnError)
-* [EventSource.OnRequestFailure](EventSource.OnRequestFailure)
-* [EventSource.OnMessage](EventSource.OnMessage)
-* [EventSource.AddEventListener](EventSource.AddEventListener)
-* [EventSource.Get](EventSource.Get)
-* [EventSource.Close](EventSource.Close)
+* [NewSSESource]({{% godoc v3 %}}NewSSESource)
+* [SSESource.SetURL]({{% godoc v3 %}}SSESource.SetURL)
+* [SSESource.SetHeader]({{% godoc v3 %}}SSESource.SetHeader)
+* [SSESource.AddHeader]({{% godoc v3 %}}SSESource.AddHeader)
+* [SSESource.SetRetryCount]({{% godoc v3 %}}SSESource.SetRetryCount)
+* [SSESource.SetRetryWaitTime]({{% godoc v3 %}}SSESource.SetRetryWaitTime)
+* [SSESource.SetRetryMaxWaitTime]({{% godoc v3 %}}SSESource.SetRetryMaxWaitTime)
+* [SSESource.SetSizeMaxBuffer]({{% godoc v3 %}}SSESource.SetSizeMaxBuffer)
+* [SSESource.TLSClientConfig]({{% godoc v3 %}}SSESource.TLSClientConfig)
+* [SSESource.SetTLSClientConfig]({{% godoc v3 %}}SSESource.SetTLSClientConfig)
+* [SSESource.Logger]({{% godoc v3 %}}SSESource.Logger)
+* [SSESource.SetLogger]({{% godoc v3 %}}SSESource.SetLogger)
+* [SSESource.OnOpen]({{% godoc v3 %}}SSESource.OnOpen)
+* [SSESource.OnError]({{% godoc v3 %}}SSESource.OnError)
+* [SSESource.OnRequestFailure]({{% godoc v3 %}}SSESource.OnRequestFailure)
+* [SSESource.OnMessage]({{% godoc v3 %}}SSESource.OnMessage)
+* [SSESource.AddEventListener]({{% godoc v3 %}}SSESource.AddEventListener)
+* [SSESource.Get]({{% godoc v3 %}}SSESource.Get)
+* [SSESource.Close]({{% godoc v3 %}}SSESource.Close)

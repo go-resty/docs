@@ -4,12 +4,12 @@ weight: 8
 
 # Response Middleware
 
-Resty provides response middleware that enables the execution of logic after receiving the request response.
+Resty provides response middleware that lets you run logic after receiving a response.
 
-Out of the box, it has -
+Out of the box, Resty provides:
 
-* [AutoParseResponseMiddleware]({{% godoc v3 %}}AutoParseResponseMiddleware)
-* [SaveToFileResponseMiddleware]({{% godoc v3 %}}SaveToFileResponseMiddleware)
+* [MiddlewareResponseAutoParse]({{% godoc v3 %}}MiddlewareResponseAutoParse)
+* [MiddlewareResponseSaveToFile]({{% godoc v3 %}}MiddlewareResponseSaveToFile)
 
 > [!NOTE]
 > * v3 introduces a fully composable middleware feature that allows the registration of response middleware in any order to accommodate practical use cases.
@@ -19,8 +19,8 @@ Out of the box, it has -
 
 ### Typical Use
 
-* Adds after the default response middleware.
-* Cascades response middleware returned `error` downstream via `Respose.Err`
+* Adds middleware after the default response middleware.
+* Cascades errors returned by response middleware downstream via `Response.CascadeError`.
 
 ```go
 client.AddResponseMiddleware(func(c *resty.Client, res *resty.Response) error {
@@ -35,7 +35,7 @@ client.AddResponseMiddleware(func(c *resty.Client, res *resty.Response) error {
 
 ### Advanced Use
 
-* Cascades response middleware returned `error` downstream via `Respose.Err`
+* Cascades errors returned by response middleware downstream via `Response.CascadeError`.
 
 ```go
 c := resty.New()
@@ -44,9 +44,9 @@ defer c.Close()
 c.SetResponseMiddlewares(
     Custom1ResponseMiddleware,
     Custom2ResponseMiddleware,
-    resty.AutoParseResponseMiddleware, // before this, the body is not read except on the debug flow
+    resty.MiddlewareResponseAutoParse, // before this, the body is not read except on the debug flow
     Custom3ResponseMiddleware,
-    resty.SaveToFileResponseMiddleware, // See, Request.SetOutputFileName & Request.SetSaveResponse
+    resty.MiddlewareResponseSaveToFile, // See, Request.SetResponseSaveFileName & Request.SetResponseSaveToFile
     Custom4ResponseMiddleware,
     Custom5ResponseMiddleware,
 )
@@ -56,7 +56,7 @@ c.SetResponseMiddlewares(
 
 * [ResponseMiddleware]({{% godoc v3 %}}ResponseMiddleware)
 
-### Cilent
+### Client
 
 * [Client.AddResponseMiddleware]({{% godoc v3 %}}Client.AddResponseMiddleware)
 * [Client.SetResponseMiddlewares]({{% godoc v3 %}}Client.SetResponseMiddlewares)

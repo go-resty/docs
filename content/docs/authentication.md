@@ -1,7 +1,7 @@
 
 # Authentication
 
-Resty supports the following authentication/authorization mechanism for requests.
+Resty supports the following authentication and authorization mechanisms for requests.
 
 * [Basic Auth]({{% relref "#basic-auth" %}})
 * [Digest Auth]({{% relref "#digest-auth" %}})
@@ -23,7 +23,7 @@ client.R().
 ## Digest Auth
 
 > [!NOTE]
-> Digest auth is supported only at the client level; create a dedicated client to utilize it.
+> Digest auth is supported only at the client level; create a dedicated client to use it.
 
 Supported QOP -
 * `auth`
@@ -64,7 +64,7 @@ client.R().
 
 ## Custom Auth Header
 
-For application/service that user custom HTTP header for authentication/authorization.
+For applications or services that use a custom HTTP header for authentication or authorization.
 
 > [!NOTE]
 > * The default authorization key is `Authorization`.

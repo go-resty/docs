@@ -5,10 +5,10 @@ weight: 1
 
 # GET Request
 
-This page discusses simple GET requests. Users can utilize Resty features across nearly all HTTP methods.
+This page discusses simple GET requests. Resty features can be used across nearly all HTTP methods.
 
 > [!NOTE]
-> * Explore the documentation to fulfill all use cases.
+> * Explore the documentation for additional use cases.
 > * Examples use request-level methods; however, Resty also includes client-level methods to configure settings for all requests.
 
 ## Examples
@@ -72,7 +72,7 @@ See [Allow Payload On]({{% relref "allow-payload-on" %}})
 
 ```go
 res, err := client.R().
-    SetAllowMethodGetPayload(true). // client level options is available
+    SetMethodGetAllowPayload(true). // client-level option is available
     SetContentType("application/json").
     SetBody(`{
         "query": {
