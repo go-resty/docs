@@ -37,7 +37,7 @@ c.R().
         "subAccountId": "100002",
         "path":         "groups/developers",
     }).
-    Get("/v1/users/{userId}/{subAccountId}/{path}/details)
+    Get("/v1/users/{userId}/{subAccountId}/{path}/details")
 
 // Result:
 //   /v1/users/sample@sample.com/100002/groups%2Fdevelopers/details
