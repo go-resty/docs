@@ -257,6 +257,38 @@ client.R().
     )
 ```
 
+#### Retry Counts per Status Code
+
+Use a request-level condition to give each HTTP status code its own retry count. This example allows one retry after HTTP 401 and three after HTTP 428, with a total limit of four retries (five attempts).
+
+```go
+func requestWithRetryCounts(client *resty.Client) *resty.Request {
+    remaining := map[int]int{
+        http.StatusUnauthorized:         1,
+        http.StatusPreconditionRequired: 3,
+    }
+
+    return client.R().
+        SetRetryCount(4).
+        SetRetryDefaultConditions(false).
+        SetRetryConditions(func(res *resty.Response, err error) bool {
+            if err != nil || res == nil {
+                return false
+            }
+            code := res.StatusCode()
+            if remaining[code] == 0 {
+                return false
+            }
+            remaining[code]--
+            return true
+        })
+}
+```
+
+The example uses `net/http` and `resty.dev/v3`. Call `requestWithRetryCounts(client)` for each new request so its counters start fresh, then execute it with a method such as `Get`. `SetRetryConditions` replaces inherited conditions, and `SetRetryDefaultConditions(false)` disables the default transport-error retries.
+
+A sequence of `401, 428, 428, 428, 200` succeeds on the fifth attempt. A sequence of `428, 401, 428, 401` stops at the second 401, even though the total retry limit has not been reached. An unconfigured status ends the request. The [token refresh example]({{% relref "#refreshing-a-token-and-returning-errors" %}}) shows how to obtain a new token before retrying a 401.
+
 ### Retry Delay Strategy
 
 By default, Resty uses a capped exponential backoff with a jitter delay strategy to calculate the delay between retries. It also provides an option to use a custom retry delay strategy. See [Client.SetRetryDelayStrategy]({{% godoc v3 %}}Request.SetRetryDelayStrategy), [Request.SetRetryDelayStrategy]({{% godoc v3 %}}Request.SetRetryDelayStrategy).
@@ -278,6 +310,39 @@ customRetryDelayStrategy := func(*Response, error) (time.Duration, error) {
 client.
     SetRetryDelayStrategy(customRetryDelayStrategy)
 ```
+
+#### Refreshing a Token and Returning Errors
+
+A custom delay strategy can return an error to stop retrying and propagate that error to the caller. Use it to handle a failed token refresh before another attempt is sent.
+
+```go
+func requestWithTokenRefresh(
+    client *resty.Client,
+    accessToken string,
+    refresh func() (string, error),
+) *resty.Request {
+    return client.R().
+        SetAuthToken(accessToken).
+        SetRetryCount(1).
+        SetRetryDefaultConditions(false).
+        SetRetryConditions(func(res *resty.Response, err error) bool {
+            return err == nil && res != nil &&
+                res.StatusCode() == http.StatusUnauthorized
+        }).
+        SetRetryDelayStrategy(func(res *resty.Response, _ error) (time.Duration, error) {
+            token, err := refresh()
+            if err != nil {
+                return 0, fmt.Errorf("refresh token: %w", err)
+            }
+            res.Request.SetAuthToken(token)
+            return 0, nil
+        })
+}
+```
+
+The example uses `fmt`, `net/http`, `time`, and `resty.dev/v3`. Supply the current access token and your application's refresh function, then execute the returned request, for example with `Get`. The refresh function returns a new token or an error. The wrapped error is returned by `Get` and can be checked with `errors.Is`.
+
+The condition restricts refresh to HTTP 401. After a successful refresh, the zero delay retries immediately with the new token set on the request. An initial success skips refresh, and another 401 ends the request after two attempts and one refresh. This count applies to each request independently.
 
 ## Methods
 
